@@ -170,6 +170,7 @@
     <Resource Include="AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FormulasSchema.xsd" />
     <None Include="images\image_OLL_001.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

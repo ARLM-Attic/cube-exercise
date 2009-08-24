@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FormulasSchema"
+    targetNamespace="http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:element name="Formulas" type="Group" />
+
+    <xs:complexType name="Formula">
+        <xs:attribute name="Name" type="xs:string" />
+        <xs:attribute name="Enabled" type="xs:boolean" default="true" />
+        <xs:attribute name="Image" type="xs:string" />
+        <xs:attribute name="Script" type="xs:string" />
+        <xs:attribute name="PreScript" type="xs:string" />
+        <xs:attribute name="PostScript" type="xs:string" />
+        <xs:attribute name="Demo" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="Group">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Formula" minOccurs="0" maxOccurs="unbounded" type="Formula" />
+            <xs:element name="Group" minOccurs="0" maxOccurs="unbounded" type="Group" />
+        </xs:choice>
+        <xs:attribute name="Name" type="xs:string" />
+        <xs:attribute name="Enabled" type="xs:boolean" default="true" />
+    </xs:complexType>
+
+</xs:schema>
