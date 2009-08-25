@@ -19,9 +19,9 @@ using System.Windows.Threading;
 namespace CubeExercise
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class MainWindow : Window
     {
         private static string fileVersion;
         public static string FileVersion
@@ -50,7 +50,7 @@ namespace CubeExercise
 
         private Formula currentFormula;
 
-        public Window1()
+        public MainWindow()
         {
             this.timer = new DispatcherTimer();
             this.timer.Tick += new EventHandler(timer_Tick);
@@ -555,7 +555,7 @@ namespace CubeExercise
             }
         }
 
-        private void window1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void mainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.SaveFormulas();
         }
