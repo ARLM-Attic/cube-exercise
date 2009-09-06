@@ -168,238 +168,238 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FormulasSchema.xsd" />
-    <None Include="images\image_OLL_001.bmp">
+    <None Include="images\image_OLL_001.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_002.bmp">
+    <None Include="images\image_OLL_002.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_003.bmp">
+    <None Include="images\image_OLL_003.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_004.bmp">
+    <None Include="images\image_OLL_004.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_005.bmp">
+    <None Include="images\image_OLL_005.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_006.bmp">
+    <None Include="images\image_OLL_006.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_007.bmp">
+    <None Include="images\image_OLL_007.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_008.bmp">
+    <None Include="images\image_OLL_008.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_009.bmp">
+    <None Include="images\image_OLL_009.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_010.bmp">
+    <None Include="images\image_OLL_010.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_011.bmp">
+    <None Include="images\image_OLL_011.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_012.bmp">
+    <None Include="images\image_OLL_012.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_013.bmp">
+    <None Include="images\image_OLL_013.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_014.bmp">
+    <None Include="images\image_OLL_014.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_015.bmp">
+    <None Include="images\image_OLL_015.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_016.bmp">
+    <None Include="images\image_OLL_016.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_017.bmp">
+    <None Include="images\image_OLL_017.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_018.bmp">
+    <None Include="images\image_OLL_018.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_019.bmp">
+    <None Include="images\image_OLL_019.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_020.bmp">
+    <None Include="images\image_OLL_020.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_021.bmp">
+    <None Include="images\image_OLL_021.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_022.bmp">
+    <None Include="images\image_OLL_022.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_023.bmp">
+    <None Include="images\image_OLL_023.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_024.bmp">
+    <None Include="images\image_OLL_024.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_025.bmp">
+    <None Include="images\image_OLL_025.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_026.bmp">
+    <None Include="images\image_OLL_026.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_027.bmp">
+    <None Include="images\image_OLL_027.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_028.bmp">
+    <None Include="images\image_OLL_028.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_029.bmp">
+    <None Include="images\image_OLL_029.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_030.bmp">
+    <None Include="images\image_OLL_030.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_031.bmp">
+    <None Include="images\image_OLL_031.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_032.bmp">
+    <None Include="images\image_OLL_032.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_033.bmp">
+    <None Include="images\image_OLL_033.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_034.bmp">
+    <None Include="images\image_OLL_034.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_035.bmp">
+    <None Include="images\image_OLL_035.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_036.bmp">
+    <None Include="images\image_OLL_036.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_037.bmp">
+    <None Include="images\image_OLL_037.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_038.bmp">
+    <None Include="images\image_OLL_038.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_039.bmp">
+    <None Include="images\image_OLL_039.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_040.bmp">
+    <None Include="images\image_OLL_040.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_041.bmp">
+    <None Include="images\image_OLL_041.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_042.bmp">
+    <None Include="images\image_OLL_042.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_043.bmp">
+    <None Include="images\image_OLL_043.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_044.bmp">
+    <None Include="images\image_OLL_044.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_045.bmp">
+    <None Include="images\image_OLL_045.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_046.bmp">
+    <None Include="images\image_OLL_046.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_047.bmp">
+    <None Include="images\image_OLL_047.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_048.bmp">
+    <None Include="images\image_OLL_048.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_049.bmp">
+    <None Include="images\image_OLL_049.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_050.bmp">
+    <None Include="images\image_OLL_050.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_051.bmp">
+    <None Include="images\image_OLL_051.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_052.bmp">
+    <None Include="images\image_OLL_052.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_053.bmp">
+    <None Include="images\image_OLL_053.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_054.bmp">
+    <None Include="images\image_OLL_054.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_055.bmp">
+    <None Include="images\image_OLL_055.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_056.bmp">
+    <None Include="images\image_OLL_056.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_OLL_057.bmp">
+    <None Include="images\image_OLL_057.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_001.bmp">
+    <None Include="images\image_PLL_001.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_002.bmp">
+    <None Include="images\image_PLL_002.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_003.bmp">
+    <None Include="images\image_PLL_003.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_004.bmp">
+    <None Include="images\image_PLL_004.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_005.bmp">
+    <None Include="images\image_PLL_005.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_006.bmp">
+    <None Include="images\image_PLL_006.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_007.bmp">
+    <None Include="images\image_PLL_007.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_008.bmp">
+    <None Include="images\image_PLL_008.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_009.bmp">
+    <None Include="images\image_PLL_009.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_010.bmp">
+    <None Include="images\image_PLL_010.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_011.bmp">
+    <None Include="images\image_PLL_011.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_012.bmp">
+    <None Include="images\image_PLL_012.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_013.bmp">
+    <None Include="images\image_PLL_013.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_014.bmp">
+    <None Include="images\image_PLL_014.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_015.bmp">
+    <None Include="images\image_PLL_015.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_016.bmp">
+    <None Include="images\image_PLL_016.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_017.bmp">
+    <None Include="images\image_PLL_017.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_018.bmp">
+    <None Include="images\image_PLL_018.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_019.bmp">
+    <None Include="images\image_PLL_019.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_020.bmp">
+    <None Include="images\image_PLL_020.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_PLL_021.bmp">
+    <None Include="images\image_PLL_021.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Readme.docx" />
@@ -441,127 +441,127 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\image_F2L_001.bmp">
+    <None Include="images\image_F2L_001.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_002.bmp">
+    <None Include="images\image_F2L_002.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_003.bmp">
+    <None Include="images\image_F2L_003.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_004.bmp">
+    <None Include="images\image_F2L_004.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_005.bmp">
+    <None Include="images\image_F2L_005.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_006.bmp">
+    <None Include="images\image_F2L_006.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_007.bmp">
+    <None Include="images\image_F2L_007.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_008.bmp">
+    <None Include="images\image_F2L_008.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_009.bmp">
+    <None Include="images\image_F2L_009.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_010.bmp">
+    <None Include="images\image_F2L_010.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_011.bmp">
+    <None Include="images\image_F2L_011.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_012.bmp">
+    <None Include="images\image_F2L_012.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_013.bmp">
+    <None Include="images\image_F2L_013.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_014.bmp">
+    <None Include="images\image_F2L_014.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_015.bmp">
+    <None Include="images\image_F2L_015.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_016.bmp">
+    <None Include="images\image_F2L_016.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_017.bmp">
+    <None Include="images\image_F2L_017.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_018.bmp">
+    <None Include="images\image_F2L_018.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_019.bmp">
+    <None Include="images\image_F2L_019.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_020.bmp">
+    <None Include="images\image_F2L_020.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_021.bmp">
+    <None Include="images\image_F2L_021.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_022.bmp">
+    <None Include="images\image_F2L_022.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_023.bmp">
+    <None Include="images\image_F2L_023.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_024.bmp">
+    <None Include="images\image_F2L_024.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_025.bmp">
+    <None Include="images\image_F2L_025.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_026.bmp">
+    <None Include="images\image_F2L_026.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_027.bmp">
+    <None Include="images\image_F2L_027.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_028.bmp">
+    <None Include="images\image_F2L_028.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_029.bmp">
+    <None Include="images\image_F2L_029.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_030.bmp">
+    <None Include="images\image_F2L_030.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_031.bmp">
+    <None Include="images\image_F2L_031.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_032.bmp">
+    <None Include="images\image_F2L_032.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_033.bmp">
+    <None Include="images\image_F2L_033.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_034.bmp">
+    <None Include="images\image_F2L_034.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_035.bmp">
+    <None Include="images\image_F2L_035.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_036.bmp">
+    <None Include="images\image_F2L_036.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_037.bmp">
+    <None Include="images\image_F2L_037.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_038.bmp">
+    <None Include="images\image_F2L_038.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_039.bmp">
+    <None Include="images\image_F2L_039.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_040.bmp">
+    <None Include="images\image_F2L_040.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="images\image_F2L_041.bmp">
+    <None Include="images\image_F2L_041.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
