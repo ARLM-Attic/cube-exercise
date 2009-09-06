@@ -3,35 +3,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Cube="clr-namespace:CubeExercise"
     Name="mainWindow"
-    Title="Cube Exercise 1.0" Width="600" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
+    Title="Cube Exercise 1.0" Width="670" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
 
     <!--<Viewbox Stretch="Fill" StretchDirection="Both">-->
     <Grid Margin="0">
         <Grid.Resources>
-            <!--<XmlDataProvider x:Key="Formulas" XPath="Formulas" Source="Formulas.xml" />-->
             <Cube:ImageConverter x:Key="imageConverter" />
             <Cube:Int32Converter x:Key="intConverter" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="420*" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Column="0" Grid.Row="0" SelectionMode="Single" VerticalContentAlignment="Top" FontSize="12">
-            <ListView.ItemsSource>
-                <Binding ElementName="mainWindow" Path="Formulas" />
-            </ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Button Click="Button_Click" Tag="{Binding Path=Script}">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.IsSharedSizeScope="False">
-                            <CheckBox IsChecked="{Binding Path=Enabled}" Height="20" />
-                            <Image Source="{Binding Path=Image, Converter={StaticResource imageConverter}}" />
-                            <TextBlock Text="{Binding Path=Name}" Height="20" />
-                        </StackPanel>
-                    </Button>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <TreeView x:Name="FormulasTree"/>
 
         <TabControl Grid.Column="1" Margin="0,0,0,0">
             <TabItem Header="模拟魔方(_C)" x:Name="tabSimulator">

@@ -1,11 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿//-----------------------------------------------------------------------------
+// <copyright file="Formula.cs" company="Rui Fan">
+//     Copyright (c) Rui Fan.  All rights reserved.
+// </copyright>
+//
+// <author email="albert@fanrui.net">
+//     Rui Fan
+// </author>
+//
+// <summary>
+//     This file contains the Formula class.
+// </summary>
+//
+// <remarks/>
+//
+// <disclaimer/>
+//
+// <history date="08/01/2009" Author="Rui Fan">
+//     Class Created.
+// </history>
+// <history date="09/06/2009" Author="Rui Fan">
+//     Add formulas grouping feature.
+// </history>
+//-----------------------------------------------------------------------------
 
 namespace CubeExercise
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.ComponentModel;
+
     [Serializable]
     public class Formula : INotifyPropertyChanged
     {
@@ -15,8 +40,10 @@ namespace CubeExercise
         private string preScript;
         private string postScript;
         private string demo;
-        private bool enabled;
+        private bool enabled = true;
         private int practiceTimes;
+
+        private List<Formula> subNodes;
 
         public string Name
         {
@@ -120,6 +147,15 @@ namespace CubeExercise
 
                 this.enabled = value;
                 this.Notify("Enabled");
+
+                if (this.SubNodes != null)
+                {
+                    // Set "Enabled" property of all the sub nodes. This is a recursive call.
+                    foreach (var f in this.SubNodes)
+                    {
+                        f.Enabled = value;
+                    }
+                }
             }
         }
 
@@ -136,6 +172,12 @@ namespace CubeExercise
                 this.practiceTimes = value;
                 this.Notify("PracticeTimes");
             }
+        }
+
+        public List<Formula> SubNodes
+        {
+            get { return this.subNodes; }
+            set { this.subNodes = value; }
         }
 
         #region INotifyPropertyChanged Members

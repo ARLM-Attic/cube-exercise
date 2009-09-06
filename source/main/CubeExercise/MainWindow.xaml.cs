@@ -1,23 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml;
-using System.Xml.Linq;
-using System.Diagnostics;
-using System.Windows.Threading;
+﻿//-----------------------------------------------------------------------------
+// <copyright file="MainWindow.xaml.cs" company="Rui Fan">
+//     Copyright (c) Rui Fan.  All rights reserved.
+// </copyright>
+//
+// <author email="albert@fanrui.net">
+//     Rui Fan
+// </author>
+//
+// <summary>
+//     This class is the main window.
+// </summary>
+//
+// <remarks/>
+//
+// <disclaimer/>
+//
+// <history date="08/01/2009" Author="Rui Fan">
+//     Class Created.
+// </history>
+// <history date="09/06/2009" Author="Rui Fan">
+//     Add formulas grouping feature.
+// </history>
+//-----------------------------------------------------------------------------
 
 namespace CubeExercise
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Threading;
+    using System.Xml.Linq;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -42,9 +61,11 @@ namespace CubeExercise
 
         private DispatcherTimer timer;
 
-        private List<Formula> formulas;
+        private Formula rootFormula;
 
-        public List<Formula> Formulas { get { return this.formulas; } }
+        private List<Formula> plainListFormulas;
+
+        //public List<Formula> Formulas { get { return this.formulas; } }
 
         private List<Formula> exercising;
 
@@ -55,21 +76,123 @@ namespace CubeExercise
             this.timer = new DispatcherTimer();
             this.timer.Tick += new EventHandler(timer_Tick);
             this.ExerciseConfiguration = new ExerciseConfiguration();
-            InitializeFormulas();
+            this.plainListFormulas = new List<Formula>();
+            this.InitializeFormulas();
             InitializeComponent();
+            this.InitializeTree();
+        }
+
+        private void InitializeTree()
+        {
+            List<Formula> formulas = this.rootFormula.SubNodes;
+            TreeViewItem root = this.GetSubTreeItems(this.rootFormula);
+
+            // Transfer the sub items from the TreeViewItem to the TreeView.
+            while (root.Items.Count > 0)
+            {
+                // One TreeViewItem can have only one logical parent. So the current
+                // parent must remove it from its children.
+                object subItem = root.Items[0];
+                root.Items.RemoveAt(0);
+                this.FormulasTree.Items.Add(subItem);
+            }
+        }
+
+        private TreeViewItem GetSubTreeItems(Formula group)
+        {
+            TreeViewItem item = new TreeViewItem();
+
+            foreach (Formula f in group.SubNodes)
+            {
+                if (f.SubNodes == null)
+                {
+                    StackPanel panel = new StackPanel();
+                    panel.HorizontalAlignment = HorizontalAlignment.Left;
+                    panel.VerticalAlignment = VerticalAlignment.Center;
+                    panel.Orientation = Orientation.Horizontal;
+                    CheckBox cb = new CheckBox() { Tag = f, VerticalAlignment = VerticalAlignment.Center };
+                    cb.DataContext = f;
+                    cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
+                    panel.Children.Add(cb);
+                    if (!string.IsNullOrEmpty(f.Image) && System.IO.File.Exists(f.Image))
+                    {
+                        string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                        path = System.IO.Path.Combine(path, f.Image);
+                        panel.Children.Add(new Image() { Source = new BitmapImage(new Uri(path, UriKind.Absolute)) });
+                    }
+                    TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
+                    tb.DataContext = f;
+                    tb.SetBinding(TextBlock.TextProperty, "Name");
+                    panel.Children.Add(tb);
+                    Button itemButton = new Button();
+                    itemButton.Tag = f;
+                    itemButton.Click += new RoutedEventHandler(Button_Click);
+                    itemButton.Content = panel;
+
+                    TreeViewItem subItem = new TreeViewItem();
+                    subItem.Header = itemButton;
+                    subItem.Tag = f;
+                    item.Items.Add(subItem);
+                }
+                else
+                {
+                    WrapPanel panel = new WrapPanel();
+                    panel.HorizontalAlignment = HorizontalAlignment.Left;
+                    panel.VerticalAlignment = VerticalAlignment.Center;
+                    panel.Orientation = Orientation.Horizontal;
+                    CheckBox cb = new CheckBox() { Tag = f, VerticalAlignment = VerticalAlignment.Center };
+                    cb.DataContext = f;
+                    cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
+                    panel.Children.Add(cb);
+                    TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
+                    tb.DataContext = f;
+                    tb.SetBinding(TextBlock.TextProperty, "Name");
+                    panel.Children.Add(tb);
+                    TreeViewItem subItem = GetSubTreeItems(f);
+                    subItem.IsExpanded = true;
+                    subItem.Header = panel;
+                    item.Items.Add(subItem);
+                }
+            }
+
+            return item;
         }
 
         private void InitializeFormulas()
         {
-            this.formulas = new List<Formula>();
             string xmlPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
             xmlPath = System.IO.Path.Combine(xmlPath, "Formulas.xml");
             if (System.IO.File.Exists(xmlPath))
             {
                 XDocument doc = XDocument.Load(xmlPath);
-                foreach (XElement element in doc.Root.Elements())
+                this.rootFormula = this.ReadGroup(doc.Root, doc.Root.GetDefaultNamespace());
+                this.rootFormula.Name = "Root - Do not display";
+            }
+        }
+
+        private Formula ReadGroup(XElement group, XNamespace defaultNamespace)
+        {
+            Formula formulaGroup = new Formula();
+
+            formulaGroup.Name = group.Attribute("Name") != null ? group.Attribute("Name").Value : string.Empty;
+
+            if (group.Attribute("Enabled") != null)
+            {
+                bool enabled;
+                if (Boolean.TryParse(group.Attribute("Enabled").Value, out enabled))
                 {
-                    Formula formula = new Formula()
+                    formulaGroup.Enabled = enabled;
+                }
+            }
+
+            formulaGroup.SubNodes = new List<Formula>();
+
+            foreach (XElement element in group.Elements())
+            {
+                Formula formula = null;
+                if (element.Name == defaultNamespace + "Formula")
+                {
+                    formula = new Formula()
                     {
                         Name = element.Attribute("Name") != null ? element.Attribute("Name").Value : string.Empty,
                         Demo = element.Attribute("Demo") != null ? element.Attribute("Demo").Value : string.Empty,
@@ -98,9 +221,79 @@ namespace CubeExercise
                         }
                     }
 
-                    this.formulas.Add(formula);
+                    this.plainListFormulas.Add(formula);
+                }
+                else
+                {
+                    formula = this.ReadGroup(element, defaultNamespace);
+                }
+
+                formulaGroup.SubNodes.Add(formula);
+            }
+
+            return formulaGroup;
+        }
+
+        private void SaveFormulas()
+        {
+            if (this.rootFormula == null || this.rootFormula.SubNodes == null)
+            {
+                return;
+            }
+
+            XNamespace ns = "http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd";
+            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement(ns + "Formulas"));
+
+            foreach (Formula f in this.rootFormula.SubNodes)
+            {
+                XElement e = this.GetElement(f);
+                doc.Root.Add(e);
+            }
+
+            string xmlPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            xmlPath = System.IO.Path.Combine(xmlPath, "Formulas.xml");
+            try
+            {
+                doc.Save(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("无法保存公式文件Formulas.xml文件！错误信息:" + ex.ToString(), "错误", MessageBoxButton.OK);
+            }
+        }
+
+        private XElement GetElement(Formula parent)
+        {
+            XNamespace ns = "http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd";
+            XElement e = null;
+            if (parent.SubNodes != null)
+            {
+                e = new XElement(
+                    ns + "Group",
+                    new XAttribute("Name", parent.Name),
+                    new XAttribute("Enabled", parent.Enabled));
+
+                foreach (Formula f in parent.SubNodes)
+                {
+                    e.Add(GetElement(f));
                 }
             }
+            else
+            {
+                e = new XElement(
+                        ns + "Formula",
+                        new XAttribute("Name", parent.Name),
+                        new XAttribute("Enabled", parent.Enabled),
+                        new XAttribute("Image", parent.Image),
+                        new XAttribute("Script", parent.Script),
+                        new XAttribute("PreScript", parent.PreScript),
+                        new XAttribute("PostScript", parent.PostScript),
+                        new XAttribute("Demo", parent.Demo),
+                        new XAttribute("PracticeTimes", parent.PracticeTimes));
+            }
+
+
+            return e;
         }
 
         private void btnInitialize_Click(object sender, RoutedEventArgs e)
@@ -149,7 +342,7 @@ namespace CubeExercise
                 i++;
             } while (!tempCube.IsRecovered());
 
-            MessageBox.Show("如果重复做该公式，将在" + i + "次后回到初始状态。");
+            MessageBox.Show("如果重复做公式" + todo + "，将在" + i + "次后回到初始状态。");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -157,10 +350,10 @@ namespace CubeExercise
             Button btn = sender as Button;
             if (btn != null)
             {
-                string script = btn.Tag as string;
-                if (script != null)
+                Formula f = btn.Tag as Formula;
+                if (f != null)
                 {
-                    this.txtFormula.Text = script;
+                    this.txtFormula.Text = f.Script;
                 }
             }
         }
@@ -185,21 +378,21 @@ namespace CubeExercise
 
             if (this.ExerciseConfiguration.Mode == ExerciseMode.Descending)
             {
-                for (int i = this.formulas.Count - 1; i >= 0; i--)
+                for (int i = this.plainListFormulas.Count - 1; i >= 0; i--)
                 {
-                    if (this.formulas[i].Enabled)
+                    if (this.plainListFormulas[i].Enabled)
                     {
-                        this.exercising.Add(this.formulas[i]);
+                        this.exercising.Add(this.plainListFormulas[i]);
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < this.formulas.Count; i++)
+                for (int i = 0; i < this.plainListFormulas.Count; i++)
                 {
-                    if (this.formulas[i].Enabled)
+                    if (this.plainListFormulas[i].Enabled)
                     {
-                        this.exercising.Add(this.formulas[i]);
+                        this.exercising.Add(this.plainListFormulas[i]);
                     }
                 }
             }
@@ -521,37 +714,6 @@ namespace CubeExercise
                         this.timer.Start();
                     }
                     break;
-            }
-        }
-
-        private void SaveFormulas()
-        {
-            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("Formulas"));
-
-            foreach (Formula f in this.formulas)
-            {
-                doc.Root.Add(
-                    new XElement(
-                        "Formula",
-                        new XAttribute("Name", f.Name),
-                        new XAttribute("Enabled", f.Enabled),
-                        new XAttribute("Image", f.Image),
-                        new XAttribute("Script", f.Script),
-                        new XAttribute("PreScript", f.PreScript),
-                        new XAttribute("PostScript", f.PostScript),
-                        new XAttribute("Demo", f.Demo),
-                        new XAttribute("PracticeTimes", f.PracticeTimes)));
-            }
-
-            string xmlPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            xmlPath = System.IO.Path.Combine(xmlPath, "Formulas.xml");
-            try
-            {
-                doc.Save(xmlPath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("无法保存Formulas.xml文件！错误信息:" + ex.ToString(), "错误", MessageBoxButton.OK);
             }
         }
 

@@ -1,6 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Formulas xmlns="http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd">
+    <Group Name="F2L">
+        <Formula Name="gan's F2L01" Image="images\image_F2L_001.bmp" Script="(R U' U' R' U)2 y'(R' U' R)" PostScript="y" />
+        <Formula Name="gan's F2L02" Image="images\image_F2L_002.bmp" Script="(U R U' R' U') y'(R' U R)" PostScript="y" />
+        <Formula Name="gan's F2L03" Image="images\image_F2L_003.bmp" Script="y U'(L' U L U)y' (R U' R')" PostScript="" />
+        <Formula Name="gan's F2L04" Image="images\image_F2L_004.bmp" Script="(R U R' U')(R U'U' R' U')(R U R')" PostScript="" />
+        <Formula Name="gan's F2L05" Image="images\image_F2L_005.bmp" Script="(R U' R U)y(R U' R' F2)" PostScript="y'" />
+        <Formula Name="gan's F2L06" Image="images\image_F2L_006.bmp" Script="y'(R' U' R U)(R' U' R)" PostScript="y" />
+        <Formula Name="gan's F2L07" Image="images\image_F2L_007.bmp" Script="(R U' R' U)(R U' R')" PostScript="" />
+        <Formula Name="gan's F2L08" Image="images\image_F2L_008.bmp" Script="(R U'U')(R U R' U)(R U'U')R2" PostScript="" />
+        <Formula Name="gan's F2L09" Image="images\image_F2L_009.bmp" Script="R2 y(R U R' U')y'(R' U R')" PostScript="" />
+        <Formula Name="gan's F2L10" Image="images\image_F2L_010.bmp" Script="y' (R' U)(R U')(R' U R)" PostScript="y" />
+        <Formula Name="gan's F2L11" Image="images\image_F2L_011.bmp" Script="(R U R' U' )(R U R')" PostScript="" />
+        <Formula Name="gan's F2L12" Image="images\image_F2L_012.bmp" Script="(R U R' U')2 (R U R')" PostScript="" />
+        <Formula Name="gan's F2L13" Image="images\image_F2L_013.bmp" Script="(R U' R') y' (R' U2 R)" PostScript="y" />
+        <Formula Name="gan's F2L14" Image="images\image_F2L_014.bmp" Script="y'(R' U2)(R U R' U')R" PostScript="y" />
+        <Formula Name="gan's F2L15" Image="images\image_F2L_015.bmp" Script="d' z U'(R2 U)(R' U' R U)" PostScript="z'y'" />
+        <Formula Name="gan's F2L16" Image="images\image_F2L_016.bmp" Script="F' L' U2 r U x'" PostScript="" />
+        <Formula Name="gan's F2L17" Image="images\image_F2L_017.bmp" Script="y' (U2 R2' U2)(R U R' U R2)" PostScript="y" />
+        <Formula Name="gan's F2L18" Image="images\image_F2L_018.bmp" Script="(U2 R2' U2)(R' U' R U' R2)" PostScript="" />
+        <Formula Name="gan's F2L19" Image="images\image_F2L_019.bmp" Script="R y (R U2 R' F')" PostScript="y'" />
+        <Formula Name="gan's F2L20" Image="images\image_F2L_020.bmp" Script="U(R U'U')(R' U R U' )R'" PostScript="" />
+        <Formula Name="gan's F2L21" Image="images\image_F2L_021.bmp" Script="(R U'U')(R' U' R U)R'" PostScript="" />
+        <Formula Name="gan's F2L22" Image="images\image_F2L_022.bmp" Script="U'(R U')(R' U2)(R U' R')" PostScript="" />
+        <Formula Name="gan's F2L23" Image="images\image_F2L_023.bmp" Script="U' (R U R') d (R' U' R)" PostScript="y" />
+        <Formula Name="gan's F2L24" Image="images\image_F2L_024.bmp" Script="d (R' U R U')(R' U' R)" PostScript="y" />
+        <Formula Name="gan's F2L25" Image="images\image_F2L_025.bmp" Script="y' (R' U' R)" PostScript="y" />
+        <Formula Name="gan's F2L26" Image="images\image_F2L_026.bmp" Script="(R2 U)y(R U' R' F2)" PostScript="y'" />
+        <Formula Name="gan's F2L27" Image="images\image_F2L_027.bmp" Script="y' (R U'U')R'2 U' R2 U' R'" PostScript="y" />
+        <Formula Name="gan's F2L28" Image="images\image_F2L_028.bmp" Script="y' (R' U)(R d' U')(R U R')" PostScript="" />
+        <Formula Name="gan's F2L29" Image="images\image_F2L_029.bmp" Script="U' (R U'U')(R' U2)(R U' R')" PostScript="" />
+        <Formula Name="gan's F2L30" Image="images\image_F2L_030.bmp" Script="y' R2 y'(R' U' R U)Y R2" PostScript="y" />
+        <Formula Name="gan's F2L31" Image="images\image_F2L_031.bmp" Script="U R U' R'" PostScript="" />
+        <Formula Name="gan's F2L32" Image="images\image_F2L_032.bmp" Script="U' (R U'U' R' U)(R U R')" PostScript="" />
+        <Formula Name="gan's F2L33" Image="images\image_F2L_033.bmp" Script="d (R' U' R) d' (R U R')" PostScript="" />
+        <Formula Name="gan's F2L34" Image="images\image_F2L_034.bmp" Script="x(U R' U' l)" PostScript="" />
+        <Formula Name="gan's F2L35" Image="images\image_F2L_035.bmp" Script="R2 y (R U R' U')y' R2" PostScript="" />
+        <Formula Name="gan's F2L36" Image="images\image_F2L_036.bmp" Script="d (R' U2)(R U'U')(R' U R)" PostScript="y" />
+        <Formula Name="gan's F2L37" Image="images\image_F2L_037.bmp" Script="(R U' R' U)(d R' U' R)" PostScript="y" />
+        <Formula Name="gan's F2L38" Image="images\image_F2L_038.bmp" Script="(R' U2)(R2' U)(R2' U R)" PostScript="" />
+        <Formula Name="gan's F2L39" Image="images\image_F2L_039.bmp" Script="y' (R2 U')(F' U F)R2" PostScript="y" />
+        <Formula Name="gan's F2L40" Image="images\image_F2L_040.bmp" Script="(R U R')" PostScript="" />
+        <Formula Name="gan's F2L41" Image="images\image_F2L_041.bmp" Script="U' (R U' R' U)(R U R')" PostScript="" />
+    </Group>
     <Group Name="OLL">
         <Group Name="点">
             <Formula Name="gan's OLL01" Enabled="true" Image="images\image_OLL_001.bmp" Script="(R U'U') (R2' F R F') U2 (R' F R F')" PreScript="" PostScript="" Demo="" />
