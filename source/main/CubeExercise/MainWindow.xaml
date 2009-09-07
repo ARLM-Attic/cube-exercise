@@ -8,7 +8,6 @@
     <!--<Viewbox Stretch="Fill" StretchDirection="Both">-->
     <Grid Margin="0">
         <Grid.Resources>
-            <Cube:ImageConverter x:Key="imageConverter" />
             <Cube:Int32Converter x:Key="intConverter" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
