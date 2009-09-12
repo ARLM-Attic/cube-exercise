@@ -31,20 +31,9 @@ namespace CubeExercise
     using System.Text;
     using System.ComponentModel;
 
-    [Serializable]
-    public class Formula : INotifyPropertyChanged
+    public partial class Formula : INotifyPropertyChanged
     {
-        private string name;
-        private string image;
-        private string script;
-        private string preScript;
-        private string postScript;
-        private string demo;
-        private bool enabled = true;
-        private int practiceTimes;
-
-        private List<Formula> subNodes;
-
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string Name
         {
             get { return this.name; }
@@ -60,6 +49,7 @@ namespace CubeExercise
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string Image
         {
             get { return this.image; }
@@ -75,6 +65,7 @@ namespace CubeExercise
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string Script
         {
             get { return this.script; }
@@ -90,6 +81,7 @@ namespace CubeExercise
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string PreScript
         {
             get { return this.preScript; }
@@ -105,6 +97,7 @@ namespace CubeExercise
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string PostScript
         {
             get { return this.postScript; }
@@ -120,6 +113,7 @@ namespace CubeExercise
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string Demo
         {
             get { return this.demo; }
@@ -135,6 +129,7 @@ namespace CubeExercise
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool Enabled
         {
             get { return this.enabled; }
@@ -147,18 +142,10 @@ namespace CubeExercise
 
                 this.enabled = value;
                 this.Notify("Enabled");
-
-                if (this.SubNodes != null)
-                {
-                    // Set "Enabled" property of all the sub nodes. This is a recursive call.
-                    foreach (var f in this.SubNodes)
-                    {
-                        f.Enabled = value;
-                    }
-                }
             }
         }
 
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public int PracticeTimes
         {
             get { return this.practiceTimes; }
@@ -172,12 +159,6 @@ namespace CubeExercise
                 this.practiceTimes = value;
                 this.Notify("PracticeTimes");
             }
-        }
-
-        public List<Formula> SubNodes
-        {
-            get { return this.subNodes; }
-            set { this.subNodes = value; }
         }
 
         #region INotifyPropertyChanged Members

@@ -27,7 +27,7 @@
                     <Viewbox Grid.Row="0" Grid.Column="0">
                         <Cube:CubeControl x:Name="cube" Height="290" Width="386" />
                     </Viewbox>
-                    <TextBox Grid.Row="1" Grid.Column="0" Name="txtFormula" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" AutoWordSelection="False" FontSize="18" FontWeight="Bold" Margin="3,3,3,3" />
+                    <TextBox Grid.Row="1" Grid.Column="0" Name="txtFormula" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" AutoWordSelection="False" FontSize="18" FontWeight="Bold" Margin="3,3,3,3" UndoLimit="64" />
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Height="23" Width="70" Name="btnFind" Click="btnFind_Click">重复次数(_T)</Button>
                         <Button Height="23" Width="70" Name="btnClear" Click="btnClear_Click">清除公式(_E)</Button>
@@ -46,6 +46,7 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <WrapPanel x:Name="spExerciseConfiguration" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Mode=TwoWay ,ElementName=mainWindow, Path=ExerciseConfiguration}" >
+                        <TextBlock Text="练习模式：" Height="15" />
                         <ComboBox x:Name="cmbRandomMode" IsEditable="False">
                             <ComboBoxItem IsSelected="True">无重复随机</ComboBoxItem>
                             <ComboBoxItem>可重复随机</ComboBoxItem>
@@ -79,7 +80,7 @@
                             <Button x:Name="btnStopExercise" Click="btnStopExercise_Click" IsEnabled="False" Width="70">停止练习(_T)</Button>
                         </StackPanel>
                     </WrapPanel>
-                    <Image x:Name="imgExercise" Grid.Row="1" Focusable="True" ForceCursor="True" KeyDown="imgExercise_KeyDown" MouseDown="imgExercise_MouseDown" HorizontalAlignment="Stretch" ToolTip="空格键或回车键：完成并进行下一个；“N”键：还须继续巩固，公式会在此次练习中再次出现；“P”键：暂停/继续；“Esc”键：停止练习。" />
+                    <Image x:Name="imgExercise" Grid.Row="1" Focusable="True" ForceCursor="True" MouseDown="imgExercise_MouseDown" HorizontalAlignment="Stretch" ToolTip="空格键或回车键：完成并进行下一个；“N”键：还须继续巩固，公式会在此次练习中再次出现；“P”键：暂停/继续；“Esc”键：停止练习。" PreviewKeyDown="imgExercise_KeyDown" />
                     <TextBlock Grid.Row="2" x:Name="tbFormulaPrompt" FontSize="16" />
                     <Cube:StopWatch Grid.Row="3" x:Name="stopWatch" />
                 </Grid>

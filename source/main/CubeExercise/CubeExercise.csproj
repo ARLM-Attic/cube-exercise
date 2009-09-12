@@ -46,6 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -127,6 +128,10 @@
     <Compile Include="ExerciseConfiguration.cs" />
     <Compile Include="ExerciseMode.cs" />
     <Compile Include="Formula.cs" />
+    <Compile Include="FormulasSchema.cs">
+      <DependentUpon>FormulasSchema.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Group.cs" />
     <Compile Include="Int32Converter.cs" />
     <Compile Include="NumberValidationRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

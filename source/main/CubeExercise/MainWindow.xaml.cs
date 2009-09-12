@@ -28,21 +28,31 @@ namespace CubeExercise
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Documents;
+    using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
     using System.Windows.Threading;
-    using System.Xml.Linq;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Cache the file version.
+        /// </summary>
         private static string fileVersion;
+
+        /// <summary>
+        /// Gets the file version. If the version is not cached, get it from the assembly attribute.
+        /// </summary>
         public static string FileVersion
         {
             get
@@ -61,7 +71,7 @@ namespace CubeExercise
 
         private DispatcherTimer timer;
 
-        private Formula rootFormula;
+        private Group root;
 
         private List<Formula> plainListFormulas;
 
@@ -73,19 +83,19 @@ namespace CubeExercise
 
         public MainWindow()
         {
+            this.root = new Group();
+            this.plainListFormulas = new List<Formula>();
             this.timer = new DispatcherTimer();
             this.timer.Tick += new EventHandler(timer_Tick);
             this.ExerciseConfiguration = new ExerciseConfiguration();
-            this.plainListFormulas = new List<Formula>();
-            this.InitializeFormulas();
             InitializeComponent();
+            this.InitializeFormulas();
             this.InitializeTree();
         }
 
         private void InitializeTree()
         {
-            List<Formula> formulas = this.rootFormula.SubNodes;
-            TreeViewItem root = this.GetSubTreeItems(this.rootFormula);
+            TreeViewItem root = this.GetSubTreeItems(this.root);
 
             // Transfer the sub items from the TreeViewItem to the TreeView.
             while (root.Items.Count > 0)
@@ -98,22 +108,40 @@ namespace CubeExercise
             }
         }
 
-        private TreeViewItem GetSubTreeItems(Formula group)
+        private TreeViewItem GetSubTreeItems(Group group)
         {
-            TreeViewItem item = new TreeViewItem();
+            TreeViewItem tvItem = new TreeViewItem();
 
-            foreach (Formula f in group.SubNodes)
+            foreach (object item in group.Items)
             {
-                if (f.SubNodes == null)
+                if (item.GetType() == typeof(Formula))
                 {
+                    Formula f = (Formula)item;
+
+                    // A plain list is helpful for the iteration of the formulas
+                    // because we don't have to find sub nodes recursivly.
+                    this.plainListFormulas.Add(f);
+                    Button itemButton = new Button();
+                    itemButton.Tag = f;
+                    itemButton.Click += new RoutedEventHandler(Button_Click);
+
+                    TreeViewItem subItem = new TreeViewItem();
+                    subItem.Header = itemButton;
+                    subItem.Tag = f;
+                    tvItem.Items.Add(subItem);
+
                     StackPanel panel = new StackPanel();
+                    itemButton.Content = panel;
                     panel.HorizontalAlignment = HorizontalAlignment.Left;
                     panel.VerticalAlignment = VerticalAlignment.Center;
                     panel.Orientation = Orientation.Horizontal;
-                    CheckBox cb = new CheckBox() { Tag = f, VerticalAlignment = VerticalAlignment.Center };
+                    CheckBox cb = new CheckBox() { VerticalAlignment = VerticalAlignment.Center };
+                    panel.Children.Add(cb);
+                    cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
+                    cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
                     cb.DataContext = f;
                     cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
-                    panel.Children.Add(cb);
+
                     if (!string.IsNullOrEmpty(f.Image) && System.IO.File.Exists(f.Image))
                     {
                         string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -124,38 +152,176 @@ namespace CubeExercise
                     tb.DataContext = f;
                     tb.SetBinding(TextBlock.TextProperty, "Name");
                     panel.Children.Add(tb);
-                    Button itemButton = new Button();
-                    itemButton.Tag = f;
-                    itemButton.Click += new RoutedEventHandler(Button_Click);
-                    itemButton.Content = panel;
-
-                    TreeViewItem subItem = new TreeViewItem();
-                    subItem.Header = itemButton;
-                    subItem.Tag = f;
-                    item.Items.Add(subItem);
                 }
                 else
                 {
-                    WrapPanel panel = new WrapPanel();
+                    Group g = (Group)item;
+                    g.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(g_PropertyChanged);
+                    StackPanel panel = new StackPanel();
+                    TreeViewItem subItem = GetSubTreeItems(g);
+
+                    // This binding is OneWay by default. So use a explicit binding configuration.
+                    Binding binding = new Binding("Expanded") { Source = g, Mode = BindingMode.TwoWay };
+                    subItem.SetBinding(TreeViewItem.IsExpandedProperty, binding);
+                    subItem.Header = panel;
+                    subItem.Tag = g;
+                    tvItem.Items.Add(subItem);
+
                     panel.HorizontalAlignment = HorizontalAlignment.Left;
                     panel.VerticalAlignment = VerticalAlignment.Center;
                     panel.Orientation = Orientation.Horizontal;
-                    CheckBox cb = new CheckBox() { Tag = f, VerticalAlignment = VerticalAlignment.Center };
-                    cb.DataContext = f;
-                    cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
+                    CheckBox cb = new CheckBox() { VerticalAlignment = VerticalAlignment.Center };
                     panel.Children.Add(cb);
+                    cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
+                    cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
+                    cb.DataContext = g;
+                    cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
+
                     TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
-                    tb.DataContext = f;
+                    tb.DataContext = g;
                     tb.SetBinding(TextBlock.TextProperty, "Name");
                     panel.Children.Add(tb);
-                    TreeViewItem subItem = GetSubTreeItems(f);
-                    subItem.IsExpanded = true;
-                    subItem.Header = panel;
-                    item.Items.Add(subItem);
                 }
             }
 
-            return item;
+            return tvItem;
+        }
+
+        void g_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Group g = (Group)sender;
+            if (e.PropertyName == "Enabled")
+            {
+                foreach (object item in g.Items)
+                {
+                    if (item.GetType() == typeof(Formula))
+                    {
+                        ((Formula)item).Enabled = g.Enabled;
+                    }
+                    else if (item.GetType() == typeof(Group))
+                    {
+                        ((Group)item).Enabled = g.Enabled;
+                    }
+                }
+            }
+        }
+
+        private void cb_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem tvItem = this.FindParentTreeViewItem((CheckBox)sender);
+            while (tvItem != null)
+            {
+                this.ResetParentStatus(tvItem);
+                tvItem = this.FindParentTreeViewItem(tvItem);
+            }
+        }
+
+        /// <summary>
+        /// Find the nearest TreeViewItem in its parents.
+        /// </summary>
+        /// <param name="child"></param>
+        /// <returns></returns>
+        private TreeViewItem FindParentTreeViewItem(FrameworkElement child)
+        {
+            if (child.Parent == null)
+            {
+                return null;
+            }
+
+            if (child.Parent is TreeViewItem)
+            {
+                return (TreeViewItem)child.Parent;
+            }
+            else
+            {
+                return this.FindParentTreeViewItem((FrameworkElement)child.Parent);
+            }
+        }
+
+        private CheckBox FindChildCheckBox(TreeViewItem item)
+        {
+            CheckBox cb = null;
+
+            Button btn = item.Header as Button;
+            Panel p;
+            if (btn == null)
+            {
+                p = item.Header as Panel;
+            }
+            else
+            {
+                p = btn.Content as Panel;
+            }
+
+            if (p == null)
+            {
+                return null;
+            }
+
+            cb = (from UIElement c in p.Children
+                  where c.GetType() == typeof(CheckBox)
+                  select c as CheckBox).ElementAtOrDefault(0);
+
+            return cb;
+        }
+
+        /// <summary>
+        /// Reset the status of the CheckBox of the parent of the 'item'.
+        /// </summary>
+        /// <param name="item">The element whose parent's status will be reset.</param>
+        private void ResetParentStatus(TreeViewItem item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item.Parent == null || !(item.Parent is TreeViewItem))
+            {
+                return;
+            }
+
+            TreeViewItem parent = item.Parent as TreeViewItem;
+            CheckBox parentCheckBox = this.FindChildCheckBox(parent);
+            if (parentCheckBox == null)
+            {
+                return;
+            }
+
+            int numOfUncheckedChildren = 0;
+            for (int i = 0; i < parent.Items.Count; i++)
+            {
+                TreeViewItem childItem = parent.Items[i] as TreeViewItem;
+                CheckBox childCheckBox = this.FindChildCheckBox(childItem);
+                if (childCheckBox == null)
+                {
+                    continue;
+                }
+
+                if (childCheckBox.IsChecked == null)
+                {
+                    parentCheckBox.IsChecked = null;
+                    return;
+                }
+
+                if (childCheckBox.IsChecked == false)
+                {
+                    numOfUncheckedChildren++;
+                }
+            }
+
+            if (numOfUncheckedChildren == parent.Items.Count)
+            {
+                parentCheckBox.IsChecked = false;
+            }
+            else if (numOfUncheckedChildren == 0)
+            {
+                parentCheckBox.IsChecked = true;
+            }
+            else
+            {
+                parentCheckBox.IsChecked = null;
+            }
         }
 
         private void InitializeFormulas()
@@ -164,136 +330,41 @@ namespace CubeExercise
             xmlPath = System.IO.Path.Combine(xmlPath, "Formulas.xml");
             if (System.IO.File.Exists(xmlPath))
             {
-                XDocument doc = XDocument.Load(xmlPath);
-                this.rootFormula = this.ReadGroup(doc.Root, doc.Root.GetDefaultNamespace());
-                this.rootFormula.Name = "Root - Do not display";
+                XmlSerializer s = new XmlSerializer(typeof(Group), "http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd");
+                Group g = (Group)s.Deserialize(XmlReader.Create(xmlPath));
+                g.FilePath = xmlPath;
+                this.root.Items = new Group[] { g };
             }
-        }
-
-        private Formula ReadGroup(XElement group, XNamespace defaultNamespace)
-        {
-            Formula formulaGroup = new Formula();
-
-            formulaGroup.Name = group.Attribute("Name") != null ? group.Attribute("Name").Value : string.Empty;
-
-            if (group.Attribute("Enabled") != null)
-            {
-                bool enabled;
-                if (Boolean.TryParse(group.Attribute("Enabled").Value, out enabled))
-                {
-                    formulaGroup.Enabled = enabled;
-                }
-            }
-
-            formulaGroup.SubNodes = new List<Formula>();
-
-            foreach (XElement element in group.Elements())
-            {
-                Formula formula = null;
-                if (element.Name == defaultNamespace + "Formula")
-                {
-                    formula = new Formula()
-                    {
-                        Name = element.Attribute("Name") != null ? element.Attribute("Name").Value : string.Empty,
-                        Demo = element.Attribute("Demo") != null ? element.Attribute("Demo").Value : string.Empty,
-                        Image = element.Attribute("Image") != null ? element.Attribute("Image").Value : string.Empty,
-                        Script = element.Attribute("Script") != null ? element.Attribute("Script").Value : string.Empty,
-                        PreScript = element.Attribute("PreScript") != null ? element.Attribute("PreScript").Value : string.Empty,
-                        PostScript = element.Attribute("PostScript") != null ? element.Attribute("PostScript").Value : string.Empty,
-                        Enabled = true
-                    };
-
-                    if (element.Attribute("Enabled") != null)
-                    {
-                        bool enabled;
-                        if (Boolean.TryParse(element.Attribute("Enabled").Value, out enabled))
-                        {
-                            formula.Enabled = enabled;
-                        }
-                    }
-
-                    if (element.Attribute("PracticeTimes") != null)
-                    {
-                        int practiceTimes = 0;
-                        if (Int32.TryParse(element.Attribute("PracticeTimes").Value, out practiceTimes))
-                        {
-                            formula.PracticeTimes = practiceTimes;
-                        }
-                    }
-
-                    this.plainListFormulas.Add(formula);
-                }
-                else
-                {
-                    formula = this.ReadGroup(element, defaultNamespace);
-                }
-
-                formulaGroup.SubNodes.Add(formula);
-            }
-
-            return formulaGroup;
         }
 
         private void SaveFormulas()
         {
-            if (this.rootFormula == null || this.rootFormula.SubNodes == null)
+            if (this.root == null || this.root.Items == null)
             {
                 return;
             }
 
-            XNamespace ns = "http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd";
-            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement(ns + "Formulas"));
-
-            foreach (Formula f in this.rootFormula.SubNodes)
-            {
-                XElement e = this.GetElement(f);
-                doc.Root.Add(e);
-            }
-
-            string xmlPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            xmlPath = System.IO.Path.Combine(xmlPath, "Formulas.xml");
             try
             {
-                doc.Save(xmlPath);
+                foreach (object item in this.root.Items)
+                {
+                    if (item.GetType() != typeof(Group))
+                    {
+                        continue;
+                    }
+
+                    Group g = (Group)item;
+                    XmlSerializer s = new XmlSerializer(typeof(Group));
+                    using (TextWriter textWriter = new StreamWriter(g.FilePath, false, Encoding.UTF8))
+                    {
+                        s.Serialize(textWriter, g);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("无法保存公式文件Formulas.xml文件！错误信息:" + ex.ToString(), "错误", MessageBoxButton.OK);
+                MessageBox.Show("无法保存公式文件！错误信息:" + ex.ToString(), "错误", MessageBoxButton.OK);
             }
-        }
-
-        private XElement GetElement(Formula parent)
-        {
-            XNamespace ns = "http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd";
-            XElement e = null;
-            if (parent.SubNodes != null)
-            {
-                e = new XElement(
-                    ns + "Group",
-                    new XAttribute("Name", parent.Name),
-                    new XAttribute("Enabled", parent.Enabled));
-
-                foreach (Formula f in parent.SubNodes)
-                {
-                    e.Add(GetElement(f));
-                }
-            }
-            else
-            {
-                e = new XElement(
-                        ns + "Formula",
-                        new XAttribute("Name", parent.Name),
-                        new XAttribute("Enabled", parent.Enabled),
-                        new XAttribute("Image", parent.Image),
-                        new XAttribute("Script", parent.Script),
-                        new XAttribute("PreScript", parent.PreScript),
-                        new XAttribute("PostScript", parent.PostScript),
-                        new XAttribute("Demo", parent.Demo),
-                        new XAttribute("PracticeTimes", parent.PracticeTimes));
-            }
-
-
-            return e;
         }
 
         private void btnInitialize_Click(object sender, RoutedEventArgs e)
@@ -484,15 +555,25 @@ namespace CubeExercise
 
         private void imgExercise_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Keyboard.Modifiers != ModifierKeys.None)
-            {
-                return;
-            }
+            //if (Keyboard.Modifiers != ModifierKeys.None)
+            //{
+            //    return;
+            //}
 
             switch (e.Key)
             {
                 case Key.Space:
                 case Key.Enter:
+                case Key.RightAlt:
+                case Key.LeftAlt:
+                case Key.RWin:
+                case Key.LWin:
+                case Key.RightCtrl:
+                case Key.LeftCtrl:
+                case Key.Apps:
+                case Key.System:
+                    // This include all the keys in the bottom line of the main keyboard.
+                    // Helpful for preventing pressing the wrong key.
                     if (this.stopWatch.IsRunning)
                     {
                         if (this.currentFormula != null)
