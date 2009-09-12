@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Formulas xmlns="http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd"
+          name="默认公式文件">
+    <Group name="gan的公式">
+        <Group name="F2L">
+            <Group name="角块复原" expanded="false">
+                <Formula name="gan's F2L01" image="images\image_F2L_001.gif" script="(R U' U' R' U)2 y'(R' U' R)" postScript="y" />
+                <Formula name="gan's F2L02" image="images\image_F2L_002.gif" script="(U R U' R' U') y'(R' U R)" postScript="y" />
+                <Formula name="gan's F2L03" image="images\image_F2L_003.gif" script="y U'(L' U L U)y' (R U' R')" postScript="" />
+            </Group>
+            <Group name="角块位置正确方向不对" expanded="false">
+                <Formula name="gan's F2L04" image="images\image_F2L_004.gif" script="(R U R' U')(R U'U' R' U')(R U R')" postScript="" />
+                <Formula name="gan's F2L05" image="images\image_F2L_005.gif" script="(R U' R U)y(R U' R' F2)" postScript="y'" />
+                <Formula name="gan's F2L06" image="images\image_F2L_006.gif" script="y'(R' U' R U)(R' U' R)" postScript="y" />
+                <Formula name="gan's F2L07" image="images\image_F2L_007.gif" script="(R U' R' U)(R U' R')" postScript="" />
+                <Formula name="gan's F2L08" image="images\image_F2L_008.gif" script="(R U'U')(R U R' U)(R U'U')R2" postScript="" />
+                <Formula name="gan's F2L09" image="images\image_F2L_009.gif" script="R2 y(R U R' U')y'(R' U R')" postScript="" />
+                <Formula name="gan's F2L10" image="images\image_F2L_010.gif" script="y' (R' U)(R U')(R' U R)" postScript="y" />
+                <Formula name="gan's F2L11" image="images\image_F2L_011.gif" script="(R U R' U' )(R U R')" postScript="" />
+            </Group>
+            <Group name="角块在顶层，底面向上" expanded="false">
+                <Formula name="gan's F2L12" image="images\image_F2L_012.gif" script="(R U R' U')2 (R U R')" postScript="" />
+                <Formula name="gan's F2L13" image="images\image_F2L_013.gif" script="(R U' R') y' (R' U2 R)" postScript="y" />
+                <Formula name="gan's F2L14" image="images\image_F2L_014.gif" script="y'(R' U2)(R U R' U')R" postScript="y" />
+                <Formula name="gan's F2L15" image="images\image_F2L_015.gif" script="d' z U'(R2 U)(R' U' R U)" postScript="z'y'" />
+                <Formula name="gan's F2L16" image="images\image_F2L_016.gif" script="F' L' U2 r U x'" postScript="" />
+                <Formula name="gan's F2L17" image="images\image_F2L_017.gif" script="y' (U2 R2' U2)(R U R' U R2)" postScript="y" />
+                <Formula name="gan's F2L18" image="images\image_F2L_018.gif" script="(U2 R2' U2)(R' U' R U' R2)" postScript="" />
+                <Formula name="gan's F2L19" image="images\image_F2L_019.gif" script="R y (R U2 R' F')" postScript="y'" />
+                <Formula name="gan's F2L20" image="images\image_F2L_020.gif" script="U(R U'U')(R' U R U' )R'" postScript="" />
+                <Formula name="gan's F2L21" image="images\image_F2L_021.gif" script="(R U'U')(R' U' R U)R'" postScript="" />
+            </Group>
+            <Group name="角块在顶层，底面向前" expanded="false">
+                <Formula name="gan's F2L22" image="images\image_F2L_022.gif" script="U'(R U')(R' U2)(R U' R')" postScript="" />
+                <Formula name="gan's F2L23" image="images\image_F2L_023.gif" script="U' (R U R') d (R' U' R)" postScript="y" />
+                <Formula name="gan's F2L24" image="images\image_F2L_024.gif" script="d (R' U R U')(R' U' R)" postScript="y" />
+                <Formula name="gan's F2L25" image="images\image_F2L_025.gif" script="y' (R' U' R)" postScript="y" />
+                <Formula name="gan's F2L26" image="images\image_F2L_026.gif" script="(R2 U)y(R U' R' F2)" postScript="y'" />
+                <Formula name="gan's F2L27" image="images\image_F2L_027.gif" script="y' (R U'U')R'2 U' R2 U' R'" postScript="y" />
+                <Formula name="gan's F2L28" image="images\image_F2L_028.gif" script="y' (R' U)(R d' U')(R U R')" postScript="" />
+                <Formula name="gan's F2L29" image="images\image_F2L_029.gif" script="U' (R U'U')(R' U2)(R U' R')" postScript="" />
+                <Formula name="gan's F2L30" image="images\image_F2L_030.gif" script="y' R2 y'(R' U' R U)Y R2" postScript="y" />
+                <Formula name="gan's F2L31" image="images\image_F2L_031.gif" script="U R U' R'" postScript="" />
+            </Group>
+            <Group name="角块在顶层，底面向右" expanded="false">
+                <Formula name="gan's F2L32" image="images\image_F2L_032.gif" script="U' (R U'U' R' U)(R U R')" postScript="" />
+                <Formula name="gan's F2L33" image="images\image_F2L_033.gif" script="d (R' U' R) d' (R U R')" postScript="" />
+                <Formula name="gan's F2L34" image="images\image_F2L_034.gif" script="x(U R' U' l)" postScript="" />
+                <Formula name="gan's F2L35" image="images\image_F2L_035.gif" script="R2 y (R U R' U')y' R2" postScript="" />
+                <Formula name="gan's F2L36" image="images\image_F2L_036.gif" script="d (R' U2)(R U'U')(R' U R)" postScript="y" />
+                <Formula name="gan's F2L37" image="images\image_F2L_037.gif" script="(R U' R' U)(d R' U' R)" postScript="y" />
+                <Formula name="gan's F2L38" image="images\image_F2L_038.gif" script="(R' U2)(R2' U)(R2' U R)" postScript="" />
+                <Formula name="gan's F2L39" image="images\image_F2L_039.gif" script="y' (R2 U')(F' U F)R2" postScript="y" />
+                <Formula name="gan's F2L40" image="images\image_F2L_040.gif" script="(R U R')" postScript="" />
+                <Formula name="gan's F2L41" image="images\image_F2L_041.gif" script="U' (R U' R' U)(R U R')" postScript="" />
+            </Group>
+        </Group>
+        <Group name="OLL">
+            <Group name="十字" expanded="false">
+                <Formula name="gan's OLL21" image="images\image_OLL_021.gif" script="(R U'U')(R' U' R U R' U') (R U' R')" demo="" />
+                <Formula name="gan's OLL22" image="images\image_OLL_022.gif" script="R U'U' (R'2 U')(R2 U')R'2 U' U'R" demo="" />
+                <Formula name="gan's OLL23" image="images\image_OLL_023.gif" script="(R2 D) (R' U2) (R D') (R' U2 R')" demo="" />
+                <Formula name="gan's OLL24" image="images\image_OLL_024.gif" script="x' R U R' (D R) U' R' D'" postScript="x" demo="" />
+                <Formula name="gan's OLL25" image="images\image_OLL_025.gif" script="F'(r U R' U')(r' F R)" demo="" />
+                <Formula name="gan's OLL26" image="images\image_OLL_026.gif" script="R U' U' R' U'R U' R'" demo="" />
+                <Formula name="gan's OLL27" image="images\image_OLL_027.gif" script="R' U2 R U R' U R" demo="" />
+            </Group>
+            <Group name="点" expanded="false">
+                <Formula name="gan's OLL01" image="images\image_OLL_001.gif" script="(R U'U') (R2' F R F') U2 (R' F R F')" postScript="" demo="" />
+                <Formula name="gan's OLL02" image="images\image_OLL_002.gif" script="(F R U R' U' F') (f R U R' U' f')" demo="" />
+                <Formula name="gan's OLL03" image="images\image_OLL_003.gif" script="f(R U R' U')f' U' F(R U R' U')F'" demo="" />
+                <Formula name="gan's OLL04" image="images\image_OLL_004.gif" script="f(R U R' U')y x(R’ F)(R U R' U')F'" postScript="y'" demo="" />
+                <Formula name="gan's OLL17" image="images\image_OLL_017.gif" script="(R U R' U) (R' F R F'U2) R' F R F'" demo="" />
+                <Formula name="gan's OLL18" image="images\image_OLL_018.gif" script="F (R U R' d)(R' U2)(R' F R F')" postScript="y" demo="" />
+                <Formula name="gan's OLL19" image="images\image_OLL_019.gif" script="R' U2 F R U R'U' y'R2 U'U' R B" postScript="y" demo="" />
+                <Formula name="gan's OLL20" image="images\image_OLL_020.gif" script="r'(R U)(R U R'U' r2)(R2'U) (R U') r'" demo="" />
+            </Group>
+
+            <Group name="直线" expanded="false">
+                <Formula name="gan's OLL13" image="images\image_OLL_013.gif" script="(r U' r'U')(r U r') (F' U F)" demo="" />
+                <Formula name="gan's OLL14" image="images\image_OLL_014.gif" script="R' F R U R' F'R (F U' F')" demo="" />
+                <Formula name="gan's OLL15" image="images\image_OLL_015.gif" script="(r' U' r)(R'U'R U)(r' U r)" demo="" />
+                <Formula name="gan's OLL16" image="images\image_OLL_016.gif" script="R B R' L U L' U' R B' R'" demo="" />
+                <Formula name="gan's OLL33" image="images\image_OLL_033.gif" script="(R U R' U')(R' F R F')" demo="" />
+                <Formula name="gan's OLL34" image="images\image_OLL_034.gif" script="(R'U'R U)y(r U R' U')r' R" postScript="y'" demo="" />
+                <Formula name="gan's OLL39" image="images\image_OLL_039.gif" script="(L F'L' U'L U) (F U' L')" demo="" />
+                <Formula name="gan's OLL40" image="images\image_OLL_040.gif" script="(R' F R U R'U') (F' U R)" demo="" />
+                <Formula name="gan's OLL45" image="images\image_OLL_045.gif" script="F (R U R' U') F'" demo="" />
+                <Formula name="gan's OLL46" image="images\image_OLL_046.gif" script="(R' U') R' F R F'(U R)" demo="" />
+                <Formula name="gan's OLL51" image="images\image_OLL_051.gif" script="f (R U R' U')2 f'" demo="" />
+                <Formula name="gan's OLL52" image="images\image_OLL_052.gif" script="R'U' R U' R' dR' U l U" postScript="xy" demo="" />
+                <Formula name="gan's OLL55" image="images\image_OLL_055.gif" script="(R U'U') (R'2 U') R U' R'U2(F R F')" demo="" />
+                <Formula name="gan's OLL56" image="images\image_OLL_056.gif" script="F (R U R'U')(R F')(r U R'U')r'" demo="" />
+                <Formula name="gan's OLL57" image="images\image_OLL_057.gif" script="(R U R' U' r)(R' U)(R U' r')" demo="" />
+            </Group>
+
+            <Group name="箱子" expanded="false">
+                <Formula name="gan's OLL05" image="images\image_OLL_005.gif" script="(r' U2)(R U R'U) r" demo="" />
+                <Formula name="gan's OLL06" image="images\image_OLL_006.gif" script="(r U'U')(R' U' R U' r')" demo="" />
+                <Formula name="gan's OLL28" image="images\image_OLL_028.gif" script="(r U R' U')(r' R U)(R U' R')" demo="" />
+                <Formula name="gan's OLL31" image="images\image_OLL_031.gif" script="(r' F' U F) (L F' L' U' r)" demo="" />
+                <Formula name="gan's OLL32" image="images\image_OLL_032.gif" script="(R U)(B' U')(R' U R B R')" demo="" />
+                <Formula name="gan's OLL35" image="images\image_OLL_035.gif" script="R U'U'R2' F R F'(R U'U'R')" demo="" />
+                <Formula name="gan's OLL37" image="images\image_OLL_037.gif" script="F (R U' R'U'R U) (R' F')" demo="" />
+                <Formula name="gan's OLL43" image="images\image_OLL_043.gif" script="(B' U')(R' U R B)" demo="" />
+                <Formula name="gan's OLL44" image="images\image_OLL_044.gif" script="f (R U R' U')f'" demo="" />
+            </Group>
+            <Group name="箭头" expanded="false">
+                <Formula name="gan's OLL09" image="images\image_OLL_009.gif" script="(R' U' R) y' x' (R U')(R'F)(R U R')" postScript="xy" demo="" />
+                <Formula name="gan's OLL10" image="images\image_OLL_010.gif" script="(R U R'U)(R'F R F')(RU'U'R')" demo="" />
+                <Formula name="gan's OLL47" image="images\image_OLL_047.gif" script="B'(R' U' R U)2 B" demo="" />
+                <Formula name="gan's OLL48" image="images\image_OLL_048.gif" script="F (R U R' U')2 F'" demo="" />
+                <Formula name="gan's OLL49" image="images\image_OLL_049.gif" script="R B'(R2 F)(R2 B) R2 F' R" demo="" />
+                <Formula name="gan's OLL50" image="images\image_OLL_050.gif" script="L'B (L2 F')(L2B')L2 F L'" demo="" />
+                <Formula name="gan's OLL53" image="images\image_OLL_053.gif" script="(r' U2)(R U R'U')(R U R'U) r " demo="" />
+                <Formula name="gan's OLL54" image="images\image_OLL_054.gif" script="(r U'U')(R' U' R U R' U')(R U' r')" demo="" />
+            </Group>
+            <Group name="曲线" expanded="false">
+                <Formula name="gan's OLL07" image="images\image_OLL_007.gif" script="r UR' U RU'U' r'" demo="" />
+                <Formula name="gan's OLL08" image="images\image_OLL_008.gif" script="r' U' RU' R' U2 r" demo="" />
+                <Formula name="gan's OLL11" image="images\image_OLL_011.gif" script="r'(R2 U R' U)(R U'U' R' U)(r R')" demo="" />
+                <Formula name="gan's OLL12" image="images\image_OLL_012.gif" script="L2 l U' z (U R'U') (R2 U R') z' r R'" demo="" />
+                <Formula name="gan's OLL29" image="images\image_OLL_029.gif" script="(R2 U' R) F (R' U) (R2 U') (R' F' R)" demo="" />
+                <Formula name="gan's OLL30" image="images\image_OLL_030.gif" script="(R2 U R' B')(RU')(R2' U)(R B R')" demo="" />
+                <Formula name="gan's OLL36" image="images\image_OLL_036.gif" script="R'U'R U'R'U R Ul U'R'U" postScript="x" demo="" />
+                <Formula name="gan's OLL38" image="images\image_OLL_038.gif" script="(R U R'U)(RU'R'U')(R'F R F')" demo="" />
+                <Formula name="gan's OLL41" image="images\image_OLL_041.gif" script="R U' R' U2 R U y R U' R' U' F'" postScript="y'" demo="" />
+                <Formula name="gan's OLL42" image="images\image_OLL_042.gif" script="(R'U R U'U'R'U')(F'U)(F U R)" demo="" />
+            </Group>
+        </Group>
+
+
+        <Group name="PLL">
+            <Group name="棱换" expanded="false">
+                <Formula name="gan's PLL01" image="images\image_PLL_001.gif" script="(R U' R)(U R U R)(U' R' U' R2)" demo="" />
+                <Formula name="gan's PLL02" image="images\image_PLL_002.gif" script="(R2' U)(R U R' U')(R' U')(R' U R')" demo="" />
+                <Formula name="gan's PLL03" image="images\image_PLL_003.gif" script="L2(l'2 U)L2(l'2 U2)L2(l'2 U)L2 l2" demo="" />
+                <Formula name="gan's PLL04" image="images\image_PLL_004.gif" script="(U R'U')(R U'R)(U R U')(R'U R U)(R2 U')(R'U)" demo="" />
+            </Group>
+
+            <Group name="角换" expanded="false">
+                <Formula name="gan's PLL05" image="images\image_PLL_005.gif" script="x' R2 D2(R' U' R)D2(R' U R')" postScript="x" demo="" />
+                <Formula name="gan's PLL06" image="images\image_PLL_006.gif" script="(l U' R)D2(R' U R)D2 R2" postScript="x" demo="" />
+                <Formula name="gan's PLL07" image="images\image_PLL_007.gif" script="x'(R U' R' D)(R U R')u2'(R' U R)D(R' U' R)" postScript="x'y2" demo="" />
+            </Group>
+
+            <Group name="邻角对棱/对角邻棱换" expanded="false">
+                <Formula name="gan's PLL08" image="images\image_PLL_008.gif" script="(R U R' U')(R' F)(R2 U' R' U')(R U R' F')" demo="" />
+                <Formula name="gan's PLL09" image="images\image_PLL_009.gif" script="U'(R'U R U' R'2 b')x(R'U R)y'(R U R' U' R2)" postScript="x'" demo="" />
+                <Formula name="gan's PLL10" image="images\image_PLL_010.gif" script="(R' U R' U') yx2 (R' U R' U'R2) xz'(R'U'R U R)" postScript="x" demo="" />
+                <Formula name="gan's PLL11" image="images\image_PLL_011.gif" script="F(R U'R' U')(R U R' F')(R U R' U')(R' F R F')" demo="" />
+            </Group>
+
+            <Group name="邻角邻棱换" expanded="false">
+                <Formula name="gan's PLL12" image="images\image_PLL_012.gif" script="z(U' R D')(R2 U R' U' R2 U)z'(R U')" demo="" />
+                <Formula name="gan's PLL13" image="images\image_PLL_013.gif" script="(R U R'F')(R U R'U')(R'F R2 U'R'U')" demo="" />
+                <Formula name="gan's PLL14" image="images\image_PLL_014.gif" script="(R' U2)(R U'U')(R' F R U R' U')(R'F' R2 U')" demo="" />
+                <Formula name="gan's PLL15" image="images\image_PLL_015.gif" script="(R U'U')(R' U2)(R B' R' U')(R U R B R2' U)" demo="" />
+            </Group>
+
+            <Group name="三角三棱换" expanded="false">
+                <Formula name="gan's PLL16" image="images\image_PLL_016.gif" script="(R2' u' R U' R)(U R' u)(R2 f R' f')" demo="" />
+                <Formula name="gan's PLL17" image="images\image_PLL_017.gif" script="(R U R')y'(R2' u' R U')(R' U R' u R2)" postScript="y" demo="" />
+                <Formula name="gan's PLL18" image="images\image_PLL_018.gif" script="(R2 u)(R' U R' U')(R u') (R2' F' U F)" demo="" />
+                <Formula name="gan's PLL19" image="images\image_PLL_019.gif" script="(R' d' F)(R2 u)(R' U)(R U' R u' R2)" postScript="y'" demo="" />
+            </Group>
+
+            <Group name="对角对棱换" expanded="false">
+                <Formula name="gan's PLL20" image="images\image_PLL_020.gif" script="z(R' U R')z'(R U2 L' U R') z(U R')z'(R U2 L' U R')" demo="" />
+                <Formula name="gan's PLL21" image="images\image_PLL_021.gif" script="z(U'R D')(R2 U R'U')z'(R U R') z(R2 U R')z'(R U')" demo="" />
+            </Group>
+        </Group>
+    </Group>
+</Formulas>

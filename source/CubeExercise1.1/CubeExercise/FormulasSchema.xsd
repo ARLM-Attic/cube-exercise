@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FormulasSchema"
+    targetNamespace="http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:element name="Formulas" type="Group" />
+
+    <xs:complexType name="Formula">
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="enabled" type="xs:boolean" default="true" />
+        <xs:attribute name="image" type="xs:string" />
+        <xs:attribute name="script" type="xs:string" />
+        <xs:attribute name="preScript" type="xs:string" />
+        <xs:attribute name="postScript" type="xs:string" />
+        <xs:attribute name="demo" type="xs:string" />
+        <xs:attribute name="practiceTimes" type="xs:int" default="0" />
+    </xs:complexType>
+
+    <xs:complexType name="Group">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Formula" minOccurs="0" maxOccurs="unbounded" type="Formula" />
+            <xs:element name="Group" minOccurs="0" maxOccurs="unbounded" type="Group" />
+        </xs:choice>
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="enabled" type="xs:boolean" default="true" />
+        <xs:attribute name="expanded" type="xs:boolean" default="true" />
+    </xs:complexType>
+
+</xs:schema>
