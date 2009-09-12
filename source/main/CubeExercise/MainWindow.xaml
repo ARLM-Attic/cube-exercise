@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Cube="clr-namespace:CubeExercise"
     Name="mainWindow"
-    Title="Cube Exercise 1.0" Width="670" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
+    Title="Cube Exercise 1.1" Width="690" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
 
     <!--<Viewbox Stretch="Fill" StretchDirection="Both">-->
     <Grid Margin="0">
@@ -11,7 +11,7 @@
             <Cube:Int32Converter x:Key="intConverter" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="270" />
             <ColumnDefinition Width="420*" />
         </Grid.ColumnDefinitions>
         <TreeView x:Name="FormulasTree"/>
