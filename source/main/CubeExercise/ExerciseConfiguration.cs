@@ -14,6 +14,8 @@ namespace CubeExercise
 
         private int showScriptDelay = 3;
 
+        private int formulaTimeLimit = -1;
+
         public ExerciseMode Mode
         {
             get
@@ -61,6 +63,22 @@ namespace CubeExercise
                 this.Notify("ShowScriptDelay");
             }
         }
+
+        public int FormulaTimeLimit
+        {
+            get { return this.formulaTimeLimit; }
+            set
+            {
+                if (this.formulaTimeLimit == value)
+                {
+                    return;
+                }
+
+                this.formulaTimeLimit = value;
+                this.Notify("FormulaTimeLimit");
+            }
+        }
+
 
         #region INotifyPropertyChanged Members
 

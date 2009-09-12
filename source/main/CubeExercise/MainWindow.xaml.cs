@@ -69,7 +69,15 @@ namespace CubeExercise
 
         public ExerciseConfiguration ExerciseConfiguration { get; set; }
 
-        private DispatcherTimer timer;
+        /// <summary>
+        /// The timer which is used to decide when to show the formula script.
+        /// </summary>
+        private DispatcherTimer timerShowFormula;
+
+        /// <summary>
+        /// The timer which is used to decide when to switch to next formula automatically.
+        /// </summary>
+        private DispatcherTimer timerFormulaLimit;
 
         private Group root;
 
@@ -85,8 +93,10 @@ namespace CubeExercise
         {
             this.root = new Group();
             this.plainListFormulas = new List<Formula>();
-            this.timer = new DispatcherTimer();
-            this.timer.Tick += new EventHandler(timer_Tick);
+            this.timerShowFormula = new DispatcherTimer();
+            this.timerFormulaLimit = new DispatcherTimer();
+            this.timerShowFormula.Tick += new EventHandler(timerShowFormula_Tick);
+            this.timerFormulaLimit.Tick += new EventHandler(timerFormulaLimit_Tick);
             this.ExerciseConfiguration = new ExerciseConfiguration();
             InitializeComponent();
             this.InitializeFormulas();
@@ -480,6 +490,11 @@ namespace CubeExercise
                 this.ExerciseConfiguration.NumberOfFormulas = 999;
             }
 
+            if (this.chkRecordScript.IsChecked.Value == true)
+            {
+                this.txtFormula.Clear();
+            }
+
             this.stopWatch.Reset();
             this.ToggleControlStatus(ExerciseStatus.Started);
             this.ShowNextFormula();
@@ -490,7 +505,8 @@ namespace CubeExercise
             if (this.exercising.Count > 0 && this.ExerciseConfiguration.NumberOfFormulas > 0)
             {
                 this.tbFormulaPrompt.Text = string.Empty;
-                this.timer.Stop();
+                this.timerShowFormula.Stop();
+                this.timerFormulaLimit.Stop();
 
                 int index = 0;
                 switch (this.ExerciseConfiguration.Mode)
@@ -509,6 +525,7 @@ namespace CubeExercise
                 }
 
                 this.currentFormula = this.exercising.ElementAt(index);
+                this.currentFormula.PracticeTimes++;
                 this.ExerciseConfiguration.NumberOfFormulas--;
                 if (this.ExerciseConfiguration.Mode != ExerciseMode.RepeatableRandom)
                 {
@@ -543,8 +560,14 @@ namespace CubeExercise
                 }
                 else if (this.ExerciseConfiguration.ShowScriptDelay > 0)
                 {
-                    this.timer.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.ShowScriptDelay);
-                    this.timer.Start();
+                    this.timerShowFormula.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.ShowScriptDelay);
+                    this.timerShowFormula.Start();
+                }
+
+                if (this.ExerciseConfiguration.FormulaTimeLimit > 0)
+                {
+                    this.timerFormulaLimit.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.FormulaTimeLimit);
+                    this.timerFormulaLimit.Start();
                 }
             }
             else
@@ -576,10 +599,6 @@ namespace CubeExercise
                     // Helpful for preventing pressing the wrong key.
                     if (this.stopWatch.IsRunning)
                     {
-                        if (this.currentFormula != null)
-                        {
-                            this.currentFormula.PracticeTimes++;
-                        }
                         ShowNextFormula();
                     }
 
@@ -592,7 +611,6 @@ namespace CubeExercise
                         Formula f = this.currentFormula;
                         if (f != null)
                         {
-                            f.PracticeTimes++;
                             this.exercising.Add(f);
                             this.ExerciseConfiguration.NumberOfFormulas++;
                         }
@@ -731,10 +749,16 @@ namespace CubeExercise
             this.SaveFormulas();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        void timerShowFormula_Tick(object sender, EventArgs e)
         {
             this.ShowFormula(this.currentFormula);
-            this.timer.Stop();
+            this.timerShowFormula.Stop();
+        }
+
+        void timerFormulaLimit_Tick(object sender, EventArgs e)
+        {
+            this.timerFormulaLimit.Stop();
+            this.ShowNextFormula();
         }
 
         private void ShowFormula(Formula formula)
@@ -767,7 +791,8 @@ namespace CubeExercise
                     this.imgExercise.Source = null;
                     this.btnPauseExercise.Content = "暂停练习(_P)";
                     this.stopWatch.Stop();
-                    this.timer.Stop();
+                    this.timerShowFormula.Stop();
+                    this.timerFormulaLimit.Stop();
                     this.exercising.Clear();
                     this.tbFormulaPrompt.Text = string.Empty;
                     break;
@@ -778,7 +803,8 @@ namespace CubeExercise
                     this.txtRepeatTimes.IsEnabled = false;
                     this.cmbRandomMode.IsEnabled = false;
                     this.stopWatch.Stop();
-                    this.timer.Stop();
+                    this.timerShowFormula.Stop();
+                    this.timerFormulaLimit.Stop();
                     this.btnPauseExercise.Content = "继续练习(_P)";
                     break;
                 case ExerciseStatus.Started:
@@ -792,7 +818,12 @@ namespace CubeExercise
                     this.imgExercise.Focus();
                     if (this.ExerciseConfiguration.ShowScriptDelay > 0)
                     {
-                        this.timer.Start();
+                        this.timerShowFormula.Start();
+                    }
+
+                    if (this.ExerciseConfiguration.FormulaTimeLimit > 0)
+                    {
+                        this.timerFormulaLimit.Start();
                     }
                     break;
             }
