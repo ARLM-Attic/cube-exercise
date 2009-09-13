@@ -109,7 +109,7 @@
             <TabItem Header="关于(_A)">
                 <StackPanel>
                     <TextBlock FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center">
-                    Cube Exercise 1.0
+                    Cube Exercise 1.1
                     </TextBlock>
                     <TextBlock>致谢：
                         gan精心制作的手法、公式的图片和录像。</TextBlock>
