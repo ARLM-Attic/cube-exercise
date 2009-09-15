@@ -124,6 +124,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AlgorithmFile.cs" />
+    <Compile Include="AlgorithmReference.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -143,9 +145,9 @@
     </Compile>
     <Compile Include="ExerciseConfiguration.cs" />
     <Compile Include="ExerciseMode.cs" />
-    <Compile Include="Formula.cs" />
-    <Compile Include="FormulasSchema.cs">
-      <DependentUpon>FormulasSchema.xsd</DependentUpon>
+    <Compile Include="Algorithm.cs" />
+    <Compile Include="AlgorithmFileSchema.cs">
+      <DependentUpon>AlgorithmFileSchema.xsd</DependentUpon>
     </Compile>
     <Compile Include="Group.cs" />
     <Compile Include="Int32Converter.cs" />
@@ -167,7 +169,7 @@
       <DependentUpon>StopWatch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transformation.cs" />
-    <None Include="Formulas.xml">
+    <None Include="Algorithms.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -188,7 +190,7 @@
     <Resource Include="AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FormulasSchema.xsd" />
+    <None Include="AlgorithmFileSchema.xsd" />
     <None Include="images\image_OLL_001.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

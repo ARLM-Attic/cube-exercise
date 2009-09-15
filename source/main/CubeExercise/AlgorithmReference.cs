@@ -1,39 +1,45 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="Group.cs" company="Rui Fan">
-//     Copyright (c) Rui Fan.  All rights reserved.
-// </copyright>
-//
-// <author email="albert@fanrui.net">
-//     Rui Fan
-// </author>
-//
-// <summary>
-//     This file contains the Group class.
-// </summary>
-//
-// <remarks/>
-//
-// <disclaimer/>
-//
-// <history date="09/10/2009" Author="Rui Fan">
-//     Class Created.
-// </history>
-//-----------------------------------------------------------------------------
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
 
 namespace CubeExercise
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.ComponentModel;
-
-    public partial class Group : INotifyPropertyChanged
+    public partial class AlgorithmReference : INotifyPropertyChanged
     {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public Algorithm Algorithm;
+
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public int Id
+        {
+            get { return this.id; }
+            //set
+            //{
+            //    if (this.id == value)
+            //    {
+            //        return;
+            //    }
+
+            //    this.id = value;
+            //    this.Notify("Id");
+            //}
+        }
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string Name
         {
-            get { return this.name; }
+            get
+            {
+                if (string.IsNullOrEmpty(this.name) && this.Algorithm != null)
+                {
+                    return this.Algorithm.Name;
+                }
+
+                return this.name;
+            }
+
             set
             {
                 if (this.name == value)
@@ -63,24 +69,32 @@ namespace CubeExercise
         }
 
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Expanded
+        public string Demo
         {
-            get { return this.expanded; }
+            get
+            {
+                if (string.IsNullOrEmpty(this.demo) && this.Algorithm != null)
+                {
+                    return this.Algorithm.Demo;
+                }
+
+                return this.demo;
+            }
+
             set
             {
-                if (this.expanded == value)
+                if (this.demo == value)
                 {
                     return;
                 }
 
-                this.expanded = value;
-                this.Notify("Expanded");
+                this.demo = value;
+                this.Notify("Demo");
             }
         }
 
         #region INotifyPropertyChanged Members
 
-        //[NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion

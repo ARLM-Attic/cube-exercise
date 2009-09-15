@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Cube="clr-namespace:CubeExercise"
     Name="mainWindow"
-    Title="Cube Exercise 1.1" Width="690" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
+    Title="Cube Exercise 1.2" Width="690" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
 
     <!--<Viewbox Stretch="Fill" StretchDirection="Both">-->
     <Grid Margin="0">
@@ -14,7 +14,7 @@
             <ColumnDefinition Width="270" />
             <ColumnDefinition Width="420*" />
         </Grid.ColumnDefinitions>
-        <TreeView x:Name="FormulasTree"/>
+        <TreeView x:Name="AlgorithmsTree"/>
 
         <TabControl Grid.Column="1" Margin="0,0,0,0">
             <TabItem Header="模拟魔方(_C)" x:Name="tabSimulator">
@@ -27,7 +27,7 @@
                     <Viewbox Grid.Row="0" Grid.Column="0">
                         <Cube:CubeControl x:Name="cube" Height="290" Width="386" />
                     </Viewbox>
-                    <TextBox Grid.Row="1" Grid.Column="0" Name="txtFormula" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" AutoWordSelection="False" FontSize="18" FontWeight="Bold" Margin="3,3,3,3" UndoLimit="64" />
+                    <TextBox Grid.Row="1" Grid.Column="0" Name="txtAlgorithm" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" AutoWordSelection="False" FontSize="18" FontWeight="Bold" Margin="3,3,3,3" UndoLimit="64" />
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Height="23" Width="70" Name="btnFind" Click="btnFind_Click">重复次数(_T)</Button>
                         <Button Height="23" Width="70" Name="btnClear" Click="btnClear_Click">清除公式(_E)</Button>
@@ -67,7 +67,7 @@
                         <TextBlock Text="剩余公式个数：" Height="15" Grid.Row="1" />
                         <TextBox MaxLines="1" x:Name="txtRepeatTimes" Width="90" MaxLength="5" AllowDrop="False" PreviewKeyDown="textBoxNumeric_PreviewKeyDown" Grid.Column="1" Grid.Row="1">
                             <TextBox.Text>
-                                <Binding Path="NumberOfFormulas" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
+                                <Binding Path="NumberOfAlgorithms" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <Cube:NumberValidationRule />
                                     </Binding.ValidationRules>
@@ -87,7 +87,7 @@
                         <TextBlock Grid.Row="3" Grid.Column="0">限时模式(秒)</TextBlock>
                         <TextBox Name="txtTimeLimit" Grid.Row="3" Grid.Column="1" Height="20" Width="90" MaxLength="5" PreviewKeyDown="textBoxNumeric_PreviewKeyDown" ToolTip="如果此值大于0，每个公式会在指定的秒数过后自动切换到下一个公式。">
                             <TextBox.Text>
-                                <Binding Path="FormulaTimeLimit" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
+                                <Binding Path="AlgorithmTimeLimit" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <Cube:NumberValidationRule />
                                     </Binding.ValidationRules>
@@ -102,14 +102,14 @@
                         </StackPanel>
                     </Grid>
                     <Image x:Name="imgExercise" Grid.Row="0" Focusable="True" ForceCursor="True" MouseDown="imgExercise_MouseDown" HorizontalAlignment="Stretch" ToolTip="空格键或回车键：完成并进行下一个；“N”键：还须继续巩固，公式会在此次练习中再次出现；“P”键：暂停/继续；“Esc”键：停止练习。" PreviewKeyDown="imgExercise_KeyDown" />
-                    <TextBlock Grid.Row="1" x:Name="tbFormulaPrompt" FontSize="16" Margin="0,0,0,40" Grid.RowSpan="2" />
+                    <TextBlock Grid.Row="1" x:Name="tbAlgorithmPrompt" FontSize="16" Margin="0,0,0,40" Grid.RowSpan="2" />
                     <Cube:StopWatch Grid.Row="2" x:Name="stopWatch" Height="50" Grid.RowSpan="2" VerticalAlignment="Top" />
                 </Grid>
             </TabItem>
             <TabItem Header="关于(_A)">
                 <StackPanel>
                     <TextBlock FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center">
-                    Cube Exercise 1.1
+                    Cube Exercise 1.2
                     </TextBlock>
                     <TextBlock>致谢：
                         gan精心制作的手法、公式的图片和录像。</TextBlock>

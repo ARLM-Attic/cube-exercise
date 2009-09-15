@@ -21,6 +21,9 @@
 // <history date="09/06/2009" Author="Rui Fan">
 //     Add formulas grouping feature.
 // </history>
+// <history date="09/15/2009" Author="Rui Fan">
+//     Reorganize algorithms management.
+// </history>
 //-----------------------------------------------------------------------------
 
 namespace CubeExercise
@@ -45,10 +48,14 @@ namespace CubeExercise
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string DefaultNameSpace = "http://schemas.fanrui.net/CubeExercise/2009/09/AlgorithmFile";
+
         /// <summary>
         /// Cache the file version.
         /// </summary>
         private static string fileVersion;
+
+        private List<AlgorithmFile> algorithmFiles;
 
         /// <summary>
         /// Gets the file version. If the version is not cached, get it from the assembly attribute.
@@ -70,36 +77,45 @@ namespace CubeExercise
         public ExerciseConfiguration ExerciseConfiguration { get; set; }
 
         /// <summary>
-        /// The timer which is used to decide when to show the formula script.
+        /// The timer which is used to decide when to show the algorithm script.
         /// </summary>
-        private DispatcherTimer timerShowFormula;
+        private DispatcherTimer timerShowAlgorithm;
 
         /// <summary>
-        /// The timer which is used to decide when to switch to next formula automatically.
+        /// The timer which is used to decide when to switch to next algorithm automatically.
         /// </summary>
-        private DispatcherTimer timerFormulaLimit;
+        private DispatcherTimer timerAlgorithmLimit;
 
         private Group root;
 
-        private List<Formula> plainListFormulas;
+        /// <summary>
+        /// A plain list is helpful for the iteration of the algorithms
+        // because we don't have to find sub nodes recursivly.
+        /// </summary>
+        private List<Algorithm> plainListAlgorithms;
 
-        //public List<Formula> Formulas { get { return this.formulas; } }
+        private List<AlgorithmReference> plainListAlgorithmReferences;
 
-        private List<Formula> exercising;
+        private SortedDictionary<int, Algorithm> algorithmDict;
 
-        private Formula currentFormula;
+        private List<Algorithm> exercising;
+
+        private Algorithm currentAlgorithm;
 
         public MainWindow()
         {
+            this.algorithmFiles = new List<AlgorithmFile>();
+            this.algorithmDict = new SortedDictionary<int, Algorithm>();
             this.root = new Group();
-            this.plainListFormulas = new List<Formula>();
-            this.timerShowFormula = new DispatcherTimer();
-            this.timerFormulaLimit = new DispatcherTimer();
-            this.timerShowFormula.Tick += new EventHandler(timerShowFormula_Tick);
-            this.timerFormulaLimit.Tick += new EventHandler(timerFormulaLimit_Tick);
+            this.plainListAlgorithms = new List<Algorithm>();
+            this.plainListAlgorithmReferences = new List<AlgorithmReference>();
+            this.timerShowAlgorithm = new DispatcherTimer();
+            this.timerAlgorithmLimit = new DispatcherTimer();
+            this.timerShowAlgorithm.Tick += new EventHandler(timerShowAlgorithm_Tick);
+            this.timerAlgorithmLimit.Tick += new EventHandler(timerAlgorithmLimit_Tick);
             this.ExerciseConfiguration = new ExerciseConfiguration();
             InitializeComponent();
-            this.InitializeFormulas();
+            this.InitializeAlgorithms();
             this.InitializeTree();
         }
 
@@ -114,7 +130,7 @@ namespace CubeExercise
                 // parent must remove it from its children.
                 object subItem = root.Items[0];
                 root.Items.RemoveAt(0);
-                this.FormulasTree.Items.Add(subItem);
+                this.AlgorithmsTree.Items.Add(subItem);
             }
         }
 
@@ -122,22 +138,25 @@ namespace CubeExercise
         {
             TreeViewItem tvItem = new TreeViewItem();
 
+            // TODO: Tag, DataContext, Algorithm, AlgorithmReference... It is a little
+            // cluttered here. Refecter it later.
             foreach (object item in group.Items)
             {
-                if (item.GetType() == typeof(Formula))
+                if (item.GetType() == typeof(AlgorithmReference))
                 {
-                    Formula f = (Formula)item;
+                    AlgorithmReference r = (AlgorithmReference)item;
+                    Algorithm a = this.ResolveReference(r);
+                    r.Algorithm = a;
 
-                    // A plain list is helpful for the iteration of the formulas
-                    // because we don't have to find sub nodes recursivly.
-                    this.plainListFormulas.Add(f);
+                    this.plainListAlgorithmReferences.Add(r);
+
                     Button itemButton = new Button();
-                    itemButton.Tag = f;
+                    itemButton.Tag = a;
                     itemButton.Click += new RoutedEventHandler(Button_Click);
 
                     TreeViewItem subItem = new TreeViewItem();
                     subItem.Header = itemButton;
-                    subItem.Tag = f;
+                    subItem.Tag = r;
                     tvItem.Items.Add(subItem);
 
                     StackPanel panel = new StackPanel();
@@ -149,17 +168,17 @@ namespace CubeExercise
                     panel.Children.Add(cb);
                     cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
                     cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
-                    cb.DataContext = f;
+                    cb.DataContext = r;
                     cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
 
-                    if (!string.IsNullOrEmpty(f.Image) && System.IO.File.Exists(f.Image))
+                    if (!string.IsNullOrEmpty(a.Image) && System.IO.File.Exists(a.Image))
                     {
                         string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                        path = System.IO.Path.Combine(path, f.Image);
+                        path = System.IO.Path.Combine(path, a.Image);
                         panel.Children.Add(new Image() { Source = new BitmapImage(new Uri(path, UriKind.Absolute)) });
                     }
                     TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
-                    tb.DataContext = f;
+                    tb.DataContext = r;
                     tb.SetBinding(TextBlock.TextProperty, "Name");
                     panel.Children.Add(tb);
                 }
@@ -204,9 +223,9 @@ namespace CubeExercise
             {
                 foreach (object item in g.Items)
                 {
-                    if (item.GetType() == typeof(Formula))
+                    if (item.GetType() == typeof(AlgorithmReference))
                     {
-                        ((Formula)item).Enabled = g.Enabled;
+                        ((AlgorithmReference)item).Enabled = g.Enabled;
                     }
                     else if (item.GetType() == typeof(Group))
                     {
@@ -334,20 +353,46 @@ namespace CubeExercise
             }
         }
 
-        private void InitializeFormulas()
+        private Algorithm ResolveReference(AlgorithmReference reference)
+        {
+            if (this.algorithmDict.ContainsKey(reference.Id))
+            {
+                return this.algorithmDict[reference.Id];
+            }
+
+            return null;
+        }
+
+        private void InitializeAlgorithms()
         {
             string xmlPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            xmlPath = System.IO.Path.Combine(xmlPath, "Formulas.xml");
+            xmlPath = System.IO.Path.Combine(xmlPath, "Algorithms.xml");
             if (System.IO.File.Exists(xmlPath))
             {
-                XmlSerializer s = new XmlSerializer(typeof(Group), "http://schemas.fanrui.net/cubeexercise/2009/08/FormulasSchema.xsd");
-                Group g = (Group)s.Deserialize(XmlReader.Create(xmlPath));
-                g.FilePath = xmlPath;
-                this.root.Items = new Group[] { g };
+                this.algorithmFiles.Clear();
+                this.algorithmDict.Clear();
+                this.plainListAlgorithms.Clear();
+
+                XmlSerializer s = new XmlSerializer(typeof(AlgorithmFile), DefaultNameSpace);
+                AlgorithmFile file = (AlgorithmFile)s.Deserialize(XmlReader.Create(xmlPath));
+                this.algorithmFiles.Add(file);
+                file.Path = xmlPath;
+                this.root.Items = new Group[] { file.Group };
+
+                foreach (Algorithm a in file.Algorithms)
+                {
+                    if (!this.algorithmDict.ContainsKey(a.Id))
+                    {
+                        this.algorithmDict.Add(a.Id, a);
+                        this.plainListAlgorithms.Add(a);
+                    }
+
+                    // TODO: Duplicate Id found. Show a warning message here.
+                }
             }
         }
 
-        private void SaveFormulas()
+        private void SaveAlgorithms()
         {
             if (this.root == null || this.root.Items == null)
             {
@@ -356,18 +401,12 @@ namespace CubeExercise
 
             try
             {
-                foreach (object item in this.root.Items)
+                foreach (AlgorithmFile file in this.algorithmFiles)
                 {
-                    if (item.GetType() != typeof(Group))
+                    XmlSerializer s = new XmlSerializer(typeof(AlgorithmFile));
+                    using (TextWriter textWriter = new StreamWriter(file.Path, false, Encoding.UTF8))
                     {
-                        continue;
-                    }
-
-                    Group g = (Group)item;
-                    XmlSerializer s = new XmlSerializer(typeof(Group));
-                    using (TextWriter textWriter = new StreamWriter(g.FilePath, false, Encoding.UTF8))
-                    {
-                        s.Serialize(textWriter, g);
+                        s.Serialize(textWriter, file);
                     }
                 }
             }
@@ -386,10 +425,10 @@ namespace CubeExercise
         {
             try
             {
-                string todo = this.txtFormula.Text;
-                if (this.txtFormula.SelectionLength != 0)
+                string todo = this.txtAlgorithm.Text;
+                if (this.txtAlgorithm.SelectionLength != 0)
                 {
-                    todo = this.txtFormula.SelectedText;
+                    todo = this.txtAlgorithm.SelectedText;
                 }
 
                 this.cube.Transform(todo);
@@ -404,10 +443,10 @@ namespace CubeExercise
 
         private void btnFind_Click(object sender, RoutedEventArgs e)
         {
-            string todo = this.txtFormula.Text;
-            if (this.txtFormula.SelectionLength != 0)
+            string todo = this.txtAlgorithm.Text;
+            if (this.txtAlgorithm.SelectionLength != 0)
             {
-                todo = this.txtFormula.SelectedText;
+                todo = this.txtAlgorithm.SelectedText;
             }
 
             if (string.IsNullOrEmpty(todo))
@@ -419,7 +458,7 @@ namespace CubeExercise
             Cube<int> tempCube = new Cube<int>(0, 1, 2, 3, 4, 5);
             do
             {
-                tempCube.DoFormula(todo);
+                tempCube.DoAlgorithm(todo);
                 i++;
             } while (!tempCube.IsRecovered());
 
@@ -431,10 +470,10 @@ namespace CubeExercise
             Button btn = sender as Button;
             if (btn != null)
             {
-                Formula f = btn.Tag as Formula;
+                Algorithm f = btn.Tag as Algorithm;
                 if (f != null)
                 {
-                    this.txtFormula.Text = f.Script;
+                    this.txtAlgorithm.Text = f.Script;
                 }
             }
         }
@@ -450,7 +489,7 @@ namespace CubeExercise
 
             if (this.exercising == null)
             {
-                this.exercising = new List<Formula>();
+                this.exercising = new List<Algorithm>();
             }
             else
             {
@@ -459,54 +498,54 @@ namespace CubeExercise
 
             if (this.ExerciseConfiguration.Mode == ExerciseMode.Descending)
             {
-                for (int i = this.plainListFormulas.Count - 1; i >= 0; i--)
+                for (int i = this.plainListAlgorithms.Count - 1; i >= 0; i--)
                 {
-                    if (this.plainListFormulas[i].Enabled)
+                    if (this.plainListAlgorithmReferences[i].Enabled)
                     {
-                        this.exercising.Add(this.plainListFormulas[i]);
+                        this.exercising.Add(this.ResolveReference(this.plainListAlgorithmReferences[i]));
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < this.plainListFormulas.Count; i++)
+                for (int i = 0; i < this.plainListAlgorithms.Count; i++)
                 {
-                    if (this.plainListFormulas[i].Enabled)
+                    if (this.plainListAlgorithmReferences[i].Enabled)
                     {
-                        this.exercising.Add(this.plainListFormulas[i]);
+                        this.exercising.Add(this.ResolveReference(this.plainListAlgorithmReferences[i]));
                     }
                 }
             }
 
             if (this.ExerciseConfiguration.Mode != ExerciseMode.RepeatableRandom)
             {
-                if (this.ExerciseConfiguration.NumberOfFormulas > this.exercising.Count || this.ExerciseConfiguration.NumberOfFormulas <= 0)
+                if (this.ExerciseConfiguration.NumberOfAlgorithms > this.exercising.Count || this.ExerciseConfiguration.NumberOfAlgorithms <= 0)
                 {
-                    this.ExerciseConfiguration.NumberOfFormulas = this.exercising.Count;
+                    this.ExerciseConfiguration.NumberOfAlgorithms = this.exercising.Count;
                 }
             }
             else
             {
-                this.ExerciseConfiguration.NumberOfFormulas = 999;
+                this.ExerciseConfiguration.NumberOfAlgorithms = 999;
             }
 
             if (this.chkRecordScript.IsChecked.Value == true)
             {
-                this.txtFormula.Clear();
+                this.txtAlgorithm.Clear();
             }
 
             this.stopWatch.Reset();
             this.ToggleControlStatus(ExerciseStatus.Started);
-            this.ShowNextFormula();
+            this.ShowNextAlgorithm();
         }
 
-        private void ShowNextFormula()
+        private void ShowNextAlgorithm()
         {
-            if (this.exercising.Count > 0 && this.ExerciseConfiguration.NumberOfFormulas > 0)
+            if (this.exercising.Count > 0 && this.ExerciseConfiguration.NumberOfAlgorithms > 0)
             {
-                this.tbFormulaPrompt.Text = string.Empty;
-                this.timerShowFormula.Stop();
-                this.timerFormulaLimit.Stop();
+                this.tbAlgorithmPrompt.Text = string.Empty;
+                this.timerShowAlgorithm.Stop();
+                this.timerAlgorithmLimit.Stop();
 
                 int index = 0;
                 switch (this.ExerciseConfiguration.Mode)
@@ -524,50 +563,50 @@ namespace CubeExercise
                         break;
                 }
 
-                this.currentFormula = this.exercising.ElementAt(index);
-                this.currentFormula.PracticeTimes++;
-                this.ExerciseConfiguration.NumberOfFormulas--;
+                this.currentAlgorithm = this.exercising.ElementAt(index);
+                this.currentAlgorithm.PracticeTimes++;
+                this.ExerciseConfiguration.NumberOfAlgorithms--;
                 if (this.ExerciseConfiguration.Mode != ExerciseMode.RepeatableRandom)
                 {
                     this.exercising.RemoveAt(index);
                 }
 
                 string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                path = System.IO.Path.Combine(path, this.currentFormula.Image);
+                path = System.IO.Path.Combine(path, this.currentAlgorithm.Image);
                 this.imgExercise.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 if (this.chkRecordScript.IsChecked.HasValue && this.chkRecordScript.IsChecked.Value == true)
                 {
-                    this.txtFormula.AppendText("/*" + this.currentFormula.Name + "*/ ");
+                    this.txtAlgorithm.AppendText("/*" + this.currentAlgorithm.Name + "*/ ");
 
-                    if (!string.IsNullOrEmpty(this.currentFormula.PreScript))
+                    if (!string.IsNullOrEmpty(this.currentAlgorithm.PreScript))
                     {
-                        this.txtFormula.AppendText("[" + this.currentFormula.PreScript + "]");
+                        this.txtAlgorithm.AppendText("[" + this.currentAlgorithm.PreScript + "]");
                     }
 
-                    this.txtFormula.AppendText(this.currentFormula.Script);
+                    this.txtAlgorithm.AppendText(this.currentAlgorithm.Script);
 
-                    if (!string.IsNullOrEmpty(this.currentFormula.PostScript))
+                    if (!string.IsNullOrEmpty(this.currentAlgorithm.PostScript))
                     {
-                        this.txtFormula.AppendText("[" + this.currentFormula.PostScript + "]");
+                        this.txtAlgorithm.AppendText("[" + this.currentAlgorithm.PostScript + "]");
                     }
 
-                    this.txtFormula.AppendText(Environment.NewLine);
+                    this.txtAlgorithm.AppendText(Environment.NewLine);
                 }
 
                 if (this.ExerciseConfiguration.ShowScriptDelay == 0)
                 {
-                    this.ShowFormula(this.currentFormula);
+                    this.ShowAlgorithm(this.currentAlgorithm);
                 }
                 else if (this.ExerciseConfiguration.ShowScriptDelay > 0)
                 {
-                    this.timerShowFormula.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.ShowScriptDelay);
-                    this.timerShowFormula.Start();
+                    this.timerShowAlgorithm.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.ShowScriptDelay);
+                    this.timerShowAlgorithm.Start();
                 }
 
-                if (this.ExerciseConfiguration.FormulaTimeLimit > 0)
+                if (this.ExerciseConfiguration.AlgorithmTimeLimit > 0)
                 {
-                    this.timerFormulaLimit.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.FormulaTimeLimit);
-                    this.timerFormulaLimit.Start();
+                    this.timerAlgorithmLimit.Interval = TimeSpan.FromSeconds(this.ExerciseConfiguration.AlgorithmTimeLimit);
+                    this.timerAlgorithmLimit.Start();
                 }
             }
             else
@@ -599,7 +638,7 @@ namespace CubeExercise
                     // Helpful for preventing pressing the wrong key.
                     if (this.stopWatch.IsRunning)
                     {
-                        ShowNextFormula();
+                        ShowNextAlgorithm();
                     }
 
                     e.Handled = true;
@@ -608,14 +647,14 @@ namespace CubeExercise
                 case Key.N:
                     if (this.stopWatch.IsRunning)
                     {
-                        Formula f = this.currentFormula;
+                        Algorithm f = this.currentAlgorithm;
                         if (f != null)
                         {
                             this.exercising.Add(f);
-                            this.ExerciseConfiguration.NumberOfFormulas++;
+                            this.ExerciseConfiguration.NumberOfAlgorithms++;
                         }
 
-                        ShowNextFormula();
+                        ShowNextAlgorithm();
                     }
 
                     e.Handled = true;
@@ -646,7 +685,7 @@ namespace CubeExercise
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            this.txtFormula.Clear();
+            this.txtAlgorithm.Clear();
         }
 
         private void imgExercise_MouseDown(object sender, MouseButtonEventArgs e)
@@ -746,27 +785,27 @@ namespace CubeExercise
         private void btnStopExercise_Click(object sender, RoutedEventArgs e)
         {
             this.ToggleControlStatus(ExerciseStatus.Stopped);
-            this.SaveFormulas();
+            this.SaveAlgorithms();
         }
 
-        void timerShowFormula_Tick(object sender, EventArgs e)
+        void timerShowAlgorithm_Tick(object sender, EventArgs e)
         {
-            this.ShowFormula(this.currentFormula);
-            this.timerShowFormula.Stop();
+            this.ShowAlgorithm(this.currentAlgorithm);
+            this.timerShowAlgorithm.Stop();
         }
 
-        void timerFormulaLimit_Tick(object sender, EventArgs e)
+        void timerAlgorithmLimit_Tick(object sender, EventArgs e)
         {
-            this.timerFormulaLimit.Stop();
-            this.ShowNextFormula();
+            this.timerAlgorithmLimit.Stop();
+            this.ShowNextAlgorithm();
         }
 
-        private void ShowFormula(Formula formula)
+        private void ShowAlgorithm(Algorithm algorithm)
         {
-            if (formula != null)
+            if (algorithm != null)
             {
                 string format = "名称：{1}{0}公式：{2}{0}练习次数：{3}";
-                this.tbFormulaPrompt.Text = string.Format(format, Environment.NewLine, formula.Name, formula.Script, formula.PracticeTimes.ToString());
+                this.tbAlgorithmPrompt.Text = string.Format(format, Environment.NewLine, algorithm.Name, algorithm.Script, algorithm.PracticeTimes.ToString());
             }
         }
 
@@ -791,10 +830,10 @@ namespace CubeExercise
                     this.imgExercise.Source = null;
                     this.btnPauseExercise.Content = "暂停练习(_P)";
                     this.stopWatch.Stop();
-                    this.timerShowFormula.Stop();
-                    this.timerFormulaLimit.Stop();
+                    this.timerShowAlgorithm.Stop();
+                    this.timerAlgorithmLimit.Stop();
                     this.exercising.Clear();
-                    this.tbFormulaPrompt.Text = string.Empty;
+                    this.tbAlgorithmPrompt.Text = string.Empty;
                     break;
                 case ExerciseStatus.Paused:
                     this.btnStartExercise.IsEnabled = false;
@@ -803,8 +842,8 @@ namespace CubeExercise
                     this.txtRepeatTimes.IsEnabled = false;
                     this.cmbRandomMode.IsEnabled = false;
                     this.stopWatch.Stop();
-                    this.timerShowFormula.Stop();
-                    this.timerFormulaLimit.Stop();
+                    this.timerShowAlgorithm.Stop();
+                    this.timerAlgorithmLimit.Stop();
                     this.btnPauseExercise.Content = "继续练习(_P)";
                     break;
                 case ExerciseStatus.Started:
@@ -818,12 +857,12 @@ namespace CubeExercise
                     this.imgExercise.Focus();
                     if (this.ExerciseConfiguration.ShowScriptDelay > 0)
                     {
-                        this.timerShowFormula.Start();
+                        this.timerShowAlgorithm.Start();
                     }
 
-                    if (this.ExerciseConfiguration.FormulaTimeLimit > 0)
+                    if (this.ExerciseConfiguration.AlgorithmTimeLimit > 0)
                     {
-                        this.timerFormulaLimit.Start();
+                        this.timerAlgorithmLimit.Start();
                     }
                     break;
             }
@@ -831,7 +870,7 @@ namespace CubeExercise
 
         private void mainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.SaveFormulas();
+            this.SaveAlgorithms();
         }
     }
 }

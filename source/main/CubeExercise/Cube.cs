@@ -352,35 +352,35 @@ namespace CubeExercise
             return this.cube;
         }
 
-        public T[,,] DoFormula(string formula)
+        public T[,,] DoAlgorithm(string algorithm)
         {
-            if (!string.IsNullOrEmpty(formula))
+            if (!string.IsNullOrEmpty(algorithm))
             {
                 // Remove the C++ style comments like /*abc*/
                 Regex removeCommentRegex = new Regex(@"/\*(.*?)\*/", RegexOptions.Singleline | RegexOptions.Compiled);
-                formula = removeCommentRegex.Replace(formula, string.Empty);
-                formula = formula.Replace('’', '\'').Replace('‘', '\'').Replace('[', '(').Replace(']', ')');
+                algorithm = removeCommentRegex.Replace(algorithm, string.Empty);
+                algorithm = algorithm.Replace('’', '\'').Replace('‘', '\'').Replace('[', '(').Replace(']', ')');
                 Regex removeRegex = new Regex(@"[^a-zA-Z0-9'\(\)]", RegexOptions.Singleline | RegexOptions.Compiled);
-                formula = removeRegex.Replace(formula, string.Empty);
-                formula = ExpandFormula(formula);
+                algorithm = removeRegex.Replace(algorithm, string.Empty);
+                algorithm = ExpandAlgorithm(algorithm);
 
                 // Replace the form of "R2'" to "R'2"
                 Regex swapRegex = new Regex(@"([0-9]+)(['])", RegexOptions.Singleline | RegexOptions.Compiled);
-                formula = swapRegex.Replace(formula, "$2$1");
+                algorithm = swapRegex.Replace(algorithm, "$2$1");
             }
 
             // i: Pointer to the next unprocessed character.
             int i = 0;
-            while (i < formula.Length)
+            while (i < algorithm.Length)
             {
                 int repeat = 1;
 
                 // Get the next one-character token.
-                string token = formula[i].ToString();
+                string token = algorithm[i].ToString();
                 i++;
 
                 // Parse the suffix of the token (reverse or not)
-                if ((i < formula.Length) && formula[i] == '\'')
+                if ((i < algorithm.Length) && algorithm[i] == '\'')
                 {
                     token += '\'';
                     i++;
@@ -388,8 +388,8 @@ namespace CubeExercise
 
                 // Parse the suffix of the token (the number of repeats)
                 Regex number = new Regex("^[0-9]+", RegexOptions.Singleline | RegexOptions.Compiled);
-                string subFormula = formula.Substring(i);
-                Match numberMatch = number.Match(subFormula);
+                string subAlgorithm = algorithm.Substring(i);
+                Match numberMatch = number.Match(subAlgorithm);
 
                 if (numberMatch.Success)
                 {
@@ -407,32 +407,32 @@ namespace CubeExercise
             return this.cube;
         }
 
-        public static string ExpandFormula(string formula)
+        public static string ExpandAlgorithm(string algorithm)
         {
-            StringBuilder expanded = new StringBuilder(formula.Length * 2);
+            StringBuilder expanded = new StringBuilder(algorithm.Length * 2);
             int m = 0, n = 0;
 
-            if (formula.IndexOf('(') < 0)
+            if (algorithm.IndexOf('(') < 0)
             {
-                expanded.Append(formula);
+                expanded.Append(algorithm);
                 return expanded.ToString();
             }
 
-            while ((m = formula.IndexOf('(', m)) >= 0)
+            while ((m = algorithm.IndexOf('(', m)) >= 0)
             {
-                expanded.Append(formula.Substring(n, m - n));
-                n = formula.IndexOf(')', m + 1);
+                expanded.Append(algorithm.Substring(n, m - n));
+                n = algorithm.IndexOf(')', m + 1);
                 if (n < 0)
                 {
-                    throw new ArgumentException("公式括号不匹配", "formula");
+                    throw new ArgumentException("公式括号不匹配", "algorithm");
                 }
 
                 // Suppress the ')'
                 n++;
 
                 Regex number = new Regex("^[0-9]+", RegexOptions.Singleline | RegexOptions.Compiled);
-                string subFormula = formula.Substring(n);
-                Match numberMatch = number.Match(subFormula);
+                string subAlgorithm = algorithm.Substring(n);
+                Match numberMatch = number.Match(subAlgorithm);
                 int repeat = 1;
                 if (numberMatch.Success)
                 {
@@ -440,22 +440,22 @@ namespace CubeExercise
 
                     for (int i = 0; i < repeat; i++)
                     {
-                        expanded.Append(formula.Substring(m + 1, n - 1 - m - 1));
+                        expanded.Append(algorithm.Substring(m + 1, n - 1 - m - 1));
                     }
 
                     n += numberMatch.Value.Length;
                 }
                 else
                 {
-                    expanded.Append(formula.Substring(m + 1, n - 1 - m - 1));
+                    expanded.Append(algorithm.Substring(m + 1, n - 1 - m - 1));
                 }
 
                 m = n;
             }
 
-            if (n > 0 && n < formula.Length)
+            if (n > 0 && n < algorithm.Length)
             {
-                expanded.Append(formula.Substring(n));
+                expanded.Append(algorithm.Substring(n));
             }
 
             return expanded.ToString();

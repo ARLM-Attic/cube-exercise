@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// <copyright file="Formula.cs" company="Rui Fan">
+// <copyright file="Algorithm.cs" company="Rui Fan">
 //     Copyright (c) Rui Fan.  All rights reserved.
 // </copyright>
 //
@@ -8,7 +8,7 @@
 // </author>
 //
 // <summary>
-//     This file contains the Formula class.
+//     This file contains the Algorithm class.
 // </summary>
 //
 // <remarks/>
@@ -21,6 +21,9 @@
 // <history date="09/06/2009" Author="Rui Fan">
 //     Add formulas grouping feature.
 // </history>
+// <history date="09/15/2009" Author="Rui Fan">
+//     Rename to "Algorithm" class.
+// </history>
 //-----------------------------------------------------------------------------
 
 namespace CubeExercise
@@ -31,8 +34,24 @@ namespace CubeExercise
     using System.Text;
     using System.ComponentModel;
 
-    public partial class Formula : INotifyPropertyChanged
+    public partial class Algorithm : INotifyPropertyChanged
     {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public int Id
+        {
+            get { return this.id; }
+            set
+            {
+                if (this.id == value)
+                {
+                    return;
+                }
+
+                this.id = value;
+                this.Notify("Id");
+            }
+        }
+
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string Name
         {
@@ -126,22 +145,6 @@ namespace CubeExercise
 
                 this.demo = value;
                 this.Notify("Demo");
-            }
-        }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Enabled
-        {
-            get { return this.enabled; }
-            set
-            {
-                if (this.enabled == value)
-                {
-                    return;
-                }
-
-                this.enabled = value;
-                this.Notify("Enabled");
             }
         }
 

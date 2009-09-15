@@ -37,10 +37,10 @@ namespace CubeExercise
                 new SolidColorBrush(Colors.Green),
                 new SolidColorBrush(Colors.Yellow),
                 new SolidColorBrush(Colors.White));
-            string script = ConfigurationManager.AppSettings["CubeInitializationFormula"];
+            string script = ConfigurationManager.AppSettings["CubeInitializationAlgorithm"];
             if (!string.IsNullOrEmpty(script))
             {
-                this.cube.DoFormula(script);
+                this.cube.DoAlgorithm(script);
             }
 
             this.UpdateColors();
@@ -138,7 +138,7 @@ namespace CubeExercise
 
         public void Transform(string script)
         {
-            this.cube.DoFormula(script);
+            this.cube.DoAlgorithm(script);
             this.UpdateColors();
         }
     }

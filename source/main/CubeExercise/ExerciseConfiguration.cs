@@ -10,11 +10,11 @@ namespace CubeExercise
     {
         private ExerciseMode mode;
 
-        private int numberOfFormulas;
+        private int numberOfAlgorithms;
 
         private int showScriptDelay = 3;
 
-        private int formulaTimeLimit = -1;
+        private int algorithmTimeLimit = -1;
 
         public ExerciseMode Mode
         {
@@ -34,18 +34,18 @@ namespace CubeExercise
             }
         }
 
-        public int NumberOfFormulas
+        public int NumberOfAlgorithms
         {
-            get { return this.numberOfFormulas; }
+            get { return this.numberOfAlgorithms; }
             set
             {
-                if (this.numberOfFormulas == value)
+                if (this.numberOfAlgorithms == value)
                 {
                     return;
                 }
 
-                this.numberOfFormulas = value;
-                this.Notify("NumberOfFormulas");
+                this.numberOfAlgorithms = value;
+                this.Notify("NumberOfAlgorithms");
             }
         }
 
@@ -64,18 +64,18 @@ namespace CubeExercise
             }
         }
 
-        public int FormulaTimeLimit
+        public int AlgorithmTimeLimit
         {
-            get { return this.formulaTimeLimit; }
+            get { return this.algorithmTimeLimit; }
             set
             {
-                if (this.formulaTimeLimit == value)
+                if (this.algorithmTimeLimit == value)
                 {
                     return;
                 }
 
-                this.formulaTimeLimit = value;
-                this.Notify("FormulaTimeLimit");
+                this.algorithmTimeLimit = value;
+                this.Notify("AlgorithmTimeLimit");
             }
         }
 

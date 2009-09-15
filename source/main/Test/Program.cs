@@ -15,19 +15,19 @@ namespace Test
             Cube<char> cube = new Cube<char>('O', 'B', 'R', 'G', 'Y', 'W');
             for (int i = 0; i < 1; i++)
             {
-                cube.DoFormula("b");
+                cube.DoAlgorithm("b");
             }
             cube.Print();
 
-            Debug.Assert(Cube<char>.ExpandFormula("") == "");
-            Debug.Assert(Cube<char>.ExpandFormula("()") == "");
-            Debug.Assert(Cube<char>.ExpandFormula("RLRU") == "RLRU");
-            Debug.Assert(Cube<char>.ExpandFormula("(RLRU)") == "RLRU");
-            Debug.Assert(Cube<char>.ExpandFormula("RL(RU)") == "RLRU");
-            Debug.Assert(Cube<char>.ExpandFormula("RL(RU)L") == "RLRUL");
-            Debug.Assert(Cube<char>.ExpandFormula("RL(RU)2L") == "RLRURUL");
-            Debug.Assert(Cube<char>.ExpandFormula("(RL)RUL") == "RLRUL");
-            Debug.Assert(Cube<char>.ExpandFormula("(RL)2RUL") == "RLRLRUL");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("") == "");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("()") == "");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("RLRU") == "RLRU");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("(RLRU)") == "RLRU");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("RL(RU)") == "RLRU");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("RL(RU)L") == "RLRUL");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("RL(RU)2L") == "RLRURUL");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("(RL)RUL") == "RLRUL");
+            Debug.Assert(Cube<char>.ExpandAlgorithm("(RL)2RUL") == "RLRLRUL");
         }
 
         //static void GenerateTransform()
@@ -41,7 +41,7 @@ namespace Test
         //        new byte[] { 5, 5, 5 });
         //    cube.cube = Transformation.O;
         //    string script = "E'";
-        //    cube.DoFormula(script);
+        //    cube.DoAlgorithm(script);
 
         //    Console.WindowWidth = 100;
         //    Console.WindowHeight = 36;
