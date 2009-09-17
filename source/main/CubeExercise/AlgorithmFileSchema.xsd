@@ -44,7 +44,7 @@
     <xs:complexType name="AlgorithmFile">
         <xs:sequence minOccurs="1" maxOccurs="1">
             <xs:element name="Algorithms" minOccurs="1" maxOccurs="1" type="AlgorithmList" />
-            <xs:element name="Group" minOccurs="1" maxOccurs="1" type="Group" />
+            <xs:element name="Group" minOccurs="1" maxOccurs="unbounded" type="Group" />
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" />
         <xs:attribute name="description" type="xs:string" use="optional" />

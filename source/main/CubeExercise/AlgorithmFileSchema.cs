@@ -29,7 +29,8 @@ namespace CubeExercise {
         public Algorithm[] Algorithms;
         
         /// <remarks/>
-        public Group Group;
+        [System.Xml.Serialization.XmlElementAttribute("Group")]
+        public Group[] Group;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]

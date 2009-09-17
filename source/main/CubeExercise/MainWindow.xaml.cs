@@ -145,6 +145,11 @@ namespace CubeExercise
                 if (item.GetType() == typeof(AlgorithmReference))
                 {
                     AlgorithmReference r = (AlgorithmReference)item;
+                    if (group.Enabled == false)
+                    {
+                        r.Enabled = false;
+                    }
+
                     Algorithm a = this.ResolveReference(r);
                     r.Algorithm = a;
 
@@ -185,6 +190,11 @@ namespace CubeExercise
                 else
                 {
                     Group g = (Group)item;
+                    if (group.Enabled == false)
+                    {
+                        g.Enabled = false;
+                    }
+
                     g.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(g_PropertyChanged);
                     StackPanel panel = new StackPanel();
                     TreeViewItem subItem = GetSubTreeItems(g);
@@ -377,7 +387,7 @@ namespace CubeExercise
                 AlgorithmFile file = (AlgorithmFile)s.Deserialize(XmlReader.Create(xmlPath));
                 this.algorithmFiles.Add(file);
                 file.Path = xmlPath;
-                this.root.Items = new Group[] { file.Group };
+                this.root.Items = file.Group;
 
                 foreach (Algorithm a in file.Algorithms)
                 {
