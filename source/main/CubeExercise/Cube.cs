@@ -352,7 +352,12 @@ namespace CubeExercise
             return this.cube;
         }
 
-        public T[,,] DoAlgorithm(string algorithm)
+        public T[, ,] DoAlgorithm(string algorithm)
+        {
+            return this.DoAlgorithm(algorithm, false);
+        }
+
+        public T[,,] DoAlgorithm(string algorithm, bool reverse)
         {
             if (!string.IsNullOrEmpty(algorithm))
             {
@@ -371,6 +376,7 @@ namespace CubeExercise
 
             // i: Pointer to the next unprocessed character.
             int i = 0;
+            List<string> actionList = new List<string>();
             while (i < algorithm.Length)
             {
                 int repeat = 1;
@@ -400,7 +406,32 @@ namespace CubeExercise
                 // Perform the token and its suffix.
                 for (int j = 0; j < repeat; j++)
                 {
-                    this.Move(token);
+                    actionList.Add(token);
+                }
+            }
+
+            if (!reverse)
+            {
+                for (i = 0; i < actionList.Count; i++)
+                {
+                    this.Move(actionList[i]);
+                }
+            }
+            else
+            {
+                for (i = actionList.Count - 1; i >= 0; i--)
+                {
+                    string action = actionList[i];
+                    if (action.EndsWith("'"))
+                    {
+                        action = action.TrimEnd('\'');
+                    }
+                    else
+                    {
+                        action += "'";
+                    }
+
+                    this.Move(action);
                 }
             }
 

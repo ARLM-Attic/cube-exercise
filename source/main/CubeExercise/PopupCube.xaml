@@ -1,0 +1,9 @@
+﻿<Window x:Class="CubeExercise.PopupCube"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Cube="clr-namespace:CubeExercise"
+    Title="Popup Cube Status" Height="290" Width="386" ShowActivated="False" ShowInTaskbar="False" Topmost="True" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
+    <Viewbox Grid.Row="0" Grid.Column="0">
+        <Cube:CubeControl x:Name="cube" Height="290" Width="386" />
+    </Viewbox>
+</Window>

@@ -138,7 +138,12 @@ namespace CubeExercise
 
         public void Transform(string script)
         {
-            this.cube.DoAlgorithm(script);
+            this.Transform(script, false);
+        }
+
+        public void Transform(string script, bool reverse)
+        {
+            this.cube.DoAlgorithm(script, reverse);
             this.UpdateColors();
         }
     }

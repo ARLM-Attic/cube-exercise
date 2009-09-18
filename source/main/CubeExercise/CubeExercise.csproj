@@ -108,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PopupCube.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -118,6 +122,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm.cs" />
+    <Compile Include="AlgorithmFile.cs" />
+    <Compile Include="AlgorithmFileSchema.cs">
+      <DependentUpon>AlgorithmFileSchema.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AlgorithmReference.cs" />
     <Compile Include="Cube.cs" />
     <Compile Include="Controls\CubeControl.xaml.cs">
       <DependentUpon>CubeControl.xaml</DependentUpon>
@@ -127,13 +137,12 @@
     </Compile>
     <Compile Include="ExerciseConfiguration.cs" />
     <Compile Include="ExerciseMode.cs" />
-    <Compile Include="Formula.cs" />
-    <Compile Include="FormulasSchema.cs">
-      <DependentUpon>FormulasSchema.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Group.cs" />
     <Compile Include="Int32Converter.cs" />
     <Compile Include="NumberValidationRule.cs" />
+    <Compile Include="PopupCube.xaml.cs">
+      <DependentUpon>PopupCube.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -151,9 +160,6 @@
       <DependentUpon>StopWatch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transformation.cs" />
-    <None Include="Formulas.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -172,7 +178,6 @@
     <Resource Include="AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FormulasSchema.xsd" />
     <None Include="images\image_OLL_001.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -446,6 +451,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AlgorithmFileSchema.xsd" />
     <None Include="images\image_F2L_001.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -568,6 +574,43 @@
     </None>
     <None Include="images\image_F2L_041.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\image_OLL_003_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_005_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_006_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_012_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_012_3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_013_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_016_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_024_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_029_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="images\image_OLL_047_2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Algorithms.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

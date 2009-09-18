@@ -33,6 +33,7 @@
                         <Button Height="23" Width="70" Name="btnClear" Click="btnClear_Click">清除公式(_E)</Button>
                         <Button Name="btnInitialize" Height="23" Width="50" Click="btnInitialize_Click">复原(_O)</Button>
                         <Button Name="btnTransform" Height="23" Width="60" Click="btnTransform_Click">做公式(_D)</Button>
+                        <Button Name="btnReverseTransform" Height="23" Width="65" ToolTip="作当前公式的逆公式，可以产生当前公式的适用情况" Click="btnReverseTransform_Click">逆做公式(_V)</Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -94,7 +95,11 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <CheckBox Name="chkRecordScript" IsChecked="True" ToolTip="所有显示过的公式将被记录到“模拟魔方”中的文本框中，从而可以重现并比对魔方当前的状态。点击'开始练习'时会清除文本框中现有的公式." Grid.Row="4" Grid.ColumnSpan="2">记录公式</CheckBox>
+                        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <CheckBox Name="chkRecordScript" IsChecked="True" ToolTip="所有显示过的公式将被记录到“模拟魔方”中的文本框中，从而可以重现并比对魔方当前的状态。点击'开始练习'时会清除文本框中现有的公式.">记录公式</CheckBox>
+                            <CheckBox Name="chkShowRealtimeStatus" IsChecked="False" Checked="chkShowRealtimeStatus_Checked" Unchecked="chkShowRealtimeStatus_Unchecked">显示魔方状态</CheckBox>
+                            <Button Name="btnResetRealtimeStatus" Click="btnResetRealtimeStatus_Click">复原魔方状态</Button>
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="5" Grid.ColumnSpan="2">
                             <Button x:Name="btnStartExercise" Click="btnStartExercise_Click" Width="70" Height="20">开始练习(_S)</Button>
                             <Button x:Name="btnPauseExercise" Click="btnPauseExercise_Click" IsEnabled="False" Width="70" Height="20">暂停练习(_P)</Button>

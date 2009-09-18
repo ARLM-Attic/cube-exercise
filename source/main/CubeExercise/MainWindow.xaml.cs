@@ -426,12 +426,7 @@ namespace CubeExercise
             }
         }
 
-        private void btnInitialize_Click(object sender, RoutedEventArgs e)
-        {
-            this.cube.InitializeCube();
-        }
-
-        private void btnTransform_Click(object sender, RoutedEventArgs e)
+        private void Transform(bool reverse)
         {
             try
             {
@@ -441,14 +436,28 @@ namespace CubeExercise
                     todo = this.txtAlgorithm.SelectedText;
                 }
 
-                this.cube.Transform(todo);
-                this.cube.UpdateColors();
+                this.cube.Transform(todo, reverse);
             }
             catch (ArgumentException ex)
             {
                 string msg = string.Format("公式不正确！错误信息：{0}", ex.ToString());
                 MessageBox.Show(msg, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnInitialize_Click(object sender, RoutedEventArgs e)
+        {
+            this.cube.InitializeCube();
+        }
+
+        private void btnTransform_Click(object sender, RoutedEventArgs e)
+        {
+            this.Transform(false);
+        }
+
+        private void btnReverseTransform_Click(object sender, RoutedEventArgs e)
+        {
+            this.Transform(true);
         }
 
         private void btnFind_Click(object sender, RoutedEventArgs e)
@@ -508,24 +517,34 @@ namespace CubeExercise
 
             if (this.ExerciseConfiguration.Mode == ExerciseMode.Descending)
             {
-                for (int i = this.plainListAlgorithms.Count - 1; i >= 0; i--)
+                for (int i = this.plainListAlgorithmReferences.Count - 1; i >= 0; i--)
                 {
                     if (this.plainListAlgorithmReferences[i].Enabled)
                     {
-                        this.exercising.Add(this.ResolveReference(this.plainListAlgorithmReferences[i]));
+                        Algorithm a = this.ResolveReference(this.plainListAlgorithmReferences[i]);
+                        if (this.exercising.Find((alg) => { return alg.Id == a.Id; }) == null)
+                        {
+                            this.exercising.Add(a);
+                        }
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < this.plainListAlgorithms.Count; i++)
+                for (int i = 0; i < this.plainListAlgorithmReferences.Count; i++)
                 {
                     if (this.plainListAlgorithmReferences[i].Enabled)
                     {
-                        this.exercising.Add(this.ResolveReference(this.plainListAlgorithmReferences[i]));
+                        Algorithm a = this.ResolveReference(this.plainListAlgorithmReferences[i]);
+                        if (this.exercising.Find((alg) => { return alg.Id == a.Id; }) == null)
+                        {
+                            this.exercising.Add(a);
+                        }
                     }
                 }
             }
+
+            this.exercising.Sort((alg1, alg2) => { return alg1.Id - alg2.Id; });
 
             if (this.ExerciseConfiguration.Mode != ExerciseMode.RepeatableRandom)
             {
@@ -584,24 +603,27 @@ namespace CubeExercise
                 string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 path = System.IO.Path.Combine(path, this.currentAlgorithm.Image);
                 this.imgExercise.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+                string fullScript = "";
+                fullScript += "/*" + this.currentAlgorithm.Name + "*/ ";
+                if (!string.IsNullOrEmpty(this.currentAlgorithm.PreScript))
+                {
+                    fullScript += "[" + this.currentAlgorithm.PreScript + "]";
+                }
+
+                fullScript += this.currentAlgorithm.Script;
+                if (!string.IsNullOrEmpty(this.currentAlgorithm.PostScript))
+                {
+                    fullScript += "[" + this.currentAlgorithm.PostScript + "]";
+                }
+
+                fullScript += Environment.NewLine;
+
                 if (this.chkRecordScript.IsChecked.HasValue && this.chkRecordScript.IsChecked.Value == true)
                 {
-                    this.txtAlgorithm.AppendText("/*" + this.currentAlgorithm.Name + "*/ ");
-
-                    if (!string.IsNullOrEmpty(this.currentAlgorithm.PreScript))
-                    {
-                        this.txtAlgorithm.AppendText("[" + this.currentAlgorithm.PreScript + "]");
-                    }
-
-                    this.txtAlgorithm.AppendText(this.currentAlgorithm.Script);
-
-                    if (!string.IsNullOrEmpty(this.currentAlgorithm.PostScript))
-                    {
-                        this.txtAlgorithm.AppendText("[" + this.currentAlgorithm.PostScript + "]");
-                    }
-
-                    this.txtAlgorithm.AppendText(Environment.NewLine);
+                    this.txtAlgorithm.AppendText(fullScript);
                 }
+
+                this.cubeStatus.cube.Transform(fullScript);
 
                 if (this.ExerciseConfiguration.ShowScriptDelay == 0)
                 {
@@ -682,6 +704,10 @@ namespace CubeExercise
                     }
 
                     e.Handled = true;
+                    break;
+
+                case Key.R:
+                    this.cubeStatus.cube.InitializeCube();
                     break;
 
                 case Key.Escape:
@@ -881,6 +907,26 @@ namespace CubeExercise
         private void mainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.SaveAlgorithms();
+            this.cubeStatus.ParentClosing = true;
+            this.cubeStatus.Close();
+        }
+
+        PopupCube cubeStatus = new PopupCube();
+
+        private void chkShowRealtimeStatus_Checked(object sender, RoutedEventArgs e)
+        {
+            this.cubeStatus.Show();
+        }
+
+        private void chkShowRealtimeStatus_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.cubeStatus.Hide();
+        }
+
+        private void btnResetRealtimeStatus_Click(object sender, RoutedEventArgs e)
+        {
+            this.cubeStatus.cube.InitializeCube();
+            this.imgExercise.Focus();
         }
     }
 }
