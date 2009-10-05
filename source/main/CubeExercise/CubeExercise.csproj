@@ -92,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AlgorithmEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CubeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
+    <Compile Include="AlgorithmEditor.xaml.cs">
+      <DependentUpon>AlgorithmEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AlgorithmFile.cs" />
     <Compile Include="AlgorithmFileSchema.cs">
       <DependentUpon>AlgorithmFileSchema.xsd</DependentUpon>

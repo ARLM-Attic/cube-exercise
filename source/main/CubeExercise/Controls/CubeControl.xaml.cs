@@ -127,13 +127,14 @@ namespace CubeExercise
                 brushes[5, 2, 2],
             };
 
-
+            this.BeginInit();
             this.Left.Colors = left;
             this.Front.Colors = front;
             this.Right.Colors = right;
             this.Back.Colors = back;
             this.Up.Colors = up;
             this.Down.Colors = down;
+            this.EndInit();
         }
 
         public void Transform(string script)

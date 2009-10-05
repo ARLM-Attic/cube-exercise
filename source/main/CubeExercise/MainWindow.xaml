@@ -14,7 +14,20 @@
             <ColumnDefinition Width="270" />
             <ColumnDefinition Width="420*" />
         </Grid.ColumnDefinitions>
-        <TreeView x:Name="AlgorithmsTree"/>
+        <TreeView x:Name="tvAlgorithms">
+            <TreeView.Resources>
+                <ContextMenu Name="cmAlgorithm" x:Key="cmAlgorithm">
+                    <MenuItem Header="加入我的公式" />
+                    <MenuItem Header="从该组删除" />
+                    <MenuItem Header="编辑..." />
+                </ContextMenu>
+                <ContextMenu Name="cmGroup" x:Key="cmGroup">
+                    <MenuItem Header="改名" />
+                    <MenuItem Header="删除" />
+                    <MenuItem Header="添加公式..." />
+                </ContextMenu>
+            </TreeView.Resources>
+        </TreeView>
 
         <TabControl Grid.Column="1" Margin="0,0,0,0">
             <TabItem Header="模拟魔方(_C)" x:Name="tabSimulator">

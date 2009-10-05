@@ -121,25 +121,61 @@ namespace CubeExercise
 
         private void InitializeTree()
         {
-            TreeViewItem root = this.GetSubTreeItems(this.root);
+            TreeViewItem tempRoot = new TreeViewItem();
+            this.isInitializing = true;
+            this.GetSubTreeItems(this.root, tempRoot);
+            this.isInitializing = false;
 
             // Transfer the sub items from the TreeViewItem to the TreeView.
-            while (root.Items.Count > 0)
+            while (tempRoot.Items.Count > 0)
             {
                 // One TreeViewItem can have only one logical parent. So the current
                 // parent must remove it from its children.
-                object subItem = root.Items[0];
-                root.Items.RemoveAt(0);
-                this.AlgorithmsTree.Items.Add(subItem);
+                object subItem = tempRoot.Items[0];
+                tempRoot.Items.RemoveAt(0);
+                this.tvAlgorithms.Items.Add(subItem);
             }
         }
 
-        private TreeViewItem GetSubTreeItems(Group group)
+        private TreeViewItem GetSubTreeItems(Group group, TreeViewItem tvItem)
         {
-            TreeViewItem tvItem = new TreeViewItem();
+            {
+                // Initialize the node itself.
+                StackPanel panel = new StackPanel();
+                panel.BeginInit();
+                // This binding is OneWay by default. So use a explicit binding configuration.
+                Binding expandedBinding = new Binding("Expanded") { Source = group, Mode = BindingMode.TwoWay };
+                tvItem.SetBinding(TreeViewItem.IsExpandedProperty, expandedBinding);
+                tvItem.Header = panel;
+                tvItem.Tag = group;
+
+                panel.HorizontalAlignment = HorizontalAlignment.Left;
+                panel.VerticalAlignment = VerticalAlignment.Center;
+                panel.Orientation = Orientation.Horizontal;
+                CheckBox cb = new CheckBox() { VerticalAlignment = VerticalAlignment.Center, IsChecked = null };
+                panel.Children.Add(cb);
+                cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
+                cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
+                cb.DataContext = group;
+                cb.IsChecked = group.Enabled;
+                //Binding enabledBinding = new Binding("Enabled") { Mode = BindingMode.OneWayToSource };
+                //cb.SetBinding(CheckBox.IsCheckedProperty, enabledBinding);
+
+                TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
+                tb.DataContext = group;
+                tb.SetBinding(TextBlock.TextProperty, "Name");
+                panel.Children.Add(tb);
+                panel.EndInit();
+            }
+
+            if (group.Items == null || group.Items.Count() <= 0)
+            {
+                return tvItem;
+            }
 
             // TODO: Tag, DataContext, Algorithm, AlgorithmReference... It is a little
-            // cluttered here. Refecter it later.
+            // cluttered here. Refector it later.
+            // Initialize the subnodes.
             foreach (object item in group.Items)
             {
                 if (item.GetType() == typeof(AlgorithmReference))
@@ -156,36 +192,39 @@ namespace CubeExercise
                     this.plainListAlgorithmReferences.Add(r);
 
                     Button itemButton = new Button();
+                    itemButton.BeginInit();
                     itemButton.Tag = a;
                     itemButton.Click += new RoutedEventHandler(Button_Click);
 
                     TreeViewItem subItem = new TreeViewItem();
                     subItem.Header = itemButton;
                     subItem.Tag = r;
+                    subItem.ContextMenu = (ContextMenu)this.tvAlgorithms.FindResource("cmAlgorithm");
                     tvItem.Items.Add(subItem);
 
-                    StackPanel panel = new StackPanel();
-                    itemButton.Content = panel;
-                    panel.HorizontalAlignment = HorizontalAlignment.Left;
-                    panel.VerticalAlignment = VerticalAlignment.Center;
-                    panel.Orientation = Orientation.Horizontal;
-                    CheckBox cb = new CheckBox() { VerticalAlignment = VerticalAlignment.Center };
-                    panel.Children.Add(cb);
-                    cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
-                    cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
-                    cb.DataContext = r;
-                    cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
+                    StackPanel subPanel = new StackPanel();
+                    itemButton.Content = subPanel;
+                    subPanel.HorizontalAlignment = HorizontalAlignment.Left;
+                    subPanel.VerticalAlignment = VerticalAlignment.Center;
+                    subPanel.Orientation = Orientation.Horizontal;
+                    CheckBox subcb = new CheckBox() { VerticalAlignment = VerticalAlignment.Center, IsChecked = null };
+                    subPanel.Children.Add(subcb);
+                    subcb.Checked += new RoutedEventHandler(cb_CheckedChanged);
+                    subcb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
+                    subcb.DataContext = r;
+                    subcb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
 
                     if (!string.IsNullOrEmpty(a.Image) && System.IO.File.Exists(a.Image))
                     {
                         string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                         path = System.IO.Path.Combine(path, a.Image);
-                        panel.Children.Add(new Image() { Source = new BitmapImage(new Uri(path, UriKind.Absolute)) });
+                        subPanel.Children.Add(new Image() { Source = new BitmapImage(new Uri(path, UriKind.Absolute)) });
                     }
-                    TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
-                    tb.DataContext = r;
-                    tb.SetBinding(TextBlock.TextProperty, "Name");
-                    panel.Children.Add(tb);
+                    TextBlock subtb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
+                    subtb.DataContext = r;
+                    subtb.SetBinding(TextBlock.TextProperty, "Name");
+                    subPanel.Children.Add(subtb);
+                    itemButton.EndInit();
                 }
                 else
                 {
@@ -196,30 +235,9 @@ namespace CubeExercise
                     }
 
                     g.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(g_PropertyChanged);
-                    StackPanel panel = new StackPanel();
-                    TreeViewItem subItem = GetSubTreeItems(g);
-
-                    // This binding is OneWay by default. So use a explicit binding configuration.
-                    Binding binding = new Binding("Expanded") { Source = g, Mode = BindingMode.TwoWay };
-                    subItem.SetBinding(TreeViewItem.IsExpandedProperty, binding);
-                    subItem.Header = panel;
-                    subItem.Tag = g;
+                    TreeViewItem subItem = new TreeViewItem();
                     tvItem.Items.Add(subItem);
-
-                    panel.HorizontalAlignment = HorizontalAlignment.Left;
-                    panel.VerticalAlignment = VerticalAlignment.Center;
-                    panel.Orientation = Orientation.Horizontal;
-                    CheckBox cb = new CheckBox() { VerticalAlignment = VerticalAlignment.Center };
-                    panel.Children.Add(cb);
-                    cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
-                    cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
-                    cb.DataContext = g;
-                    cb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
-
-                    TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
-                    tb.DataContext = g;
-                    tb.SetBinding(TextBlock.TextProperty, "Name");
-                    panel.Children.Add(tb);
+                    this.GetSubTreeItems(g, subItem);
                 }
             }
 
@@ -245,9 +263,23 @@ namespace CubeExercise
             }
         }
 
+        /// <summary>
+        /// The binding should be one-way when initializing the tree for the first time.
+        /// After it is initialized, updates from the UI should sync to the algorithms and groups.
+        /// </summary>
+        private bool isInitializing = true;
+
         private void cb_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            TreeViewItem tvItem = this.FindParentTreeViewItem((CheckBox)sender);
+            CheckBox cb = (CheckBox)sender;
+            if (!this.isInitializing)
+            {
+                if (cb.DataContext is Group && cb.IsChecked.HasValue)
+                {
+                    ((Group)cb.DataContext).Enabled = cb.IsChecked.Value;
+                }
+            }
+            TreeViewItem tvItem = this.FindParentTreeViewItem(cb);
             while (tvItem != null)
             {
                 this.ResetParentStatus(tvItem);
