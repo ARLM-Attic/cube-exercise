@@ -16,8 +16,10 @@
 // English (U.S.) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
+#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -51,7 +53,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,2,215,0
+ FILEVERSION 1,2,305,0
  PRODUCTVERSION 1,2,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
@@ -70,7 +72,7 @@ BEGIN
             VALUE "Comments", "http://cubeexercise.fanrui.net"
             VALUE "CompanyName", "Rui Fan (cubeexercise@fanrui.net)"
             VALUE "FileDescription", "CubeExercise Prerequisites Check"
-            VALUE "FileVersion", "1.2.215.0"
+            VALUE "FileVersion", "1.2.305.0"
             VALUE "InternalName", "CheckCLR"
             VALUE "LegalCopyright", "Copyright (C) 2009 Rui Fan"
             VALUE "OriginalFilename", "CheckCLR.exe"
@@ -92,7 +94,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "E:\\Projects\\CubeExercise\\source\\main\\CubeExercise\\AppIcon.ico"
+IDI_ICON1               ICON                    "..\\CubeExercise\\AppIcon.ico"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 
