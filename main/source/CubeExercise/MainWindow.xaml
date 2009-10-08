@@ -17,14 +17,14 @@
         <TreeView x:Name="tvAlgorithms">
             <TreeView.Resources>
                 <ContextMenu Name="cmAlgorithm" x:Key="cmAlgorithm">
-                    <MenuItem Header="加入我的公式" />
+                    <MenuItem Header="复制到其他组..." Click="MenuItem_Click" />
                     <MenuItem Header="从该组删除" />
-                    <MenuItem Header="编辑..." />
+                    <MenuItem Header="编辑..." IsEnabled="False" />
                 </ContextMenu>
                 <ContextMenu Name="cmGroup" x:Key="cmGroup">
-                    <MenuItem Header="改名" />
-                    <MenuItem Header="删除" />
-                    <MenuItem Header="添加公式..." />
+                    <MenuItem Header="改名" IsEnabled="False" />
+                    <MenuItem Header="删除该组" IsEnabled="False" />
+                    <MenuItem Header="添加公式..." IsEnabled="False" />
                 </ContextMenu>
             </TreeView.Resources>
         </TreeView>

@@ -148,6 +148,8 @@ namespace CubeExercise
                 tvItem.SetBinding(TreeViewItem.IsExpandedProperty, expandedBinding);
                 tvItem.Header = panel;
                 tvItem.Tag = group;
+                tvItem.ContextMenu = (ContextMenu)this.tvAlgorithms.FindResource("cmGroup");
+                tvItem.ContextMenuOpening += new ContextMenuEventHandler(group_ContextMenuOpening);
 
                 panel.HorizontalAlignment = HorizontalAlignment.Left;
                 panel.VerticalAlignment = VerticalAlignment.Center;
@@ -200,6 +202,7 @@ namespace CubeExercise
                     subItem.Header = itemButton;
                     subItem.Tag = r;
                     subItem.ContextMenu = (ContextMenu)this.tvAlgorithms.FindResource("cmAlgorithm");
+                    subItem.ContextMenuOpening += new ContextMenuEventHandler(algorithm_ContextMenuOpening);
                     tvItem.Items.Add(subItem);
 
                     StackPanel subPanel = new StackPanel();
@@ -959,6 +962,23 @@ namespace CubeExercise
         {
             this.cubeStatus.cube.InitializeCube();
             this.imgExercise.Focus();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            e.ToString();
+        }
+
+        private void group_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            //e.Handled = true;
+        }
+
+        private void algorithm_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            e.Handled = true;
+            FrameworkElement fe = sender as FrameworkElement;
+            fe.ContextMenu.IsOpen = true;
         }
     }
 }
