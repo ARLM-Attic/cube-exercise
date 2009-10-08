@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyCompany("Rui Fan (cubeexercise@fanrui.net)")]
 [assembly: AssemblyProduct("CubeExercise")]
-[assembly: AssemblyCopyright("Copyright \251 Rui Fan 2009")]
+[assembly: AssemblyCopyright("Copyright (c) Rui Fan 2009")]
 [assembly: AssemblyTrademark("")]
 
 #if ENABLE_CODESIGN
