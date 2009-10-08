@@ -22,7 +22,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)..\target\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -45,6 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="..\..\public\inc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -59,6 +60,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\public\inc"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
