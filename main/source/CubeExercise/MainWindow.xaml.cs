@@ -42,6 +42,7 @@ namespace CubeExercise
     using System.Windows.Threading;
     using System.Xml;
     using System.Xml.Serialization;
+    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -56,6 +57,30 @@ namespace CubeExercise
         private static string fileVersion;
 
         private List<AlgorithmFile> algorithmFiles;
+
+        ///// <summary>
+        ///// Cache the GroupWindow object.
+        ///// </summary>
+        //private GroupWindow groupWindow;
+
+        //protected GroupWindow GroupWindow
+        //{
+        //    get
+        //    {
+        //        if (this.groupWindow == null)
+        //        {
+        //            if (this.root == null)
+        //            {
+        //                throw new ApplicationException("The algorithms haven't been initialized");
+        //            }
+
+        //            this.groupWindow = new GroupWindow(this.root);
+        //            this.groupWindow.Owner = this;
+        //        }
+
+        //        return this.groupWindow;
+        //    }
+        //}
 
         /// <summary>
         /// Gets the file version. If the version is not cached, get it from the assembly attribute.
@@ -121,6 +146,9 @@ namespace CubeExercise
 
         private void InitializeTree()
         {
+            this.plainListAlgorithmReferences.Clear();
+            this.tvAlgorithms.Items.Clear();
+
             TreeViewItem tempRoot = new TreeViewItem();
             this.isInitializing = true;
             this.GetSubTreeItems(this.root, tempRoot);
@@ -147,9 +175,11 @@ namespace CubeExercise
                 Binding expandedBinding = new Binding("Expanded") { Source = group, Mode = BindingMode.TwoWay };
                 tvItem.SetBinding(TreeViewItem.IsExpandedProperty, expandedBinding);
                 tvItem.Header = panel;
-                tvItem.Tag = group;
+                // DataContext will be used by all its children.
+                tvItem.DataContext = group;
                 tvItem.ContextMenu = (ContextMenu)this.tvAlgorithms.FindResource("cmGroup");
-                tvItem.ContextMenuOpening += new ContextMenuEventHandler(group_ContextMenuOpening);
+                tvItem.ContextMenuOpening += new ContextMenuEventHandler(OnContextMenuOpening);
+                tvItem.MouseDoubleClick += new MouseButtonEventHandler(groupTreeViewItem_MouseDoubleClick);
 
                 panel.HorizontalAlignment = HorizontalAlignment.Left;
                 panel.VerticalAlignment = VerticalAlignment.Center;
@@ -158,15 +188,18 @@ namespace CubeExercise
                 panel.Children.Add(cb);
                 cb.Checked += new RoutedEventHandler(cb_CheckedChanged);
                 cb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
-                cb.DataContext = group;
                 cb.IsChecked = group.Enabled;
-                //Binding enabledBinding = new Binding("Enabled") { Mode = BindingMode.OneWayToSource };
-                //cb.SetBinding(CheckBox.IsCheckedProperty, enabledBinding);
 
                 TextBlock tb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
-                tb.DataContext = group;
                 tb.SetBinding(TextBlock.TextProperty, "Name");
+                TextBox tbox = new TextBox() { VerticalAlignment = VerticalAlignment.Center };
+                tbox.SetBinding(TextBox.TextProperty, "Name");
+                tbox.Visibility = Visibility.Collapsed;
+                tbox.BorderThickness = new Thickness(1);
+                tbox.BorderBrush = new SolidColorBrush(Colors.Black);
+                tbox.LostFocus += new RoutedEventHandler(groupNameTextBox_LostFocus);
                 panel.Children.Add(tb);
+                panel.Children.Add(tbox);
                 panel.EndInit();
             }
 
@@ -175,8 +208,6 @@ namespace CubeExercise
                 return tvItem;
             }
 
-            // TODO: Tag, DataContext, Algorithm, AlgorithmReference... It is a little
-            // cluttered here. Refector it later.
             // Initialize the subnodes.
             foreach (object item in group.Items)
             {
@@ -195,14 +226,14 @@ namespace CubeExercise
 
                     Button itemButton = new Button();
                     itemButton.BeginInit();
-                    itemButton.Tag = a;
                     itemButton.Click += new RoutedEventHandler(Button_Click);
 
                     TreeViewItem subItem = new TreeViewItem();
                     subItem.Header = itemButton;
-                    subItem.Tag = r;
+                    // DataContext will be used by all its children.
+                    subItem.DataContext = r;
                     subItem.ContextMenu = (ContextMenu)this.tvAlgorithms.FindResource("cmAlgorithm");
-                    subItem.ContextMenuOpening += new ContextMenuEventHandler(algorithm_ContextMenuOpening);
+                    subItem.ContextMenuOpening += new ContextMenuEventHandler(OnContextMenuOpening);
                     tvItem.Items.Add(subItem);
 
                     StackPanel subPanel = new StackPanel();
@@ -214,7 +245,6 @@ namespace CubeExercise
                     subPanel.Children.Add(subcb);
                     subcb.Checked += new RoutedEventHandler(cb_CheckedChanged);
                     subcb.Unchecked += new RoutedEventHandler(cb_CheckedChanged);
-                    subcb.DataContext = r;
                     subcb.SetBinding(CheckBox.IsCheckedProperty, "Enabled");
 
                     if (!string.IsNullOrEmpty(a.Image) && System.IO.File.Exists(a.Image))
@@ -224,7 +254,7 @@ namespace CubeExercise
                         subPanel.Children.Add(new Image() { Source = new BitmapImage(new Uri(path, UriKind.Absolute)) });
                     }
                     TextBlock subtb = new TextBlock() { VerticalAlignment = VerticalAlignment.Center };
-                    subtb.DataContext = r;
+
                     subtb.SetBinding(TextBlock.TextProperty, "Name");
                     subPanel.Children.Add(subtb);
                     itemButton.EndInit();
@@ -245,6 +275,35 @@ namespace CubeExercise
             }
 
             return tvItem;
+        }
+
+        private bool isEditing = false;
+
+        void groupNameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            StackPanel panel = tb.Parent as StackPanel;
+            panel.Children[1].Visibility = Visibility.Visible;
+            panel.Children[2].Visibility = Visibility.Collapsed;
+            e.Handled = true;
+            this.isEditing = false;
+        }
+
+        void groupTreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.isEditing == false)
+            {
+                e.Handled = true;
+                this.isEditing = true;
+                TreeViewItem item = sender as TreeViewItem;
+                StackPanel panel = item.Header as StackPanel;
+                TextBox tb = panel.Children[2] as TextBox;
+                tb.Visibility = Visibility.Visible;
+                tb.Focus();
+                tb.SelectAll();
+
+                panel.Children[1].Visibility = Visibility.Collapsed;
+            }
         }
 
         void g_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -524,10 +583,10 @@ namespace CubeExercise
             Button btn = sender as Button;
             if (btn != null)
             {
-                Algorithm f = btn.Tag as Algorithm;
-                if (f != null)
+                AlgorithmReference r = btn.DataContext as AlgorithmReference;
+                if (r != null)
                 {
-                    this.txtAlgorithm.Text = f.Script;
+                    this.txtAlgorithm.Text = r.Algorithm.Script;
                 }
             }
         }
@@ -964,21 +1023,134 @@ namespace CubeExercise
             this.imgExercise.Focus();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItemCopyTo_Click(object sender, RoutedEventArgs e)
         {
-            e.ToString();
+            AlgorithmReference r = null;
+            MenuItem mi = sender as MenuItem;
+            if (mi == null)
+            {
+                throw new ApplicationException("The sender is not a MenuItem object");
+            }
+
+            if (mi.DataContext is TreeViewItem)
+            {
+                r = (AlgorithmReference)((TreeViewItem)mi.DataContext).DataContext;
+            }
+            else
+            {
+                throw new ApplicationException("Invalid datacontext");
+            }
+
+            GroupWindow groupWindow = new GroupWindow(this.root, r.Name);
+            groupWindow.Owner = this;
+            if (groupWindow.ShowDialog() == true)
+            {
+                Group g = groupWindow.SelectedGroup;
+                if (g == null)
+                {
+                    throw new ApplicationException("The selected group is null");
+                }
+
+                if (g.Items == null)
+                {
+                    g.Items = new object[] { r };
+                    this.InitializeTree();
+                }
+                else if (!g.Items.Contains(r))
+                {
+                    var list = g.Items.ToList();
+                    list.Add(r);
+                    g.Items = list.ToArray();
+                    this.InitializeTree();
+                }
+            }
         }
 
-        private void group_ContextMenuOpening(object sender, ContextMenuEventArgs e)
-        {
-            //e.Handled = true;
-        }
-
-        private void algorithm_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        private void OnContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             e.Handled = true;
             FrameworkElement fe = sender as FrameworkElement;
-            fe.ContextMenu.IsOpen = true;
+            if (fe != null)
+            {
+                TreeViewItem item = fe as TreeViewItem;
+                if (item != null)
+                {
+                    item.ContextMenu.DataContext = item;
+                    item.ContextMenu.IsOpen = true;
+                }
+            }
+        }
+
+        private void cmiRemoveAlgorithm_Click(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem item = null;
+            MenuItem mi = sender as MenuItem;
+            if (mi == null)
+            {
+                throw new ApplicationException("The sender is not a MenuItem object");
+            }
+
+            if (mi.DataContext is TreeViewItem)
+            {
+                item = (TreeViewItem)mi.DataContext;
+            }
+            else
+            {
+                throw new ApplicationException("Invalid datacontext");
+            }
+
+            Group g = ((TreeViewItem)item.Parent).DataContext as Group;
+            if (g == null)
+            {
+                throw new ApplicationException("Invalid datacontext");
+            }
+
+            if (g.Items.Contains(item.DataContext))
+            {
+                var list = g.Items.ToList();
+                list.Remove(item.DataContext);
+                g.Items = list.ToArray();
+                this.InitializeTree();
+            }
+        }
+
+        private void cmiCreateNewGroup_Click(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem item = null;
+            MenuItem mi = sender as MenuItem;
+            if (mi == null)
+            {
+                throw new ApplicationException("The sender is not a MenuItem object");
+            }
+
+            if (mi.DataContext is TreeViewItem)
+            {
+                item = (TreeViewItem)mi.DataContext;
+            }
+            else
+            {
+                throw new ApplicationException("Invalid menu item datacontext");
+            }
+
+            Group g = item.DataContext as Group;
+            if (g == null)
+            {
+                throw new ApplicationException("Invalid tree view item datacontext");
+            }
+
+            Group newGroup = new Group() { Name = "新建组(双击改名)" };
+            if (g.Items == null)
+            {
+                g.Items = new object[] { newGroup };
+            }
+            else
+            {
+                var list = g.Items.ToList();
+                list.Add(newGroup);
+                g.Items = list.ToArray();
+            }
+
+            this.InitializeTree();
         }
     }
 }

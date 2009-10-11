@@ -108,6 +108,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,6 +149,9 @@
     <Compile Include="ExerciseConfiguration.cs" />
     <Compile Include="ExerciseMode.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="GroupWindow.xaml.cs">
+      <DependentUpon>GroupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Int32Converter.cs" />
     <Compile Include="NumberValidationRule.cs" />
     <Compile Include="..\..\public\inc\bldver.cs" />

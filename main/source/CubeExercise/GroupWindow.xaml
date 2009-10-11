@@ -1,0 +1,16 @@
+﻿<Window x:Class="CubeExercise.GroupWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Please select the target group" Height="300" Width="300" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TreeView x:Name="tvGroups" Grid.Row="0"></TreeView>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button x:Name="btnOK" Height="20" Width="70" IsDefault="True" Click="btnOK_Click">确定(_O)</Button>
+            <Button x:Name="btnCancle" Height="20" Width="70" IsCancel="True">取消(_C)</Button>
+        </StackPanel>
+    </Grid>
+</Window>
