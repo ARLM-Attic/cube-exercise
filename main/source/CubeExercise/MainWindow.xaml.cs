@@ -198,6 +198,7 @@ namespace CubeExercise
                 tbox.BorderThickness = new Thickness(1);
                 tbox.BorderBrush = new SolidColorBrush(Colors.Black);
                 tbox.LostFocus += new RoutedEventHandler(groupNameTextBox_LostFocus);
+                tbox.KeyDown += new KeyEventHandler(groupNameTextBox_KeyDown);
                 panel.Children.Add(tb);
                 panel.Children.Add(tbox);
                 panel.EndInit();
@@ -279,7 +280,20 @@ namespace CubeExercise
 
         private bool isEditing = false;
 
-        void groupNameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void groupNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox tb = sender as TextBox;
+                StackPanel panel = tb.Parent as StackPanel;
+                panel.Children[1].Visibility = Visibility.Visible;
+                panel.Children[2].Visibility = Visibility.Collapsed;
+                e.Handled = true;
+                this.isEditing = false;
+            }
+        }
+
+        private void groupNameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = sender as TextBox;
             StackPanel panel = tb.Parent as StackPanel;
@@ -289,7 +303,7 @@ namespace CubeExercise
             this.isEditing = false;
         }
 
-        void groupTreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void groupTreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (this.isEditing == false)
             {
@@ -306,7 +320,7 @@ namespace CubeExercise
             }
         }
 
-        void g_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void g_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Group g = (Group)sender;
             if (e.PropertyName == "Enabled")
@@ -1009,7 +1023,10 @@ namespace CubeExercise
 
         private void chkShowRealtimeStatus_Checked(object sender, RoutedEventArgs e)
         {
-            this.cubeStatus.Show();
+            if (this.IsLoaded)
+            {
+                this.cubeStatus.Show();
+            }
         }
 
         private void chkShowRealtimeStatus_Unchecked(object sender, RoutedEventArgs e)
@@ -1059,7 +1076,9 @@ namespace CubeExercise
                 else if (!g.Items.Contains(r))
                 {
                     var list = g.Items.ToList();
-                    list.Add(r);
+                    // AlgorithmReference is bound to one tree node. So a new node
+                    // should have a new reference.
+                    list.Add(new AlgorithmReference() { Algorithm = r.Algorithm, demo = r.demo, enabled = r.enabled, id = r.id, name = r.name });
                     g.Items = list.ToArray();
                     this.InitializeTree();
                 }
@@ -1151,6 +1170,57 @@ namespace CubeExercise
             }
 
             this.InitializeTree();
+        }
+
+        private void cmiRenameGroup_Click(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem item = null;
+            MenuItem mi = sender as MenuItem;
+            if (mi == null)
+            {
+                throw new ApplicationException("The sender is not a MenuItem object");
+            }
+
+            if (mi.DataContext is TreeViewItem)
+            {
+                item = (TreeViewItem)mi.DataContext;
+            }
+            else
+            {
+                throw new ApplicationException("Invalid menu item datacontext");
+            }
+
+            if (this.isEditing == false)
+            {
+                e.Handled = true;
+                this.isEditing = true;
+                StackPanel panel = item.Header as StackPanel;
+                TextBox tb = panel.Children[2] as TextBox;
+                tb.Visibility = Visibility.Visible;
+                tb.Focus();
+                tb.SelectAll();
+
+                panel.Children[1].Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.chkShowRealtimeStatus != null && this.chkShowRealtimeStatus.IsChecked == true)
+            {
+                if (this.tcMain.SelectedItem == this.tabRandomExercise)
+                {
+                    this.cubeStatus.Show();
+                }
+                else
+                {
+                    this.cubeStatus.Hide();
+                }
+            }
+            else
+            {
+                this.cubeStatus.Hide();
+            }
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CubeExercise")]
-[assembly: AssemblyDescription("http://cubeexercise.fanrui.net\nE-mail: cubeexercise@fanrui.net")]
+[assembly: AssemblyTitle("CubeExercise\nhttp://cubeexercise.fanrui.net\nhttp://cubeexercise.codeplex.com\nE-mail: cubeexercise@fanrui.net")]
+[assembly: AssemblyDescription("http://cubeexercise.fanrui.net\nhttp://cubeexercise.codeplex.com\nE-mail: cubeexercise@fanrui.net")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
 

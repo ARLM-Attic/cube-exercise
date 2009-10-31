@@ -19,18 +19,18 @@
                 <ContextMenu Name="cmAlgorithm" x:Key="cmAlgorithm">
                     <MenuItem x:Name="cmiCopyTo" Header="复制到其他组..." Click="MenuItemCopyTo_Click" />
                     <MenuItem x:Name="cmiRemoveAlgorithm" Header="从该组删除" Click="cmiRemoveAlgorithm_Click" />
-                    <MenuItem x:Name="cmiEdit" Header="编辑..." IsEnabled="False" />
+                    <!--<MenuItem x:Name="cmiEdit" Header="编辑..." IsEnabled="False" />-->
                 </ContextMenu>
                 <ContextMenu Name="cmGroup" x:Key="cmGroup">
                     <MenuItem x:Name="cmiCreateNewGroup" Header="创建新组" IsEnabled="True" Click="cmiCreateNewGroup_Click" />
-                    <MenuItem x:Name="cmiRenameGroup" Header="改名" IsEnabled="False" />
-                    <MenuItem x:Name="cmiRemoveGroup" Header="删除该组" IsEnabled="False" />
-                    <MenuItem x:Name="cmiAddAlgorithm" Header="添加公式..." IsEnabled="False" />
+                    <MenuItem x:Name="cmiRenameGroup" Header="改名" IsEnabled="True" Click="cmiRenameGroup_Click" />
+                    <!--<MenuItem x:Name="cmiRemoveGroup" Header="删除该组" IsEnabled="False" />
+                    <MenuItem x:Name="cmiAddAlgorithm" Header="添加公式..." IsEnabled="False" />-->
                 </ContextMenu>
             </TreeView.Resources>
         </TreeView>
 
-        <TabControl Grid.Column="1" Margin="0,0,0,0">
+        <TabControl x:Name="tcMain"  Grid.Column="1" Margin="0,0,0,0" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="模拟魔方(_C)" x:Name="tabSimulator">
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -110,9 +110,9 @@
                             </TextBox.Text>
                         </TextBox>
                         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-                            <CheckBox Name="chkRecordScript" IsChecked="True" ToolTip="所有显示过的公式将被记录到“模拟魔方”中的文本框中，从而可以重现并比对魔方当前的状态。点击'开始练习'时会清除文本框中现有的公式.">记录公式</CheckBox>
-                            <CheckBox Name="chkShowRealtimeStatus" IsChecked="False" Checked="chkShowRealtimeStatus_Checked" Unchecked="chkShowRealtimeStatus_Unchecked">显示魔方状态</CheckBox>
-                            <Button Name="btnResetRealtimeStatus" Click="btnResetRealtimeStatus_Click">复原魔方状态</Button>
+                            <CheckBox Name="chkRecordScript" IsChecked="False" ToolTip="所有显示过的公式将被记录到“模拟魔方”中的文本框中，从而可以重现并比对魔方当前的状态。点击'开始练习'时会清除文本框中现有的公式.">记录公式</CheckBox>
+                            <CheckBox Name="chkShowRealtimeStatus" IsChecked="True" Checked="chkShowRealtimeStatus_Checked" Unchecked="chkShowRealtimeStatus_Unchecked">显示魔方状态</CheckBox>
+                            <Button Name="btnResetRealtimeStatus" Click="btnResetRealtimeStatus_Click">复原魔方状态(_I)</Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="5" Grid.ColumnSpan="2">
                             <Button x:Name="btnStartExercise" Click="btnStartExercise_Click" Width="70" Height="20">开始练习(_S)</Button>
@@ -120,7 +120,7 @@
                             <Button x:Name="btnStopExercise" Click="btnStopExercise_Click" IsEnabled="False" Width="70" Height="20">停止练习(_T)</Button>
                         </StackPanel>
                     </Grid>
-                    <Image x:Name="imgExercise" Grid.Row="0" Focusable="True" ForceCursor="True" MouseDown="imgExercise_MouseDown" HorizontalAlignment="Stretch" ToolTip="空格键或回车键：完成并进行下一个；“N”键：还须继续巩固，公式会在此次练习中再次出现；“P”键：暂停/继续；“Esc”键：停止练习。" PreviewKeyDown="imgExercise_KeyDown" />
+                    <Image x:Name="imgExercise" Grid.Row="0" Focusable="True" ForceCursor="True" MouseDown="imgExercise_MouseDown" HorizontalAlignment="Stretch" ToolTip="空格键或回车键：正确完成并进行下一个；“N”键：还想继续巩固一下，公式会在此次练习中再次出现；“P”键：暂停/继续；“Esc”键：停止练习。" PreviewKeyDown="imgExercise_KeyDown" />
                     <TextBlock Grid.Row="1" x:Name="tbAlgorithmPrompt" FontSize="16" Margin="0,0,0,40" Grid.RowSpan="2" />
                     <Cube:StopWatch Grid.Row="2" x:Name="stopWatch" Height="50" Grid.RowSpan="2" VerticalAlignment="Top" />
                 </Grid>
@@ -146,6 +146,7 @@
                     <WrapPanel VerticalAlignment="Center">
                         <TextBlock>QQ:  </TextBlock>
                         <TextBox IsReadOnly="True" Margin="10,0,0,0">19831227</TextBox>
+                        <TextBlock>(加好友请注明“魔友”)</TextBlock>
                     </WrapPanel>
                     <TextBlock>下载软件的新版本请访问：</TextBlock>
                     <TextBlock MouseDown="TextBlock_MouseDown" Foreground="Blue" FontSize="12" Cursor="Hand">http://cubeexercise.fanrui.net</TextBlock>

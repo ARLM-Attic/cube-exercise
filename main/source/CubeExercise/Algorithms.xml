@@ -508,6 +508,8 @@
     </Group>
 
     <Group name="我的公式">
-        
+        <Group name="F2L" />
+        <Group name="OLL" />
+        <Group name="PLL" />
     </Group>
 </AlgorithmFile>
