@@ -323,7 +323,7 @@ namespace CubeExercise
         private void g_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Group g = (Group)sender;
-            if (e.PropertyName == "Enabled")
+            if (e.PropertyName == "Enabled" && g.Items != null)
             {
                 foreach (object item in g.Items)
                 {
