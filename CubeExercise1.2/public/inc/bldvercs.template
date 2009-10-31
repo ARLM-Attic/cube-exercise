@@ -1,0 +1,16 @@
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
+[assembly: AssemblyFileVersion("%ProductMajor%.%ProductMinor%.%BuildMajor%.%BuildMinor%")]
+[assembly: AssemblyVersion("%ProductMajor%.%ProductMinor%.0.0")]
+
+[assembly: AssemblyCompany("Rui Fan (cubeexercise@fanrui.net)")]
+[assembly: AssemblyProduct("CubeExercise")]
+[assembly: AssemblyCopyright("Copyright (c) Rui Fan 2009")]
+[assembly: AssemblyTrademark("")]
+
+#if ENABLE_CODESIGN
+[assembly: AssemblyKeyFile(@"%CODESIGN_KEY%")]
+[assembly: AssemblyKeyName("")]
+[assembly: AssemblyDelaySign(false)]
+#endif

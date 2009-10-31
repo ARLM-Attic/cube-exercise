@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<AlgorithmFile xmlns="http://schemas.fanrui.net/CubeExercise/2009/09/AlgorithmFile"
+               name="默认公式文件">
+    <Algorithms>
+        <Algorithm id="1" name="F2L01" image="images\image_F2L_001.gif" script="(R U' U' R' U)2 y'(R' U' R)" postScript="y" />
+        <Algorithm id="2" name="F2L02" image="images\image_F2L_002.gif" script="(U R U' R' U') y'(R' U R)" postScript="y" />
+        <Algorithm id="3" name="F2L03" image="images\image_F2L_003.gif" script="y U'(L' U L U)y' (R U' R')" postScript="" />
+        <Algorithm id="4" name="F2L04" image="images\image_F2L_004.gif" script="(R U R' U')(R U'U' R' U')(R U R')" postScript="" />
+        <Algorithm id="5" name="F2L05" image="images\image_F2L_005.gif" script="(R U' R U)y(R U' R' F2)" postScript="y'" />
+        <Algorithm id="6" name="F2L06" image="images\image_F2L_006.gif" script="y'(R' U' R U)(R' U' R)" postScript="y" />
+        <Algorithm id="7" name="F2L07" image="images\image_F2L_007.gif" script="(R U' R' U)(R U' R')" postScript="" />
+        <Algorithm id="8" name="F2L08" image="images\image_F2L_008.gif" script="(R U'U')(R U R' U)(R U'U')R2" postScript="" />
+        <Algorithm id="9" name="F2L09" image="images\image_F2L_009.gif" script="R2 y(R U R' U')y'(R' U R')" postScript="" />
+        <Algorithm id="10" name="F2L10" image="images\image_F2L_010.gif" script="y' (R' U)(R U')(R' U R)" postScript="y" />
+        <Algorithm id="11" name="F2L11" image="images\image_F2L_011.gif" script="(R U R' U' )(R U R')" postScript="" />
+        <Algorithm id="12" name="F2L12" image="images\image_F2L_012.gif" script="(R U R' U')2 (R U R')" postScript="" />
+        <Algorithm id="13" name="F2L13" image="images\image_F2L_013.gif" script="(R U' R') y' (R' U2 R)" postScript="y" />
+        <Algorithm id="14" name="F2L14" image="images\image_F2L_014.gif" script="y'(R' U2)(R U R' U')R" postScript="y" />
+        <Algorithm id="15" name="F2L15" image="images\image_F2L_015.gif" script="d' z U'(R2 U)(R' U' R U)" postScript="z'y'" />
+        <Algorithm id="16" name="F2L16" image="images\image_F2L_016.gif" script="F' L' U2 r U x'" postScript="" />
+        <Algorithm id="17" name="F2L17" image="images\image_F2L_017.gif" script="y' (U2 R2' U2)(R U R' U R2)" postScript="y" />
+        <Algorithm id="18" name="F2L18" image="images\image_F2L_018.gif" script="(U2 R2' U2)(R' U' R U' R2)" postScript="" />
+        <Algorithm id="19" name="F2L19" image="images\image_F2L_019.gif" script="R y (R U2 R' F')" postScript="y'" />
+        <Algorithm id="20" name="F2L20" image="images\image_F2L_020.gif" script="U(R U'U')(R' U R U' )R'" postScript="" />
+        <Algorithm id="21" name="F2L21" image="images\image_F2L_021.gif" script="(R U'U')(R' U' R U)R'" postScript="" />
+        <Algorithm id="22" name="F2L22" image="images\image_F2L_022.gif" script="U'(R U')(R' U2)(R U' R')" postScript="" />
+        <Algorithm id="23" name="F2L23" image="images\image_F2L_023.gif" script="U' (R U R') d (R' U' R)" postScript="y" />
+        <Algorithm id="24" name="F2L24" image="images\image_F2L_024.gif" script="d (R' U R U')(R' U' R)" postScript="y" />
+        <Algorithm id="25" name="F2L25" image="images\image_F2L_025.gif" script="y' (R' U' R)" postScript="y" />
+        <Algorithm id="26" name="F2L26" image="images\image_F2L_026.gif" script="(R2 U)y(R U' R' F2)" postScript="y'" />
+        <Algorithm id="27" name="F2L27" image="images\image_F2L_027.gif" script="y' (R U'U')R'2 U' R2 U' R'" postScript="y" />
+        <Algorithm id="28" name="F2L28" image="images\image_F2L_028.gif" script="y' (R' U)(R d' U')(R U R')" postScript="" />
+        <Algorithm id="29" name="F2L29" image="images\image_F2L_029.gif" script="U' (R U'U')(R' U2)(R U' R')" postScript="" />
+        <Algorithm id="30" name="F2L30" image="images\image_F2L_030.gif" script="y' R2 y'(R' U' R U)Y R2" postScript="y" />
+        <Algorithm id="31" name="F2L31" image="images\image_F2L_031.gif" script="U R U' R'" postScript="" />
+        <Algorithm id="32" name="F2L32" image="images\image_F2L_032.gif" script="U' (R U'U' R' U)(R U R')" postScript="" />
+        <Algorithm id="33" name="F2L33" image="images\image_F2L_033.gif" script="d (R' U' R) d' (R U R')" postScript="" />
+        <Algorithm id="34" name="F2L34" image="images\image_F2L_034.gif" script="x(U R' U' l)" postScript="" />
+        <Algorithm id="35" name="F2L35" image="images\image_F2L_035.gif" script="R2 y (R U R' U')y' R2" postScript="" />
+        <Algorithm id="36" name="F2L36" image="images\image_F2L_036.gif" script="d (R' U2)(R U'U')(R' U R)" postScript="y" />
+        <Algorithm id="37" name="F2L37" image="images\image_F2L_037.gif" script="(R U' R' U)(d R' U' R)" postScript="y" />
+        <Algorithm id="38" name="F2L38" image="images\image_F2L_038.gif" script="(R' U2)(R2' U)(R2' U R)" postScript="" />
+        <Algorithm id="39" name="F2L39" image="images\image_F2L_039.gif" script="y' (R2 U')(F' U F)R2" postScript="y" />
+        <Algorithm id="40" name="F2L40" image="images\image_F2L_040.gif" script="(R U R')" postScript="" />
+        <Algorithm id="41" name="F2L41" image="images\image_F2L_041.gif" script="U' (R U' R' U)(R U R')" postScript="" />
+
+        <Algorithm id="42" name="OLL01" image="images\image_OLL_001.gif" script="(R U'U') (R2' F R F') U2 (R' F R F')" postScript="" demo="" />
+        <Algorithm id="43" name="OLL02" image="images\image_OLL_002.gif" script="(F R U R' U' F') (f R U R' U' f')" demo="" />
+        <Algorithm id="44" name="OLL03" image="images\image_OLL_003.gif" script="f(R U R' U')f' U' F(R U R' U')F'" demo="" />
+        <Algorithm id="45" name="OLL04" image="images\image_OLL_004.gif" script="f(R U R' U')y x(R’ F)(R U R' U')F'" postScript="y'" demo="" />
+        <Algorithm id="46" name="OLL05" image="images\image_OLL_005.gif" script="(r' U2)(R U R'U) r" demo="" />
+        <Algorithm id="47" name="OLL06" image="images\image_OLL_006.gif" script="(r U'U')(R' U' R U' r')" demo="" />
+        <Algorithm id="48" name="OLL07" image="images\image_OLL_007.gif" script="r U R' U R U'U' r'" demo="" />
+        <Algorithm id="49" name="OLL08" image="images\image_OLL_008.gif" script="r' U' R U' R' U2 r" demo="" />
+        <Algorithm id="50" name="OLL09" image="images\image_OLL_009.gif" script="(R' U' R) y' x' (R U')(R'F)(R U R')" postScript="xy" demo="" />
+        <Algorithm id="51" name="OLL10" image="images\image_OLL_010.gif" script="(R U R'U)(R'F R F')(RU'U'R')" demo="" />
+        <Algorithm id="52" name="OLL11" image="images\image_OLL_011.gif" script="r'(R2 U R' U)(R U'U' R' U)(r R')" demo="" />
+        <Algorithm id="53" name="OLL12" image="images\image_OLL_012.gif" script="L2 l U' z (U R'U') (R2 U R') z' r R'" demo="" />
+        <Algorithm id="54" name="OLL13" image="images\image_OLL_013.gif" script="(r U' r'U')(r U r') (F' U F)" demo="" />
+        <Algorithm id="55" name="OLL14" image="images\image_OLL_014.gif" script="R' F R U R' F'R (F U' F')" demo="" />
+        <Algorithm id="56" name="OLL15" image="images\image_OLL_015.gif" script="(r' U' r)(R'U'R U)(r' U r)" demo="" />
+        <Algorithm id="57" name="OLL16" image="images\image_OLL_016.gif" script="R B R' L U L' U' R B' R'" demo="" />
+        <Algorithm id="58" name="OLL17" image="images\image_OLL_017.gif" script="(R U R' U) (R' F R F'U2) R' F R F'" demo="" />
+        <Algorithm id="59" name="OLL18" image="images\image_OLL_018.gif" script="F (R U R' d)(R' U2)(R' F R F')" postScript="y" demo="" />
+        <Algorithm id="60" name="OLL19" image="images\image_OLL_019.gif" script="R' U2 F R U R'U' y'R2 U'U' R B" postScript="y" demo="" />
+        <Algorithm id="61" name="OLL20" image="images\image_OLL_020.gif" script="r'(R U)(R U R'U' r2)(R2'U) (R U') r'" demo="" />
+        <Algorithm id="62" name="OLL21" image="images\image_OLL_021.gif" script="(R U'U')(R' U' R U R' U') (R U' R')" demo="" />
+        <Algorithm id="63" name="OLL22" image="images\image_OLL_022.gif" script="R U'U' (R'2 U')(R2 U')R'2 U' U'R" demo="" />
+        <Algorithm id="64" name="OLL23" image="images\image_OLL_023.gif" script="(R2 D) (R' U2) (R D') (R' U2 R')" demo="" />
+        <Algorithm id="65" name="OLL24" image="images\image_OLL_024.gif" script="x' R U R' (D R) U' R' D'" postScript="x" demo="" />
+        <Algorithm id="66" name="OLL25" image="images\image_OLL_025.gif" script="F'(r U R' U')(r' F R)" demo="" />
+        <Algorithm id="67" name="OLL26" image="images\image_OLL_026.gif" script="R U' U' R' U'R U' R'" demo="" />
+        <Algorithm id="68" name="OLL27" image="images\image_OLL_027.gif" script="R' U2 R U R' U R" demo="" />
+        <Algorithm id="69" name="OLL28" image="images\image_OLL_028.gif" script="(r U R' U')(r' R U)(R U' R')" demo="" />
+        <Algorithm id="70" name="OLL29" image="images\image_OLL_029.gif" script="(R2 U' R) F (R' U) (R2 U') (R' F' R)" demo="" />
+        <Algorithm id="71" name="OLL30" image="images\image_OLL_030.gif" script="(R2 U R' B')(RU')(R2' U)(R B R')" demo="" />
+        <Algorithm id="72" name="OLL31" image="images\image_OLL_031.gif" script="(r' F' U F) (L F' L' U' r)" demo="" />
+        <Algorithm id="73" name="OLL32" image="images\image_OLL_032.gif" script="(R U)(B' U')(R' U R B R')" demo="" />
+        <Algorithm id="74" name="OLL33" image="images\image_OLL_033.gif" script="(R U R' U')(R' F R F')" demo="" />
+        <Algorithm id="75" name="OLL34" image="images\image_OLL_034.gif" script="(R'U'R U)y(r U R' U')r' R" postScript="y'" demo="" />
+        <Algorithm id="76" name="OLL35" image="images\image_OLL_035.gif" script="R U'U'R2' F R F'(R U'U'R')" demo="" />
+        <Algorithm id="77" name="OLL36" image="images\image_OLL_036.gif" script="R'U'R U'R'U R Ul U'R'U" postScript="x" demo="" />
+        <Algorithm id="78" name="OLL37" image="images\image_OLL_037.gif" script="F (R U' R'U'R U) (R' F')" demo="" />
+        <Algorithm id="79" name="OLL38" image="images\image_OLL_038.gif" script="(R U R'U)(RU'R'U')(R'F R F')" demo="" />
+        <Algorithm id="80" name="OLL39" image="images\image_OLL_039.gif" script="(L F'L' U'L U) (F U' L')" demo="" />
+        <Algorithm id="81" name="OLL40" image="images\image_OLL_040.gif" script="(R' F R U R'U') (F' U R)" demo="" />
+        <Algorithm id="82" name="OLL41" image="images\image_OLL_041.gif" script="R U' R' U2 R U y R U' R' U' F'" postScript="y'" demo="" />
+        <Algorithm id="83" name="OLL42" image="images\image_OLL_042.gif" script="(R'U R U'U'R'U')(F'U)(F U R)" demo="" />
+        <Algorithm id="84" name="OLL43" image="images\image_OLL_043.gif" script="(B' U')(R' U R B)" demo="" />
+        <Algorithm id="85" name="OLL44" image="images\image_OLL_044.gif" script="f (R U R' U')f'" demo="" />
+        <Algorithm id="86" name="OLL45" image="images\image_OLL_045.gif" script="F (R U R' U') F'" demo="" />
+        <Algorithm id="87" name="OLL46" image="images\image_OLL_046.gif" script="(R' U') R' F R F'(U R)" demo="" />
+        <Algorithm id="88" name="OLL47" image="images\image_OLL_047.gif" script="B'(R' U' R U)2 B" demo="" />
+        <Algorithm id="89" name="OLL48" image="images\image_OLL_048.gif" script="F (R U R' U')2 F'" demo="" />
+        <Algorithm id="90" name="OLL49" image="images\image_OLL_049.gif" script="R B'(R2 F)(R2 B) R2 F' R" demo="" />
+        <Algorithm id="91" name="OLL50" image="images\image_OLL_050.gif" script="L'B (L2 F')(L2B')L2 F L'" demo="" />
+        <Algorithm id="92" name="OLL51" image="images\image_OLL_051.gif" script="f (R U R' U')2 f'" demo="" />
+        <Algorithm id="93" name="OLL52" image="images\image_OLL_052.gif" script="R'U' R U' R' dR' U l U" postScript="xy" demo="" />
+        <Algorithm id="94" name="OLL53" image="images\image_OLL_053.gif" script="(r' U2)(R U R'U')(R U R'U) r " demo="" />
+        <Algorithm id="95" name="OLL54" image="images\image_OLL_054.gif" script="(r U'U')(R' U' R U R' U')(R U' r')" demo="" />
+        <Algorithm id="96" name="OLL55" image="images\image_OLL_055.gif" script="(R U'U') (R'2 U') R U' R'U2(F R F')" demo="" />
+        <Algorithm id="97" name="OLL56" image="images\image_OLL_056.gif" script="F (R U R'U')(R F')(r U R'U')r'" demo="" />
+        <Algorithm id="98" name="OLL57" image="images\image_OLL_057.gif" script="(R U R' U' r)(R' U)(R U' r')" demo="" />
+
+        <Algorithm id="99" name="PLL01" image="images\image_PLL_001.gif" script="(R U' R)(U R U R)(U' R' U' R2)" demo="" />
+        <Algorithm id="100" name="PLL02" image="images\image_PLL_002.gif" script="(R2' U)(R U R' U')(R' U')(R' U R')" demo="" />
+        <Algorithm id="101" name="PLL03" image="images\image_PLL_003.gif" script="L2(l'2 U)L2(l'2 U2)L2(l'2 U)L2 l2" demo="" />
+        <Algorithm id="102" name="PLL04" image="images\image_PLL_004.gif" script="(U R'U')(R U'R)(U R U')(R'U R U)(R2 U')(R'U)" demo="" />
+        <Algorithm id="103" name="PLL05" image="images\image_PLL_005.gif" script="x' R2 D2(R' U' R)D2(R' U R')" postScript="x" demo="" />
+        <Algorithm id="104" name="PLL06" image="images\image_PLL_006.gif" script="(l U' R)D2(R' U R)D2 R2" postScript="x" demo="" />
+        <Algorithm id="105" name="PLL07" image="images\image_PLL_007.gif" script="x'(R U' R' D)(R U R')u2'(R' U R)D(R' U' R)" postScript="x'y2" demo="" />
+        <Algorithm id="106" name="PLL08" image="images\image_PLL_008.gif" script="(R U R' U')(R' F)(R2 U' R' U')(R U R' F')" demo="" />
+        <Algorithm id="107" name="PLL09" image="images\image_PLL_009.gif" script="U'(R'U R U' R'2 b')x(R'U R)y'(R U R' U' R2)" postScript="x'" demo="" />
+        <Algorithm id="108" name="PLL10" image="images\image_PLL_010.gif" script="(R' U R' U') yx2 (R' U R' U'R2) xz'(R'U'R U R)" postScript="x" demo="" />
+        <Algorithm id="109" name="PLL11" image="images\image_PLL_011.gif" script="F(R U'R' U')(R U R' F')(R U R' U')(R' F R F')" demo="" />
+        <Algorithm id="110" name="PLL12" image="images\image_PLL_012.gif" script="z(U' R D')(R2 U R' U' R2 U)z'(R U')" demo="" />
+        <Algorithm id="111" name="PLL13" image="images\image_PLL_013.gif" script="(R U R'F')(R U R'U')(R'F R2 U'R'U')" demo="" />
+        <Algorithm id="112" name="PLL14" image="images\image_PLL_014.gif" script="(R' U2)(R U'U')(R' F R U R' U')(R'F' R2 U')" demo="" />
+        <Algorithm id="113" name="PLL15" image="images\image_PLL_015.gif" script="(R U'U')(R' U2)(R B' R' U')(R U R B R2' U)" demo="" />
+        <Algorithm id="114" name="PLL16" image="images\image_PLL_016.gif" script="(R2' u' R U' R)(U R' u)(R2 f R' f')" demo="" />
+        <Algorithm id="115" name="PLL17" image="images\image_PLL_017.gif" script="(R U R')y'(R2' u' R U')(R' U R' u R2)" postScript="y" demo="" />
+        <Algorithm id="116" name="PLL18" image="images\image_PLL_018.gif" script="(R2 u)(R' U R' U')(R u') (R2' F' U F)" demo="" />
+        <Algorithm id="117" name="PLL19" image="images\image_PLL_019.gif" script="(R' d' F)(R2 u)(R' U)(R U' R u' R2)" postScript="y'" demo="" />
+        <Algorithm id="118" name="PLL20" image="images\image_PLL_020.gif" script="z(R' U R')z'(R U2 L' U R') z(U R')z'(R U2 L' U R')" demo="" />
+        <Algorithm id="119" name="PLL21" image="images\image_PLL_021.gif" script="z(U'R D')(R2 U R'U')z'(R U R') z(R2 U R')z'(R U')" demo="" />
+
+        <Algorithm id="120" name="F2L08_2" image="images\image_F2L_008.gif" script="(R U' R' U) (R U' U' R' U) (R U' R')" />
+        <Algorithm id="121" name="F2L03_2" image="images\image_F2L_003.gif" script="(R' F' R U)(R U' R' F)" />
+        <Algorithm id="122" name="F2L03_3" image="images\image_F2L_003.gif" script="U'(F' R U R' U')(R' F R)" />
+        <Algorithm id="123" name="F2L15_2" image="images\image_F2L_015.gif" script="y' U'(R' U2)(R U' R' U)R" postScript="y" />
+        <Algorithm id="124" name="F2L16_2" image="images\image_F2L_016.gif" script="y'(R' U R U' U')(R' U' R)" postScript="y" />
+        <Algorithm id="125" name="F2L17_2" image="images\image_F2L_017.gif" script="(R U R' U)(R U' U' R' d)(R' U R)" postScript="y" />
+        <Algorithm id="126" name="F2L18_2" image="images\image_F2L_018.gif" script="(R U R')U2(R U R' U')(R U R')" />
+        <Algorithm id="127" name="F2L19_2" image="images\image_F2L_019.gif" script="(R U' R' U2)(R U R')" />
+        <Algorithm id="128" name="F2L26_2" image="images\image_F2L_026.gif" script="(d R' U' R U')(R' U' R)" postScript="y"/>
+        <Algorithm id="129" name="F2L27_2" image="images\image_F2L_027.gif" script="U'(R U'U' R' d)(R'U'R)" postScript="y"/>
+        <Algorithm id="130" name="F2L30_2" image="images\image_F2L_030.gif" script="U'(R U R' U')(R U'U' R')" />
+        <Algorithm id="131" name="F2L34_2" image="images\image_F2L_034.gif" script="y' U' (R' U R)" postScript="y" />
+        <Algorithm id="132" name="F2L35_2" image="images\image_F2L_035.gif" script="(d R' U' R U'U')(R' U R)" postScript="y" />
+        <Algorithm id="133" name="F2L38_2" image="images\image_F2L_038.gif" script="(R U')(R' U)(R U')(R' U2)(R U' R')" />
+        <Algorithm id="134" name="F2L39_2" image="images\image_F2L_039.gif" script="U'(R U R' U)(R U R')" />
+        <Algorithm id="135" name="OLL12_2" image="images\image_OLL_012_2.gif" script="(r R'2 U' R U')(R' U2 R U' R)r'"/>
+        <Algorithm id="136" name="OLL12_3" image="images\image_OLL_012_3.gif" script="F (R U R' U') y L'  F (R U R' U') F'" postScript="y'"/>
+        <Algorithm id="137" name="OLL16_2" image="images\image_OLL_016_2.gif" script="(r U r)'(R U R' U')(r U' r')"/>
+        <Algorithm id="138" name="OLL19_2" image="images\image_OLL_019.gif" script="(r' R U)(R U R' U' r) (R'2 F R F')"/>
+        <Algorithm id="139" name="OLL24_2" image="images\image_OLL_024_2.gif" script="(r U R' U') (r' F R F')"/>
+        <Algorithm id="140" name="OLL29_2" image="images\image_OLL_029_2.gif" script="(r U R' U')(R r'2 F R F')(r R')"/>
+        <Algorithm id="141" name="OLL39_2" image="images\image_OLL_039.gif" script="(r U' r' U' r)y(R U R' f')" postScript="y'"/>
+        <Algorithm id="142" name="OLL42_2" image="images\image_OLL_042.gif" script="(R2 U' R) F (R' U) (R2 U') (R' F' R)"/>
+        <Algorithm id="143" name="OLL47_2" image="images\image_OLL_047_2.gif" script="b' U'(R' U R U' R' U R)b"/>
+        <Algorithm id="144" name="OLL05_2" image="images\image_OLL_005_2.gif" script="(l' U2)(L U L' U l)"/>
+        <Algorithm id="145" name="OLL06_2" image="images\image_OLL_006_2.gif" script="l U2 L' U' L U' l'"/>
+        <Algorithm id="146" name="OLL03_2" image="images\image_OLL_003_2.gif" script="(r' R2 U R' U)(r U2)(r' U r R')"/>
+        <Algorithm id="147" name="OLL13_2" image="images\image_OLL_013_2.gif" script="l U' R' F' R U l' y R' U R" postScript="y'"/>
+        <Algorithm id="148" name="PLL03_2" image="images\image_PLL_003.gif" script="M2 U M2 U2 M2 U M2"/>
+        <Algorithm id="149" name="PLL01_2" image="images\image_PLL_001.gif" script="(R2 U')(R' U' R U R U)(R U 'R)"/>
+        <Algorithm id="150" name="PLL02_2" image="images\image_PLL_002.gif" script="(R' U R' U')(R' U')(R' U)(R U R'2)"/>
+        <Algorithm id="151" name="PLL06_2" image="images\image_PLL_006.gif" script="x'(R U' R)z'(R'2 U' L U R2' x y R2)"/>
+        <Algorithm id="152" name="PLL09_2" image="images\image_PLL_009.gif" script="z(R U R' U' R U ' U')(x' z')(R U R'U') x(U'R'U R U 'U')" postScript="x'y"/>
+        <Algorithm id="153" name="PLL10_2" image="images\image_PLL_010.gif" script="z(U' R U' l')z(R' U R'U')(l R)(U' R' U R U)" postScript="x'y"/>
+    </Algorithms>
+    <Group name="gan的公式视频版" enabled="false" expanded="false">
+        <Group name="F2L">
+            <Group name="角块复原" expanded="false">
+                <AlgorithmReference id="1" name="gan's F2L01"/>
+                <AlgorithmReference id="2" name="gan's F2L02"/>
+                <AlgorithmReference id="3" name="gan's F2L03"/>
+            </Group>
+            <Group name="角块位置正确方向不对" expanded="false">
+                <AlgorithmReference id="4" name="gan's F2L04"/>
+                <AlgorithmReference id="5" name="gan's F2L05"/>
+                <AlgorithmReference id="6" name="gan's F2L06"/>
+                <AlgorithmReference id="7" name="gan's F2L07"/>
+                <AlgorithmReference id="8" name="gan's F2L08"/>
+                <AlgorithmReference id="9" name="gan's F2L09"/>
+                <AlgorithmReference id="10" name="gan's F2L10"/>
+                <AlgorithmReference id="11" name="gan's F2L11"/>
+            </Group>
+            <Group name="角块在顶层，底面向上" expanded="false">
+                <AlgorithmReference id="12" name="gan's F2L12"/>
+                <AlgorithmReference id="13" name="gan's F2L13"/>
+                <AlgorithmReference id="14" name="gan's F2L14"/>
+                <AlgorithmReference id="15" name="gan's F2L15"/>
+                <AlgorithmReference id="16" name="gan's F2L16"/>
+                <AlgorithmReference id="17" name="gan's F2L17"/>
+                <AlgorithmReference id="18" name="gan's F2L18"/>
+                <AlgorithmReference id="19" name="gan's F2L19"/>
+                <AlgorithmReference id="20" name="gan's F2L20"/>
+                <AlgorithmReference id="21" name="gan's F2L21"/>
+            </Group>
+            <Group name="角块在顶层，底面向前" expanded="false">
+                <AlgorithmReference id="22" name="gan's F2L22"/>
+                <AlgorithmReference id="23" name="gan's F2L23"/>
+                <AlgorithmReference id="24" name="gan's F2L24"/>
+                <AlgorithmReference id="25" name="gan's F2L25"/>
+                <AlgorithmReference id="26" name="gan's F2L26"/>
+                <AlgorithmReference id="27" name="gan's F2L27"/>
+                <AlgorithmReference id="28" name="gan's F2L28"/>
+                <AlgorithmReference id="29" name="gan's F2L29"/>
+                <AlgorithmReference id="30" name="gan's F2L30"/>
+                <AlgorithmReference id="31" name="gan's F2L31"/>
+            </Group>
+            <Group name="角块在顶层，底面向右" expanded="false">
+                <AlgorithmReference id="32" name="gan's F2L32"/>
+                <AlgorithmReference id="33" name="gan's F2L33"/>
+                <AlgorithmReference id="34" name="gan's F2L34"/>
+                <AlgorithmReference id="35" name="gan's F2L35"/>
+                <AlgorithmReference id="36" name="gan's F2L36"/>
+                <AlgorithmReference id="37" name="gan's F2L37"/>
+                <AlgorithmReference id="38" name="gan's F2L38"/>
+                <AlgorithmReference id="39" name="gan's F2L39"/>
+                <AlgorithmReference id="40" name="gan's F2L40"/>
+                <AlgorithmReference id="41" name="gan's F2L41"/>
+            </Group>
+        </Group>
+        <Group name="OLL">
+            <Group name="十字" expanded="false">
+                <AlgorithmReference id="62" name="gan's OLL21" />
+                <AlgorithmReference id="63" name="gan's OLL22" />
+                <AlgorithmReference id="64" name="gan's OLL23" />
+                <AlgorithmReference id="65" name="gan's OLL24" />
+                <AlgorithmReference id="66" name="gan's OLL25" />
+                <AlgorithmReference id="67" name="gan's OLL26" />
+                <AlgorithmReference id="68" name="gan's OLL27" />
+            </Group>
+            <Group name="点" expanded="false">
+                <AlgorithmReference id="42" name="gan's OLL01" />
+                <AlgorithmReference id="43" name="gan's OLL02" />
+                <AlgorithmReference id="44" name="gan's OLL03" />
+                <AlgorithmReference id="45" name="gan's OLL04" />
+                <AlgorithmReference id="58" name="gan's OLL17" />
+                <AlgorithmReference id="59" name="gan's OLL18" />
+                <AlgorithmReference id="60" name="gan's OLL19" />
+                <AlgorithmReference id="61" name="gan's OLL20" />
+            </Group>
+
+            <Group name="直线" expanded="false">
+                <AlgorithmReference id="54" name="gan's OLL13" />
+                <AlgorithmReference id="55" name="gan's OLL14" />
+                <AlgorithmReference id="56" name="gan's OLL15" />
+                <AlgorithmReference id="57" name="gan's OLL16" />
+                <AlgorithmReference id="74" name="gan's OLL33" />
+                <AlgorithmReference id="75" name="gan's OLL34" />
+                <AlgorithmReference id="80" name="gan's OLL39" />
+                <AlgorithmReference id="81" name="gan's OLL40" />
+                <AlgorithmReference id="86" name="gan's OLL45" />
+                <AlgorithmReference id="87" name="gan's OLL46" />
+                <AlgorithmReference id="92" name="gan's OLL51" />
+                <AlgorithmReference id="93" name="gan's OLL52" />
+                <AlgorithmReference id="96" name="gan's OLL55" />
+                <AlgorithmReference id="97" name="gan's OLL56" />
+                <AlgorithmReference id="98" name="gan's OLL57" />
+            </Group>
+
+            <Group name="箱子" expanded="false">
+                <AlgorithmReference id="46" name="gan's OLL05" />
+                <AlgorithmReference id="47" name="gan's OLL06" />
+                <AlgorithmReference id="69" name="gan's OLL28" />
+                <AlgorithmReference id="72" name="gan's OLL31" />
+                <AlgorithmReference id="73" name="gan's OLL32" />
+                <AlgorithmReference id="76" name="gan's OLL35" />
+                <AlgorithmReference id="78" name="gan's OLL37" />
+                <AlgorithmReference id="84" name="gan's OLL43" />
+                <AlgorithmReference id="85" name="gan's OLL44" />
+            </Group>
+            <Group name="箭头" expanded="false">
+                <AlgorithmReference id="50" name="gan's OLL09" />
+                <AlgorithmReference id="51" name="gan's OLL10" />
+                <AlgorithmReference id="88" name="gan's OLL47" />
+                <AlgorithmReference id="89" name="gan's OLL48" />
+                <AlgorithmReference id="90" name="gan's OLL49" />
+                <AlgorithmReference id="91" name="gan's OLL50" />
+                <AlgorithmReference id="94" name="gan's OLL53" />
+                <AlgorithmReference id="95" name="gan's OLL54" />
+            </Group>
+            <Group name="曲线" expanded="false">
+                <AlgorithmReference id="48" name="gan's OLL07" />
+                <AlgorithmReference id="49" name="gan's OLL08" />
+                <AlgorithmReference id="52" name="gan's OLL11" />
+                <AlgorithmReference id="53" name="gan's OLL12" />
+                <AlgorithmReference id="70" name="gan's OLL29" />
+                <AlgorithmReference id="71" name="gan's OLL30" />
+                <AlgorithmReference id="77" name="gan's OLL36" />
+                <AlgorithmReference id="79" name="gan's OLL38" />
+                <AlgorithmReference id="82" name="gan's OLL41" />
+                <AlgorithmReference id="83" name="gan's OLL42" />
+            </Group>
+        </Group>
+
+        <Group name="PLL">
+            <Group name="棱换" expanded="false">
+                <AlgorithmReference id="99" name="gan's PLL01" />
+                <AlgorithmReference id="100" name="gan's PLL02" />
+                <AlgorithmReference id="101" name="gan's PLL03" />
+                <AlgorithmReference id="102" name="gan's PLL04" />
+            </Group>
+
+            <Group name="角换" expanded="false">
+                <AlgorithmReference id="103" name="gan's PLL05" />
+                <AlgorithmReference id="104" name="gan's PLL06" />
+                <AlgorithmReference id="105" name="gan's PLL07" />
+            </Group>
+
+            <Group name="邻角对棱/对角邻棱换" expanded="false">
+                <AlgorithmReference id="106" name="gan's PLL08" />
+                <AlgorithmReference id="107" name="gan's PLL09" />
+                <AlgorithmReference id="108" name="gan's PLL10" />
+                <AlgorithmReference id="109" name="gan's PLL11" />
+            </Group>
+
+            <Group name="邻角邻棱换" expanded="false">
+                <AlgorithmReference id="110" name="gan's PLL12" />
+                <AlgorithmReference id="111" name="gan's PLL13" />
+                <AlgorithmReference id="112" name="gan's PLL14" />
+                <AlgorithmReference id="113" name="gan's PLL15" />
+            </Group>
+
+            <Group name="三角三棱换" expanded="false">
+                <AlgorithmReference id="114" name="gan's PLL16" />
+                <AlgorithmReference id="115" name="gan's PLL17" />
+                <AlgorithmReference id="116" name="gan's PLL18" />
+                <AlgorithmReference id="117" name="gan's PLL19" />
+            </Group>
+
+            <Group name="对角对棱换" expanded="false">
+                <AlgorithmReference id="118" name="gan's PLL20" />
+                <AlgorithmReference id="119" name="gan's PLL21" />
+            </Group>
+        </Group>
+    </Group>
+
+    <Group name="gan的公式080527版">
+        <Group name="F2L">
+            <Group name="角块复原" expanded="false">
+                <AlgorithmReference id="1" name="gan's F2L01"/>
+                <AlgorithmReference id="2" name="gan's F2L02"/>
+                <AlgorithmReference id="121" name="gan's F2L03"/>
+                <AlgorithmReference id="122" name="gan's F2L03_2" enabled="false" />
+            </Group>
+            <Group name="角块位置正确方向不对" expanded="false">
+                <AlgorithmReference id="4" name="gan's F2L04"/>
+                <AlgorithmReference id="5" name="gan's F2L05"/>
+                <AlgorithmReference id="6" name="gan's F2L06"/>
+                <AlgorithmReference id="7" name="gan's F2L07"/>
+                <AlgorithmReference id="120" name="gan's F2L08"/>
+                <AlgorithmReference id="9" name="gan's F2L09"/>
+                <AlgorithmReference id="10" name="gan's F2L10"/>
+                <AlgorithmReference id="11" name="gan's F2L11"/>
+            </Group>
+            <Group name="角块在顶层，底面向上" expanded="false">
+                <AlgorithmReference id="12" name="gan's F2L12"/>
+                <AlgorithmReference id="13" name="gan's F2L13"/>
+                <AlgorithmReference id="14" name="gan's F2L14"/>
+                <AlgorithmReference id="123" name="gan's F2L15"/>
+                <AlgorithmReference id="124" name="gan's F2L16"/>
+                <AlgorithmReference id="125" name="gan's F2L17"/>
+                <AlgorithmReference id="126" name="gan's F2L18"/>
+                <AlgorithmReference id="127" name="gan's F2L19"/>
+                <AlgorithmReference id="20" name="gan's F2L20"/>
+                <AlgorithmReference id="21" name="gan's F2L21"/>
+            </Group>
+            <Group name="角块在顶层，底面向前" expanded="false">
+                <AlgorithmReference id="22" name="gan's F2L22"/>
+                <AlgorithmReference id="23" name="gan's F2L23"/>
+                <AlgorithmReference id="24" name="gan's F2L24"/>
+                <AlgorithmReference id="25" name="gan's F2L25"/>
+                <AlgorithmReference id="128" name="gan's F2L26"/>
+                <AlgorithmReference id="27" name="gan's F2L27"/>
+                <AlgorithmReference id="129" name="gan's F2L27_2"/>
+                <AlgorithmReference id="28" name="gan's F2L28"/>
+                <AlgorithmReference id="29" name="gan's F2L29"/>
+                <AlgorithmReference id="130" name="gan's F2L30"/>
+                <AlgorithmReference id="31" name="gan's F2L31"/>
+            </Group>
+            <Group name="角块在顶层，底面向右" expanded="false">
+                <AlgorithmReference id="32" name="gan's F2L32"/>
+                <AlgorithmReference id="33" name="gan's F2L33"/>
+                <AlgorithmReference id="131" name="gan's F2L34"/>
+                <AlgorithmReference id="132" name="gan's F2L35"/>
+                <AlgorithmReference id="36" name="gan's F2L36"/>
+                <AlgorithmReference id="37" name="gan's F2L37"/>
+                <AlgorithmReference id="133" name="gan's F2L38"/>
+                <AlgorithmReference id="134" name="gan's F2L39"/>
+                <AlgorithmReference id="40" name="gan's F2L40"/>
+                <AlgorithmReference id="41" name="gan's F2L41"/>
+            </Group>
+        </Group>
+        <Group name="OLL">
+            <Group name="十字" expanded="false">
+                <AlgorithmReference id="62" name="gan's OLL21" />
+                <AlgorithmReference id="63" name="gan's OLL22" />
+                <AlgorithmReference id="64" name="gan's OLL23" />
+                <AlgorithmReference id="139" name="gan's OLL24" />
+                <AlgorithmReference id="66" name="gan's OLL25" />
+                <AlgorithmReference id="67" name="gan's OLL26" />
+                <AlgorithmReference id="68" name="gan's OLL27" />
+            </Group>
+            <Group name="点" expanded="false">
+                <AlgorithmReference id="42" name="gan's OLL01" />
+                <AlgorithmReference id="43" name="gan's OLL02" />
+                <AlgorithmReference id="146" name="gan's OLL03" />
+                <AlgorithmReference id="45" name="gan's OLL04" />
+                <AlgorithmReference id="58" name="gan's OLL17" />
+                <AlgorithmReference id="59" name="gan's OLL18" />
+                <AlgorithmReference id="138" name="gan's OLL19" />
+                <AlgorithmReference id="61" name="gan's OLL20" />
+            </Group>
+
+            <Group name="直线" expanded="false">
+                <AlgorithmReference id="147" name="gan's OLL13" />
+                <AlgorithmReference id="55" name="gan's OLL14" />
+                <AlgorithmReference id="56" name="gan's OLL15" />
+                <AlgorithmReference id="137" name="gan's OLL16" />
+                <AlgorithmReference id="74" name="gan's OLL33" />
+                <AlgorithmReference id="75" name="gan's OLL34" />
+                <AlgorithmReference id="141" name="gan's OLL39" />
+                <AlgorithmReference id="81" name="gan's OLL40" />
+                <AlgorithmReference id="86" name="gan's OLL45" />
+                <AlgorithmReference id="87" name="gan's OLL46" />
+                <AlgorithmReference id="92" name="gan's OLL51" />
+                <AlgorithmReference id="93" name="gan's OLL52" />
+                <AlgorithmReference id="96" name="gan's OLL55" />
+                <AlgorithmReference id="97" name="gan's OLL56" />
+                <AlgorithmReference id="98" name="gan's OLL57" />
+            </Group>
+
+            <Group name="箱子" expanded="false">
+                <AlgorithmReference id="144" name="gan's OLL05" />
+                <AlgorithmReference id="145" name="gan's OLL06" />
+                <AlgorithmReference id="69" name="gan's OLL28" />
+                <AlgorithmReference id="72" name="gan's OLL31" />
+                <AlgorithmReference id="73" name="gan's OLL32" />
+                <AlgorithmReference id="76" name="gan's OLL35" />
+                <AlgorithmReference id="78" name="gan's OLL37" />
+                <AlgorithmReference id="84" name="gan's OLL43" />
+                <AlgorithmReference id="85" name="gan's OLL44" />
+            </Group>
+            <Group name="箭头" expanded="false">
+                <AlgorithmReference id="50" name="gan's OLL09" />
+                <AlgorithmReference id="51" name="gan's OLL10" />
+                <AlgorithmReference id="143" name="gan's OLL47" />
+                <AlgorithmReference id="89" name="gan's OLL48" />
+                <AlgorithmReference id="90" name="gan's OLL49" />
+                <AlgorithmReference id="91" name="gan's OLL50" />
+                <AlgorithmReference id="94" name="gan's OLL53" />
+                <AlgorithmReference id="95" name="gan's OLL54" />
+            </Group>
+            <Group name="曲线" expanded="false">
+                <AlgorithmReference id="48" name="gan's OLL07" />
+                <AlgorithmReference id="49" name="gan's OLL08" />
+                <AlgorithmReference id="52" name="gan's OLL11" />
+                <AlgorithmReference id="135" name="gan's OLL12" />
+                <AlgorithmReference id="136" name="gan's OLL12'" enabled="false" />
+                <AlgorithmReference id="140" name="gan's OLL29" />
+                <AlgorithmReference id="71" name="gan's OLL30" />
+                <AlgorithmReference id="77" name="gan's OLL36" />
+                <AlgorithmReference id="79" name="gan's OLL38" />
+                <AlgorithmReference id="82" name="gan's OLL41" />
+                <AlgorithmReference id="142" name="gan's OLL42" />
+            </Group>
+        </Group>
+
+        <Group name="PLL">
+            <Group name="棱换" expanded="false">
+                <AlgorithmReference id="99" name="gan's PLL01" />
+                <AlgorithmReference id="149" name="gan's PLL01'" enabled="false" />
+                <AlgorithmReference id="100" name="gan's PLL02" />
+                <AlgorithmReference id="150" name="gan's PLL02'" enabled="false" />
+                <AlgorithmReference id="148" name="gan's PLL03" />
+                <AlgorithmReference id="102" name="gan's PLL04" />
+            </Group>
+
+            <Group name="角换" expanded="false">
+                <AlgorithmReference id="103" name="gan's PLL05" />
+                <AlgorithmReference id="151" name="gan's PLL06" />
+                <AlgorithmReference id="105" name="gan's PLL07" />
+            </Group>
+
+            <Group name="邻角对棱/对角邻棱换" expanded="false">
+                <AlgorithmReference id="106" name="gan's PLL08" />
+                <AlgorithmReference id="107" name="gan's PLL09" />
+                <AlgorithmReference id="152" name="gan's PLL09'" enabled="false" />
+                <AlgorithmReference id="108" name="gan's PLL10" />
+                <AlgorithmReference id="153" name="gan's PLL10'" enabled="false" />
+                <AlgorithmReference id="109" name="gan's PLL11" />
+            </Group>
+
+            <Group name="邻角邻棱换" expanded="false">
+                <AlgorithmReference id="110" name="gan's PLL12" />
+                <AlgorithmReference id="111" name="gan's PLL13" />
+                <AlgorithmReference id="112" name="gan's PLL14" />
+                <AlgorithmReference id="113" name="gan's PLL15" />
+            </Group>
+
+            <Group name="三角三棱换" expanded="false">
+                <AlgorithmReference id="114" name="gan's PLL16" />
+                <AlgorithmReference id="115" name="gan's PLL17" />
+                <AlgorithmReference id="116" name="gan's PLL18" />
+                <AlgorithmReference id="117" name="gan's PLL19" />
+            </Group>
+
+            <Group name="对角对棱换" expanded="false">
+                <AlgorithmReference id="118" name="gan's PLL20" />
+                <AlgorithmReference id="119" name="gan's PLL21" />
+            </Group>
+        </Group>
+    </Group>
+
+    <Group name="我的公式">
+        <Group name="F2L" />
+        <Group name="OLL" />
+        <Group name="PLL" />
+    </Group>
+</AlgorithmFile>

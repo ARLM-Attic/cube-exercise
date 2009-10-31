@@ -1,0 +1,160 @@
+﻿<Window x:Class="CubeExercise.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Cube="clr-namespace:CubeExercise"
+    Name="mainWindow"
+    Title="Cube Exercise 1.2" Width="690" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Closing="mainWindow_Closing">
+
+    <!--<Viewbox Stretch="Fill" StretchDirection="Both">-->
+    <Grid Margin="0">
+        <Grid.Resources>
+            <Cube:Int32Converter x:Key="intConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270" />
+            <ColumnDefinition Width="420*" />
+        </Grid.ColumnDefinitions>
+        <TreeView x:Name="tvAlgorithms">
+            <TreeView.Resources>
+                <ContextMenu Name="cmAlgorithm" x:Key="cmAlgorithm">
+                    <MenuItem x:Name="cmiCopyTo" Header="复制到其他组..." Click="MenuItemCopyTo_Click" />
+                    <MenuItem x:Name="cmiRemoveAlgorithm" Header="从该组删除" Click="cmiRemoveAlgorithm_Click" />
+                    <!--<MenuItem x:Name="cmiEdit" Header="编辑..." IsEnabled="False" />-->
+                </ContextMenu>
+                <ContextMenu Name="cmGroup" x:Key="cmGroup">
+                    <MenuItem x:Name="cmiCreateNewGroup" Header="创建新组" IsEnabled="True" Click="cmiCreateNewGroup_Click" />
+                    <MenuItem x:Name="cmiRenameGroup" Header="改名" IsEnabled="True" Click="cmiRenameGroup_Click" />
+                    <!--<MenuItem x:Name="cmiRemoveGroup" Header="删除该组" IsEnabled="False" />
+                    <MenuItem x:Name="cmiAddAlgorithm" Header="添加公式..." IsEnabled="False" />-->
+                </ContextMenu>
+            </TreeView.Resources>
+        </TreeView>
+
+        <TabControl x:Name="tcMain"  Grid.Column="1" Margin="0,0,0,0" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="模拟魔方(_C)" x:Name="tabSimulator">
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="290"/>
+                        <RowDefinition Height="105" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="0" Grid.Column="0">
+                        <Cube:CubeControl x:Name="cube" Height="290" Width="386" />
+                    </Viewbox>
+                    <TextBox Grid.Row="1" Grid.Column="0" Name="txtAlgorithm" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" AutoWordSelection="False" FontSize="18" FontWeight="Bold" Margin="3,3,3,3" UndoLimit="64" />
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Button Height="23" Width="70" Name="btnFind" Click="btnFind_Click">重复次数(_T)</Button>
+                        <Button Height="23" Width="70" Name="btnClear" Click="btnClear_Click">清除公式(_E)</Button>
+                        <Button Name="btnInitialize" Height="23" Width="50" Click="btnInitialize_Click">复原(_O)</Button>
+                        <Button Name="btnTransform" Height="23" Width="60" Click="btnTransform_Click">做公式(_D)</Button>
+                        <Button Name="btnReverseTransform" Height="23" Width="65" ToolTip="作当前公式的逆公式，可以产生当前公式的适用情况" Click="btnReverseTransform_Click">逆做公式(_V)</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="随机练习(_R)" x:Name="tabRandomExercise">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="72"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="120" />
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="spExerciseConfiguration" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Mode=TwoWay ,ElementName=mainWindow, Path=ExerciseConfiguration}" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="练习模式：" Height="15" />
+                        <ComboBox x:Name="cmbRandomMode" IsEditable="False" Grid.Column="1" Height="20">
+                            <ComboBoxItem IsSelected="True">无重复随机</ComboBoxItem>
+                            <ComboBoxItem>可重复随机</ComboBoxItem>
+                            <ComboBoxItem>正序(无重复)</ComboBoxItem>
+                            <ComboBoxItem>逆序(无重复)</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="剩余公式个数：" Height="15" Grid.Row="1" />
+                        <TextBox MaxLines="1" x:Name="txtRepeatTimes" Width="90" MaxLength="5" AllowDrop="False" PreviewKeyDown="textBoxNumeric_PreviewKeyDown" Grid.Column="1" Grid.Row="1">
+                            <TextBox.Text>
+                                <Binding Path="NumberOfAlgorithms" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <Cube:NumberValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock Text="显示公式延迟(秒)：" Height="15" Grid.Row="2" />
+                        <TextBox MaxLines="1" x:Name="txtShowScriptDelay" Width="90" MaxLength="5" AllowDrop="False" PreviewKeyDown="textBoxNumeric_PreviewKeyDown" ToolTip="定义多少秒之后显示公式。如果值为-1，则永远不显示公式。" Grid.Column="1" Grid.Row="2">
+                            <TextBox.Text>
+                                <Binding Path="ShowScriptDelay" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <Cube:NumberValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock Grid.Row="3" Grid.Column="0">限时模式(秒)</TextBlock>
+                        <TextBox Name="txtTimeLimit" Grid.Row="3" Grid.Column="1" Height="20" Width="90" MaxLength="5" PreviewKeyDown="textBoxNumeric_PreviewKeyDown" ToolTip="如果此值大于0，每个公式会在指定的秒数过后自动切换到下一个公式。">
+                            <TextBox.Text>
+                                <Binding Path="AlgorithmTimeLimit" Converter="{StaticResource intConverter}" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <Cube:NumberValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <CheckBox Name="chkRecordScript" IsChecked="False" ToolTip="所有显示过的公式将被记录到“模拟魔方”中的文本框中，从而可以重现并比对魔方当前的状态。点击'开始练习'时会清除文本框中现有的公式.">记录公式</CheckBox>
+                            <CheckBox Name="chkShowRealtimeStatus" IsChecked="True" Checked="chkShowRealtimeStatus_Checked" Unchecked="chkShowRealtimeStatus_Unchecked">显示魔方状态</CheckBox>
+                            <Button Name="btnResetRealtimeStatus" Click="btnResetRealtimeStatus_Click">复原魔方状态(_I)</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="5" Grid.ColumnSpan="2">
+                            <Button x:Name="btnStartExercise" Click="btnStartExercise_Click" Width="70" Height="20">开始练习(_S)</Button>
+                            <Button x:Name="btnPauseExercise" Click="btnPauseExercise_Click" IsEnabled="False" Width="70" Height="20">暂停练习(_P)</Button>
+                            <Button x:Name="btnStopExercise" Click="btnStopExercise_Click" IsEnabled="False" Width="70" Height="20">停止练习(_T)</Button>
+                        </StackPanel>
+                    </Grid>
+                    <Image x:Name="imgExercise" Grid.Row="0" Focusable="True" ForceCursor="True" MouseDown="imgExercise_MouseDown" HorizontalAlignment="Stretch" ToolTip="空格键或回车键：正确完成并进行下一个；“N”键：还想继续巩固一下，公式会在此次练习中再次出现；“P”键：暂停/继续；“Esc”键：停止练习。" PreviewKeyDown="imgExercise_KeyDown" />
+                    <TextBlock Grid.Row="1" x:Name="tbAlgorithmPrompt" FontSize="16" Margin="0,0,0,40" Grid.RowSpan="2" />
+                    <Cube:StopWatch Grid.Row="2" x:Name="stopWatch" Height="50" Grid.RowSpan="2" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="关于(_A)">
+                <StackPanel>
+                    <TextBlock FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center">
+                    Cube Exercise 1.2
+                    </TextBlock>
+                    <TextBlock>致谢：
+                        gan精心制作的手法、公式的图片和录像。</TextBlock>
+                    <WrapPanel>
+                        <TextBlock>版本:</TextBlock>
+                        <TextBlock Text="{Binding Source={x:Static Cube:MainWindow.FileVersion}}"></TextBlock>
+                    </WrapPanel>
+
+                    <TextBlock>版权所有 © 2009 范睿 (凡瑞)</TextBlock>
+                    <TextBlock>如果有任何疑问、错误报告、意见和建议请联系：</TextBlock>
+                    <WrapPanel>
+                        <TextBlock>E-mail: </TextBlock>
+                        <TextBlock MouseDown="TextBlock_MouseDown" Foreground="Blue" FontSize="12" Cursor="Hand">cubeexercise@fanrui.net</TextBlock>
+                    </WrapPanel>
+                    <WrapPanel VerticalAlignment="Center">
+                        <TextBlock>QQ:  </TextBlock>
+                        <TextBox IsReadOnly="True" Margin="10,0,0,0">19831227</TextBox>
+                        <TextBlock>(加好友请注明“魔友”)</TextBlock>
+                    </WrapPanel>
+                    <TextBlock>下载软件的新版本请访问：</TextBlock>
+                    <TextBlock MouseDown="TextBlock_MouseDown" Foreground="Blue" FontSize="12" Cursor="Hand">http://cubeexercise.fanrui.net</TextBlock>
+                    <TextBlock>开源项目网站：</TextBlock>
+                    <TextBlock MouseDown="TextBlock_MouseDown" Foreground="Blue" FontSize="12" Cursor="Hand">http://cubeexercise.codeplex.com</TextBlock>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+    <!--</Viewbox>-->
+</Window>
