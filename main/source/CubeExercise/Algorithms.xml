@@ -147,7 +147,6 @@
         <Algorithm id="139" name="OLL24_2" image="images\image_OLL_024_2.gif" script="(r U R' U') (r' F R F')"/>
         <Algorithm id="140" name="OLL29_2" image="images\image_OLL_029_2.gif" script="(r U R' U')(R r'2 F R F')(r R')"/>
         <Algorithm id="141" name="OLL39_2" image="images\image_OLL_039.gif" script="(r U' r' U' r)y(R U R' f')" postScript="y'"/>
-        <Algorithm id="142" name="OLL42_2" image="images\image_OLL_042.gif" script="(R2 U' R) F (R' U) (R2 U') (R' F' R)"/>
         <Algorithm id="143" name="OLL47_2" image="images\image_OLL_047_2.gif" script="b' U'(R' U R U' R' U R)b"/>
         <Algorithm id="144" name="OLL05_2" image="images\image_OLL_005_2.gif" script="(l' U2)(L U L' U l)"/>
         <Algorithm id="145" name="OLL06_2" image="images\image_OLL_006_2.gif" script="l U2 L' U' L U' l'"/>
@@ -457,7 +456,7 @@
                 <AlgorithmReference id="77" name="gan's OLL36" />
                 <AlgorithmReference id="79" name="gan's OLL38" />
                 <AlgorithmReference id="82" name="gan's OLL41" />
-                <AlgorithmReference id="142" name="gan's OLL42" />
+                <AlgorithmReference id="70" name="gan's OLL42" />
             </Group>
         </Group>
 
