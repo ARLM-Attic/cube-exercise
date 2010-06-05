@@ -48,10 +48,17 @@ const int g_iNetfx35VersionMinor = 5;
 const int g_iNetfx35VersionBuild = 21022;
 const int g_iNetfx35VersionRevision = 8;
 
+// Version information for final release of .NET Framework 4.0
+const int g_iNetfx40VersionMajor = 4;
+const int g_iNetfx40VersionMinor = 0;
+const int g_iNetfx40VersionBuild = 30319;
+const int g_iNetfx40VersionRevision = 1;
+
 // Constants for known .NET Framework versions used with the GetRequestedRuntimeInfo API
 const TCHAR *g_szNetfx10VersionString = _T("v1.0.3705");
 const TCHAR *g_szNetfx11VersionString = _T("v1.1.4322");
 const TCHAR *g_szNetfx20VersionString = _T("v2.0.50727");
+const TCHAR *g_szNetfx40VersionString = _T("v4.0.30319");
 
 /******************************************************************
 Function Name:  CheckNetfxVersionUsingMscoree
@@ -292,7 +299,7 @@ bool CheckNetfxBuildNumber(const TCHAR *pszNetfxRegKeyName, const TCHAR *pszNetf
 	int iRegistryVersionMajor = 0;
 	int iRegistryVersionMinor = 0;
 	int iRegistryVersionBuild = 0;
-	int iRegistryVersionRevision = 0;
+	int iRegistryVersionRevision = -1;
 	bool bRegistryRetVal = false;
 
 	// Attempt to retrieve the build number registry value
@@ -337,7 +344,7 @@ bool CheckNetfxBuildNumber(const TCHAR *pszNetfxRegKeyName, const TCHAR *pszNetf
 	}
 
 	// Compare the version number retrieved from the registry with
-	// the version number of the final release of the .NET Framework 3.0
+	// the version number of the final release of the .NET Framework 4.0
 	if (iRegistryVersionMajor > iRequestedVersionMajor)
 	{
 		return true;
@@ -350,13 +357,15 @@ bool CheckNetfxBuildNumber(const TCHAR *pszNetfxRegKeyName, const TCHAR *pszNetf
 		}
 		else if (iRegistryVersionMinor == iRequestedVersionMinor)
 		{
-			if (iRegistryVersionBuild > iRequestedVersionBuild)
+			if (iRegistryVersionBuild >= iRequestedVersionBuild)
 			{
 				return true;
 			}
-			else if (iRegistryVersionBuild == iRequestedVersionBuild)
+            else if (iRegistryVersionBuild == iRequestedVersionBuild)
 			{
-				if (iRegistryVersionRevision >= iRequestedVersionRevision)
+                // -1 means the value doesn't exist in the registry.
+                // Skip validating this value in this case.
+				if (iRegistryVersionRevision == -1 || iRegistryVersionRevision >= iRequestedVersionRevision)
 				{
 					return true;
 				}
@@ -533,7 +542,10 @@ bool IsNetfx40ClientInstalled()
 			bRetValue = true;
 	}
 
-	return bRetValue;
+	// A system with a pre-release version of the .NET Framework 4.0 Client Profile can
+	// have the Install value.  As an added verification, check the
+	// version number listed in the registry
+	return (bRetValue && CheckNetfxBuildNumber(g_szNetfx40ClientRegKeyName, g_szNetfxStandardVersionRegValueName, g_iNetfx40VersionMajor, g_iNetfx40VersionMinor, g_iNetfx40VersionBuild, g_iNetfx40VersionRevision));
 }
 
 
@@ -558,7 +570,10 @@ bool IsNetfx40FullInstalled()
 			bRetValue = true;
 	}
 
-	return bRetValue;
+	// A system with a pre-release version of the .NET Framework 4.0 Full can
+	// have the Install value.  As an added verification, check the
+	// version number listed in the registry
+	return (bRetValue && CheckNetfxBuildNumber(g_szNetfx40FullRegKeyName, g_szNetfxStandardVersionRegValueName, g_iNetfx40VersionMajor, g_iNetfx40VersionMinor, g_iNetfx40VersionBuild, g_iNetfx40VersionRevision));
 }
 
 

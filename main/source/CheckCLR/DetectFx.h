@@ -31,10 +31,17 @@ extern const int g_iNetfx35VersionMinor; // = 5;
 extern const int g_iNetfx35VersionBuild; // = 21022;
 extern const int g_iNetfx35VersionRevision; // = 8;
 
+// Version information for final release of .NET Framework 4.0
+extern const int g_iNetfx40VersionMajor; // = 4;
+extern const int g_iNetfx40VersionMinor; // = 0;
+extern const int g_iNetfx40VersionBuild; // = 30319;
+extern const int g_iNetfx40VersionRevision; // = 1;
+
 // Constants for known .NET Framework versions used with the GetRequestedRuntimeInfo API
 extern const TCHAR *g_szNetfx10VersionString; // = _T("v1.0.3705");
 extern const TCHAR *g_szNetfx11VersionString; // = _T("v1.1.4322");
 extern const TCHAR *g_szNetfx20VersionString; // = _T("v2.0.50727");
+extern const TCHAR *g_szNetfx40VersionString; // = _T("v4.0.30319");
 
 // Function prototypes
 bool CheckNetfxBuildNumber(const TCHAR*, const TCHAR*, const int, const int, const int, const int);
